@@ -12,6 +12,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+import favoris as suivi
 from version import DATE, VERSION
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -104,11 +105,13 @@ def charger():
     return univers, performances, arbitrage, offres, anomalies, imports
 
 
+suivis = suivi.charger()
 donnees = charger()
 if donnees is None:
     st.error(f"Base introuvable : {BASE}\n\nLancez `construire.bat` pour la créer.")
     st.stop()
 univers, performances, arbitrage, offres, anomalies, imports = donnees
+univers = univers.assign(favori=univers["isin"].isin(suivis))
 
 
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin",
@@ -223,6 +226,13 @@ def barre_laterale():
         vue = vue[vue["nom"].str.contains(recherche, case=False, na=False)
                   | vue["isin"].str.contains(recherche.upper(), na=False)]
 
+    favori = barre.radio("Favoris", ["Tous", "Oui", "Non"], horizontal=True,
+                         help=f"{len(suivis)} support(s) suivi(s)")
+    if favori == "Oui":
+        vue = vue[vue["favori"]]
+    elif favori == "Non":
+        vue = vue[~vue["favori"]]
+
     natures = barre.multiselect("Nature", sorted(univers["type_instrument"].unique()),
                                 default=["opc", "etf"])
     if natures:
@@ -262,12 +272,13 @@ def barre_laterale():
 def page_accueil(vue):
     en_tete("Univers d'investissement")
 
-    colonnes = st.columns(4)
+    colonnes = st.columns(5)
     colonnes[0].metric("Instruments", f"{len(univers):,}".replace(",", " "))
-    colonnes[1].metric("Types d'actif", univers["type_actif"].nunique())
-    colonnes[2].metric("Chez les deux assureurs",
+    colonnes[1].metric("Favoris suivis", len(suivis))
+    colonnes[2].metric("Types d'actif", univers["type_actif"].nunique())
+    colonnes[3].metric("Chez les deux assureurs",
                        int((univers["disponibilite"] == "les deux").sum()))
-    colonnes[3].metric("Avec 5 ans d'historique", int((univers["annees"] == 5).sum()))
+    colonnes[4].metric("Avec 5 ans d'historique", int((univers["annees"] == 5).sum()))
 
     st.divider()
     gauche, droite = st.columns([3, 2])
@@ -342,14 +353,31 @@ def page_parcourir(vue):
         if types:
             detail = detail[detail["type_actif"].isin(types)]
 
-    st.caption(f"{len(detail)} instruments")
+    st.caption(f"{len(detail)} instruments — cochez la première colonne pour suivre un support")
     # Neuf colonnes tiennent sans troncature ; la société de gestion et la
     # classification SFDR restent consultables sur la fiche du support.
-    colonnes = {"isin": "ISIN", "nom": "Support", "type_actif": "Type d'actif", "sri": "SRI",
-                "perf_annualisee": "Perf. annualisée", "annees": "Années",
-                "perf_n1": "Perf. N-1", "frais": "Frais totaux", "disponibilite": "Disponible"}
-    tableau(detail[list(colonnes)].rename(columns=colonnes)
-            .sort_values("Perf. annualisée", ascending=False), height=460)
+    colonnes = {"favori": "Favori", "isin": "ISIN", "nom": "Support", "type_actif": "Type d'actif",
+                "sri": "SRI", "perf_annualisee": "Perf. ann.", "annees": "Ans",
+                "perf_n1": "Perf. N-1", "frais": "Frais", "disponibilite": "Disponible"}
+    affiche = (detail[list(colonnes)].rename(columns=colonnes)
+               .sort_values("Perf. ann.", ascending=False))
+    # Le signe est porte par le format : une performance negative doit se
+    # distinguer d'une positive sans avoir a lire la valeur.
+    rendement = lambda libelle: st.column_config.NumberColumn(libelle, format="%+.2f %%")
+    edite = st.data_editor(
+        affiche, width="stretch", hide_index=True, height=460, key=f"editeur_{axe}",
+        disabled=[c for c in affiche.columns if c != "Favori"],
+        column_config={"Favori": st.column_config.CheckboxColumn("Favori", width="small"),
+                       "Perf. ann.": rendement("Perf. ann."), "Perf. N-1": rendement("Perf. N-1"),
+                       "Frais": st.column_config.NumberColumn("Frais", format="%.2f %%"),
+                       "SRI": st.column_config.NumberColumn("SRI", format="%d"),
+                       "Ans": st.column_config.NumberColumn("Ans", format="%d")})
+    # L'alignement ne porte que sur les lignes affichées : un écran filtré ne
+    # doit pas effacer le reste de la liste.
+    _, modifie = suivi.appliquer(affiche["ISIN"].tolist(),
+                                 set(edite.loc[edite["Favori"], "ISIN"]))
+    if modifie:
+        st.rerun()
 
 
 def page_fiche(vue):
@@ -361,7 +389,11 @@ def page_fiche(vue):
     isin = choix.split(" — ")[0]
     ligne = univers[univers["isin"] == isin].iloc[0]
 
-    st.subheader(ligne["nom"])
+    titre, bascule = st.columns([5, 1])
+    titre.subheader(ligne["nom"])
+    if bascule.toggle("Favori", value=isin in suivis, key=f"fav_{isin}") != (isin in suivis):
+        suivi.basculer(isin, isin not in suivis)
+        st.rerun()
     st.caption(f"`{isin}` · {ligne['societe_gestion'] or 'société non communiquée'} · "
                f"{ligne['type_actif']} · SFDR {ligne['sfdr']} · disponible chez {ligne['disponibilite']}")
     if ligne["origine_classification"] == "déduite du libellé":

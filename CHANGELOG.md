@@ -4,6 +4,15 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.6.0 — 19 septembre 2026
+
+- Favoris : une case à cocher dans le tableau de la page Parcourir et une
+  bascule sur la fiche d'un support permettent de tenir une liste de supports
+  suivis, filtrable par « Favoris : Oui / Non » dans la barre latérale.
+- La liste vit dans `data/favoris.csv`, hors de la base : celle-ci est effacée
+  et reconstruite à chaque exécution de `construire.bat`, elle ne peut donc pas
+  accueillir de donnée saisie par l'utilisateur.
+
 ## 0.5.0 — 19 septembre 2026
 
 - Version et date affichées en tête de chaque page, avec le millésime des
