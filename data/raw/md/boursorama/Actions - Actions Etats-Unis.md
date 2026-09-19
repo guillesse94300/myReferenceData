@@ -5,7 +5,7 @@ slug: actions--actions-etats-unis
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 14
+nombre_de_supports: 15
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0493246853"
@@ -64,6 +64,20 @@ supports:
     frais_totaux_e: "2,59%"
     perf_finale: "6,61%"
     retrocessions: "0,00%"
+  - isin: "LU1894682704"
+    nom: "AMUNDI US EQ RESEARCH VALUE A"
+    societe: "AMUNDI LUXEMBOURG SA"
+    nature: "Compartiment SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "3,13%"
+    frais_actif_b: "1,78%"
+    perf_nette_c: "1,35%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,54%"
+    perf_finale: "0,59%"
+    retrocessions: "0,75%"
   - isin: "LU1458427942"
     nom: "BNPP RESP US VAL MF EQ CL EUR"
     societe: "BNP PARIBAS ASSET MNGT LUX SA"
@@ -208,7 +222,7 @@ supports:
 
 # Actions — Actions États-Unis
 
-14 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+15 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -223,6 +237,7 @@ La performance porte sur le dernier exercice clos.
 | `LU0201575346` | AF EQUITY LATIN AMERICA AU | AMUNDI LUXEMBOURG SA | 3,10% | 34,42% | 0,85% | Article 8 |
 | `FR001400YA12` | AMPLEGEST PRIC POWER US ACH | AMPLEGEST | n.c. | n.c. | 1,05% | Article 8 |
 | `LU1883872332` | AMUNDI FDS US PIONEER FUND A | AMUNDI LUXEMBOURG SA | 2,59% | 6,61% | 0,00% | Article 8 |
+| `LU1894682704` | AMUNDI US EQ RESEARCH VALUE A | AMUNDI LUXEMBOURG SA | 2,54% | 0,59% | 0,75% | Article 8 |
 | `LU1458427942` | BNPP RESP US VAL MF EQ CL EUR | BNP PARIBAS ASSET MNGT LUX SA | 2,23% | 1,03% | 0,58% | Article 8 |
 | `FR001400RWL4` | BOURSO US | SG INVT SOLUTIONS FRANCE | n.c. | n.c. | 0,00% | non renseignée |
 | `LU0061475181` | COL THREAD AMERICAN AU USD | THREADNEEDLE MANAGEMENT LUXEMB | 2,58% | 3,42% | 0,82% | non renseignée |
@@ -368,6 +383,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 9,19% |
 | Nette de l'unité de compte (C = A − B) | 7,41% |
 | **Finale (A − E)** | **6,61%** |
+
+---
+
+## AMUNDI US EQ RESEARCH VALUE A
+
+`LU1894682704` · AMUNDI LUXEMBOURG SA · Compartiment SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU1894682704` |
+| Société de gestion | AMUNDI LUXEMBOURG SA |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions États-Unis (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,78% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,54%** |
+| Taux de rétrocession de commissionnement | 0,75% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 3,13% |
+| Nette de l'unité de compte (C = A − B) | 1,35% |
+| **Finale (A − E)** | **0,59%** |
 
 ---
 

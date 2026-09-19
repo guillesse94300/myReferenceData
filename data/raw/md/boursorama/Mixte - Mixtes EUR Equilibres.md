@@ -5,7 +5,7 @@ slug: mixte--mixtes-eur-equilibres
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 4
+nombre_de_supports: 6
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0212925753"
@@ -64,11 +64,39 @@ supports:
     frais_totaux_e: "2,21%"
     perf_finale: "7,73%"
     retrocessions: "0,62%"
+  - isin: "FR0010564351"
+    nom: "OFI RS MULTITRACK R"
+    societe: "OFI INVEST ASSET MANAGEMENT"
+    nature: "FCP"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "10,33%"
+    frais_actif_b: "1,52%"
+    perf_nette_c: "8,81%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,34%"
+    perf_finale: "7,99%"
+    retrocessions: "0,63%"
+  - isin: "FR0010286013"
+    nom: "SEXTANT GRAND LARGE"
+    societe: "AMIRAL GESTION"
+    nature: "FCP"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "4,56%"
+    frais_actif_b: "1,70%"
+    perf_nette_c: "2,86%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,47%"
+    perf_finale: "2,09%"
+    retrocessions: "0,70%"
 ---
 
 # Mixte — Mixtes EUR Equilibrés
 
-4 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -83,6 +111,8 @@ La performance porte sur le dernier exercice clos.
 | `FR0010149203` | CARMIGNAC MULTI EXPERTISE | CARMIGNAC GESTION | 2,39% | 3,96% | 1,00% | Article 8 |
 | `FR0010135103` | CARMIGNAC PATRIMOINE A EUR ACC | CARMIGNAC GESTION | 2,64% | 11,28% | 0,75% | Article 8 |
 | `LU0740858229` | JPM GLOBAL INC FND A EUR CAP | JPMORGAN ASSET MANAGEMENT EUR | 2,21% | 7,73% | 0,62% | non renseignée |
+| `FR0010564351` | OFI RS MULTITRACK R | OFI INVEST ASSET MANAGEMENT | 2,34% | 7,99% | 0,63% | Article 8 |
+| `FR0010286013` | SEXTANT GRAND LARGE | AMIRAL GESTION | 2,47% | 2,09% | 0,70% | Article 8 |
 
 ---
 ## BGF GLOBAL ALLOC FD H A2 EUR
@@ -218,3 +248,71 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 9,94% |
 | Nette de l'unité de compte (C = A − B) | 8,54% |
 | **Finale (A − E)** | **7,73%** |
+
+---
+
+## OFI RS MULTITRACK R
+
+`FR0010564351` · OFI INVEST ASSET MANAGEMENT · FCP · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0010564351` |
+| Société de gestion | OFI INVEST ASSET MANAGEMENT |
+| Nature juridique | FCP |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Mixtes EUR Equilibrés (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,52% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,34%** |
+| Taux de rétrocession de commissionnement | 0,63% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 10,33% |
+| Nette de l'unité de compte (C = A − B) | 8,81% |
+| **Finale (A − E)** | **7,99%** |
+
+---
+
+## SEXTANT GRAND LARGE
+
+`FR0010286013` · AMIRAL GESTION · FCP · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0010286013` |
+| Société de gestion | AMIRAL GESTION |
+| Nature juridique | FCP |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Mixtes EUR Equilibrés (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,70% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,47%** |
+| Taux de rétrocession de commissionnement | 0,70% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 4,56% |
+| Nette de l'unité de compte (C = A − B) | 2,86% |
+| **Finale (A − E)** | **2,09%** |

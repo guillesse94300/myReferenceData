@@ -5,7 +5,7 @@ slug: actions--actions-europe-grandes-capitalisations-croissance
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 6
+nombre_de_supports: 7
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0154234636"
@@ -92,11 +92,25 @@ supports:
     frais_totaux_e: "2,95%"
     perf_finale: "-5,09%"
     retrocessions: "0,96%"
+  - isin: "LU0119124781"
+    nom: "FIDELITY EUROP. DYN. GW. A EUR"
+    societe: "FIL INVESTMENT MANAGEMENT LUX"
+    nature: "Compartiment SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "-3,92%"
+    frais_actif_b: "1,90%"
+    perf_nette_c: "-5,82%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,61%"
+    perf_finale: "-6,53%"
+    retrocessions: "0,75%"
 ---
 
 # Actions — Actions Europe Grandes Capitalisations Croissance
 
-6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+7 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -113,6 +127,7 @@ La performance porte sur le dernier exercice clos.
 | `FR0010836163` | CPR SILVER AGE P A/I | CPR ASSET MANAGEMENT | 2,58% | 7,83% | 0,72% | Article 8 |
 | `FR0010158048` | DORVAL DRIVERS EUROPE R | DORVAL ASSET MANAGEMENT | 2,81% | 5,98% | 1,00% | Article 8 |
 | `FR0010321828` | ECHIQUIER MAJ SRI GROWT EURP A | FINANCIERE DE L ECHIQUIER | 2,95% | -5,09% | 0,96% | Article 8 |
+| `LU0119124781` | FIDELITY EUROP. DYN. GW. A EUR | FIL INVESTMENT MANAGEMENT LUX | 2,61% | -6,53% | 0,75% | Article 8 |
 
 ---
 ## BGF-EUROPEAN SPEC SIT-A2E
@@ -316,3 +331,37 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | -2,14% |
 | Nette de l'unité de compte (C = A − B) | -4,37% |
 | **Finale (A − E)** | **-5,09%** |
+
+---
+
+## FIDELITY EUROP. DYN. GW. A EUR
+
+`LU0119124781` · FIL INVESTMENT MANAGEMENT LUX · Compartiment SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0119124781` |
+| Société de gestion | FIL INVESTMENT MANAGEMENT LUX |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Europe Grandes Capitalisations Croissance (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,90% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,61%** |
+| Taux de rétrocession de commissionnement | 0,75% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | -3,92% |
+| Nette de l'unité de compte (C = A − B) | -5,82% |
+| **Finale (A − E)** | **-6,53%** |

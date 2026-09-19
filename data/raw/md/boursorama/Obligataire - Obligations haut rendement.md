@@ -5,7 +5,7 @@ slug: obligataire--obligations-haut-rendement
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 7
+nombre_de_supports: 8
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0119176310"
@@ -36,6 +36,20 @@ supports:
     frais_totaux_e: "1,74%"
     perf_finale: "3,50%"
     retrocessions: "0,32%"
+  - isin: "LU1883861137"
+    nom: "AMUNDI US HIGH YIELD BOND A"
+    societe: "AMUNDI LUXEMBOURG SA"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "-3,74%"
+    frais_actif_b: "1,63%"
+    perf_nette_c: "-5,37%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,34%"
+    perf_finale: "-6,08%"
+    retrocessions: "0,68%"
   - isin: "LU1191877379"
     nom: "BGF EUROPEAN HIGH YIELD BD A2"
     societe: "BLACKROCK (LUXEMBOURG) SA"
@@ -110,7 +124,7 @@ supports:
 
 # Obligataire — Obligations haut rendement
 
-7 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+8 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -123,6 +137,7 @@ La performance porte sur le dernier exercice clos.
 |---|---|---|---|---|---|---|
 | `LU0119176310` | ABRDN EURO HY BD A EUR | ABRDN INVESTMENTS LUXEMBOURG | 2,23% | 3,82% | 0,62% | non renseignée |
 | `FR0010032326` | ALLIANZ EURO HIGH YIELD R C | ALLIANZ GLOBAL INVESTORS GMBH | 1,74% | 3,50% | 0,32% | Article 8 |
+| `LU1883861137` | AMUNDI US HIGH YIELD BOND A | AMUNDI LUXEMBOURG SA | 2,34% | -6,08% | 0,68% | Article 8 |
 | `LU1191877379` | BGF EUROPEAN HIGH YIELD BD A2 | BLACKROCK (LUXEMBOURG) SA | 2,00% | 4,80% | 0,50% | non renseignée |
 | `LU0093504206` | BGF GLB HIGH YIELD BD FD EUR | BLACKROCK (LUXEMBOURG) SA | 2,25% | 4,93% | 0,62% | non renseignée |
 | `LU0170291933` | CANDRIAM BONDS GLOB HIGH YIELD | CANDRIAM SCA | 2,26% | 5,10% | 0,72% | Article 8 |
@@ -195,6 +210,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 5,24% |
 | Nette de l'unité de compte (C = A − B) | 4,28% |
 | **Finale (A − E)** | **3,50%** |
+
+---
+
+## AMUNDI US HIGH YIELD BOND A
+
+`LU1883861137` · AMUNDI LUXEMBOURG SA · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU1883861137` |
+| Société de gestion | AMUNDI LUXEMBOURG SA |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Obligations haut rendement (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,63% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,34%** |
+| Taux de rétrocession de commissionnement | 0,68% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | -3,74% |
+| Nette de l'unité de compte (C = A − B) | -5,37% |
+| **Finale (A − E)** | **-6,08%** |
 
 ---
 

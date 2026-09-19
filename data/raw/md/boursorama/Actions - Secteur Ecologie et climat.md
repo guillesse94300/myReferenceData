@@ -5,7 +5,7 @@ slug: actions--secteur-ecologie-climat
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 10
+nombre_de_supports: 12
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "FR0000991424"
@@ -78,6 +78,20 @@ supports:
     frais_totaux_e: "2,96%"
     perf_finale: "-1,29%"
     retrocessions: "0,96%"
+  - isin: "FR001400RWM2"
+    nom: "BOURSO CLIMAT"
+    societe: "SG INVT SOLUTIONS FRANCE"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "n.c."
+    frais_actif_b: "0,59%"
+    perf_nette_c: "n.c."
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "n.c."
+    perf_finale: "n.c."
+    retrocessions: "0,00%"
   - isin: "LU2389405080"
     nom: "CPR INVEST HYDROGEN A"
     societe: "CPR ASSET MANAGEMENT"
@@ -134,6 +148,20 @@ supports:
     frais_totaux_e: "2,70%"
     perf_finale: "11,24%"
     retrocessions: "0,78%"
+  - isin: "LU0302446645"
+    nom: "SCHRODER ISF GLB CLMT CHG EQ A"
+    societe: "SCHRODER INVESTMENT MGT EUR SA"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "11,04%"
+    frais_actif_b: "1,83%"
+    perf_nette_c: "9,21%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,65%"
+    perf_finale: "8,39%"
+    retrocessions: "0,75%"
   - isin: "FR0000444275"
     nom: "SG AM ACT EUR ENVIRON P CAP"
     societe: "SOCIETE GENERALE GESTION"
@@ -152,7 +180,7 @@ supports:
 
 # Actions — Secteur Écologie & climat
 
-10 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+12 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -168,10 +196,12 @@ La performance porte sur le dernier exercice clos.
 | `LU1883868819` | AMUNDI EUROPE EQ CLIMATE A C | AMUNDI LUXEMBOURG SA | 2,62% | 10,63% | 0,75% | Article 8 |
 | `FR0013216207` | AMUNDI KBI AQUA C | AMUNDI ASSET MANAGEMENT | 2,64% | -1,81% | 0,74% | Article 8 |
 | `LU1165135440` | BNP PARIBAS FUNDS AQUA | BNP PARIBAS ASSET MNGT LUX SA | 2,96% | -1,29% | 0,96% | Article 9 |
+| `FR001400RWM2` | BOURSO CLIMAT | SG INVT SOLUTIONS FRANCE | n.c. | n.c. | 0,00% | Article 8 |
 | `LU2389405080` | CPR INVEST HYDROGEN A | CPR ASSET MANAGEMENT | 2,83% | 15,07% | 0,80% | Article 8 |
 | `LU1902443420` | CPR INVEST-CLIMATE ACT -A-ACC | CPR ASSET MANAGEMENT | 2,73% | 2,62% | 0,78% | Article 9 |
 | `FR0000982449` | HSBC EURO EQ GREEN TRANSIT AC | HSBC GLOBAL ASSET MNGMT FRANCE | 2,44% | 11,43% | 0,75% | Article 9 |
 | `LU0914731947` | MIROVA EURO SUSTAINABLE EQ R/A | NATIXIS INVEST MANAGERS INTL | 2,70% | 11,24% | 0,78% | Article 9 |
+| `LU0302446645` | SCHRODER ISF GLB CLMT CHG EQ A | SCHRODER INVESTMENT MGT EUR SA | 2,65% | 8,39% | 0,75% | Article 8 |
 | `FR0000444275` | SG AM ACT EUR ENVIRON P CAP | SOCIETE GENERALE GESTION | 2,79% | 12,32% | 0,82% | Article 9 |
 
 ---
@@ -345,6 +375,40 @@ La performance porte sur le dernier exercice clos.
 
 ---
 
+## BOURSO CLIMAT
+
+`FR001400RWM2` · SG INVT SOLUTIONS FRANCE · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR001400RWM2` |
+| Société de gestion | SG INVT SOLUTIONS FRANCE |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Secteur Écologie & climat (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,59% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **n.c.** |
+| Taux de rétrocession de commissionnement | 0,00% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | n.c. |
+| Nette de l'unité de compte (C = A − B) | n.c. |
+| **Finale (A − E)** | **n.c.** |
+
+---
+
 ## CPR INVEST HYDROGEN A
 
 `LU2389405080` · CPR ASSET MANAGEMENT · SICAV · SFDR Article 8
@@ -478,6 +542,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 13,94% |
 | Nette de l'unité de compte (C = A − B) | 12,08% |
 | **Finale (A − E)** | **11,24%** |
+
+---
+
+## SCHRODER ISF GLB CLMT CHG EQ A
+
+`LU0302446645` · SCHRODER INVESTMENT MGT EUR SA · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0302446645` |
+| Société de gestion | SCHRODER INVESTMENT MGT EUR SA |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Secteur Écologie & climat (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,83% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,65%** |
+| Taux de rétrocession de commissionnement | 0,75% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 11,04% |
+| Nette de l'unité de compte (C = A − B) | 9,21% |
+| **Finale (A − E)** | **8,39%** |
 
 ---
 

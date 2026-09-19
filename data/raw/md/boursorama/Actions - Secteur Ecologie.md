@@ -5,7 +5,7 @@ slug: actions--secteur-ecologie
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 5
+nombre_de_supports: 6
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "FR0010592022"
@@ -36,6 +36,20 @@ supports:
     frais_totaux_e: "2,64%"
     perf_finale: "1,31%"
     retrocessions: "1,15%"
+  - isin: "LU2257980289"
+    nom: "MANDARINE GLOBAL TRANSITION R"
+    societe: "MANDARINE GESTION"
+    nature: "SICAV"
+    sfdr: "Article 9"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "4,51%"
+    frais_actif_b: "2,13%"
+    perf_nette_c: "2,38%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,90%"
+    perf_finale: "1,61%"
+    retrocessions: "0,98%"
   - isin: "LU0914733059"
     nom: "MIROVA THEM EURP ENVIRON RA"
     societe: "NATIXIS INVEST MANAGERS INTL"
@@ -82,7 +96,7 @@ supports:
 
 # Actions — Secteur Ecologie
 
-5 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -95,6 +109,7 @@ La performance porte sur le dernier exercice clos.
 |---|---|---|---|---|---|---|
 | `FR0010592022` | ECOFI ENJEUX FUTURS C | ECOFI INVESTISSEMENTS | 2,87% | 3,33% | 1,13% | Article 9 |
 | `FR0000970949` | MAM TRANSITION DURABLE ACT C | MANDARINE GESTION | 2,64% | 1,31% | 1,15% | Article 9 |
+| `LU2257980289` | MANDARINE GLOBAL TRANSITION R | MANDARINE GESTION | 2,90% | 1,61% | 0,98% | Article 9 |
 | `LU0914733059` | MIROVA THEM EURP ENVIRON RA | NATIXIS INVEST MANAGERS INTL | 2,69% | 10,30% | 0,78% | Article 9 |
 | `FR0013267150` | OFI ESG EQ CLIMATE CHANGE RC | OFI INVEST ASSET MANAGEMENT | 2,62% | 7,57% | 0,88% | Article 9 |
 | `LU1183791794` | SYCOMORE ECO SOLUTIONS R | SYCOMORE ASSET MANAGEMENT | 2,79% | 10,93% | 1,01% | Article 9 |
@@ -165,6 +180,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 3,95% |
 | Nette de l'unité de compte (C = A − B) | 2,08% |
 | **Finale (A − E)** | **1,31%** |
+
+---
+
+## MANDARINE GLOBAL TRANSITION R
+
+`LU2257980289` · MANDARINE GESTION · SICAV · SFDR Article 9
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU2257980289` |
+| Société de gestion | MANDARINE GESTION |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 9 |
+| Avenant spécifique | non |
+| Classification d'actif | Secteur Ecologie (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,13% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,90%** |
+| Taux de rétrocession de commissionnement | 0,98% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 4,51% |
+| Nette de l'unité de compte (C = A − B) | 2,38% |
+| **Finale (A − E)** | **1,61%** |
 
 ---
 

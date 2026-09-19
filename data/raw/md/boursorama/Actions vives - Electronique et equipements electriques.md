@@ -5,7 +5,7 @@ slug: actions-vives--electronique-et-equipements-electriques
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 5
+nombre_de_supports: 6
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "FR0010220475"
@@ -50,6 +50,20 @@ supports:
     frais_totaux_e: "n.c."
     perf_finale: "19,82%"
     retrocessions: "n.c."
+  - isin: "IT0004176001"
+    nom: "PRYSMIAN SPA"
+    societe: "NC"
+    nature: "Action"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "annexe IB SwissLife (par ISIN)"
+    perf_brute_a: "n.c."
+    frais_actif_b: "n.c."
+    perf_nette_c: "40,09%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "n.c."
+    perf_finale: "39,04%"
+    retrocessions: "n.c."
   - isin: "FR0010451203"
     nom: "REXEL SA"
     societe: "NC"
@@ -82,7 +96,7 @@ supports:
 
 # Actions vives — Electronique et équipements électriques
 
-5 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -96,6 +110,7 @@ La performance porte sur le dernier exercice clos.
 | `FR0010220475` | ALSTOM REGROUPT | n.c. | n.c. | 15,87% | n.c. | non renseignée |
 | `FR0010307819` | LEGRAND SA | n.c. | n.c. | 34,30% | n.c. | non renseignée |
 | `FR0000044448` | NEXANS SA | n.c. | n.c. | 19,82% | n.c. | non renseignée |
+| `IT0004176001` | PRYSMIAN SPA | n.c. | n.c. | 39,04% | n.c. | non renseignée |
 | `FR0010451203` | REXEL SA | n.c. | n.c. | 35,52% | n.c. | non renseignée |
 | `FR0000121972` | SCHNEIDER ELECTRIC | n.c. | n.c. | -3,22% | n.c. | non renseignée |
 
@@ -199,6 +214,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | n.c. |
 | Nette de l'unité de compte (C = A − B) | 20,73% |
 | **Finale (A − E)** | **19,82%** |
+
+---
+
+## PRYSMIAN SPA
+
+`IT0004176001` · n.c. · Action · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `IT0004176001` |
+| Société de gestion | n.c. |
+| Nature juridique | Action |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Electronique et équipements électriques (annexe IB SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | n.c. |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **n.c.** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | n.c. |
+| Nette de l'unité de compte (C = A − B) | 40,09% |
+| **Finale (A − E)** | **39,04%** |
 
 ---
 

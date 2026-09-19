@@ -5,9 +5,23 @@ slug: mixte--mixtes-eur-prudents
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 6
+nombre_de_supports: 7
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
+  - isin: "FR0010177899"
+    nom: "CHOIX SOLIDAIRE C"
+    societe: "ECOFI INVESTISSEMENTS"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "8,72%"
+    frais_actif_b: "0,94%"
+    perf_nette_c: "7,78%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "1,75%"
+    perf_finale: "6,97%"
+    retrocessions: "0,40%"
   - isin: "LU0284394235"
     nom: "DNCA INVEST EUROSE A EUR"
     societe: "DNCA FINANCE"
@@ -96,7 +110,7 @@ supports:
 
 # Mixte — Mixtes EUR Prudents
 
-6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+7 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -107,6 +121,7 @@ La performance porte sur le dernier exercice clos.
 
 | ISIN | Support | Société | Frais totaux | Perf. finale | Rétrocessions | SFDR |
 |---|---|---|---|---|---|---|
+| `FR0010177899` | CHOIX SOLIDAIRE C | ECOFI INVESTISSEMENTS | 1,75% | 6,97% | 0,40% | Article 8 |
 | `LU0284394235` | DNCA INVEST EUROSE A EUR | DNCA FINANCE | 2,30% | 7,00% | 0,63% | Article 8 |
 | `LU0992632538` | EDR INCOME EUROPE | EDMOND ROTHSCHILD ASSET MNGT | 2,43% | 4,85% | 0,65% | Article 8 |
 | `FR0012355139` | LAZARD PATRIMOINE R CAP | LAZARD FRERES GESTION SAS | 2,30% | 0,31% | 0,69% | Article 8 |
@@ -115,6 +130,40 @@ La performance porte sur le dernier exercice clos.
 | `FR0007072160` | TRUSTEAM OPTIMUM R | AURIS GESTION | 2,18% | 2,78% | 0,60% | Article 8 |
 
 ---
+## CHOIX SOLIDAIRE C
+
+`FR0010177899` · ECOFI INVESTISSEMENTS · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0010177899` |
+| Société de gestion | ECOFI INVESTISSEMENTS |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Mixtes EUR Prudents (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,94% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **1,75%** |
+| Taux de rétrocession de commissionnement | 0,40% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 8,72% |
+| Nette de l'unité de compte (C = A − B) | 7,78% |
+| **Finale (A − E)** | **6,97%** |
+
+---
+
 ## DNCA INVEST EUROSE A EUR
 
 `LU0284394235` · DNCA FINANCE · Compartiment SICAV · SFDR Article 8

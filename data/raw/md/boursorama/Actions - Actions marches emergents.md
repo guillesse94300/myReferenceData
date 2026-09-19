@@ -5,7 +5,7 @@ slug: actions--actions-marches-emergents
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 12
+nombre_de_supports: 15
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0278937759"
@@ -106,6 +106,20 @@ supports:
     frais_totaux_e: "3,06%"
     perf_finale: "12,96%"
     retrocessions: "0,96%"
+  - isin: "FR0010149302"
+    nom: "CARMIGNAC EMERGENTS A EUR ACC"
+    societe: "CARMIGNAC GESTION"
+    nature: "FCP"
+    sfdr: "Article 9"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "24,94%"
+    frais_actif_b: "1,80%"
+    perf_nette_c: "23,14%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,72%"
+    perf_finale: "22,22%"
+    retrocessions: "0,75%"
   - isin: "LU0352132285"
     nom: "FRANKLIN MENA FUND A EUR CAP"
     societe: "FRANKLIN TEMPLET INTL SVCES SA"
@@ -120,6 +134,20 @@ supports:
     frais_totaux_e: "3,42%"
     perf_finale: "-8,43%"
     retrocessions: "0,70%"
+  - isin: "LU0708055370"
+    nom: "HSBC GIF FRONT MARKET A USD"
+    societe: "HSBC INVESTMENT FUNDS LUXEMBOU"
+    nature: "SICAV"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "9,76%"
+    frais_actif_b: "2,25%"
+    perf_nette_c: "7,51%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "3,06%"
+    perf_finale: "6,71%"
+    retrocessions: "0,88%"
   - isin: "LU0217576759"
     nom: "JPM EMERGING MKT EQ A ACC-EUR"
     societe: "JPMORGAN ASSET MANAGEMENT EUR"
@@ -134,6 +162,20 @@ supports:
     frais_totaux_e: "2,62%"
     perf_finale: "18,72%"
     retrocessions: "0,75%"
+  - isin: "FR0010380675"
+    nom: "LAZARD ACTIONS EMERGENTES R"
+    societe: "LAZARD FRERES GESTION SAS"
+    nature: "FCP"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "25,43%"
+    frais_actif_b: "2,14%"
+    perf_nette_c: "23,29%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "3,06%"
+    perf_finale: "22,37%"
+    retrocessions: "0,74%"
   - isin: "LU0118140002"
     nom: "MSIF NEXTGEN EM FD A EUR"
     societe: "MSIM FUND MANAGEMENT IRL LTD"
@@ -180,7 +222,7 @@ supports:
 
 # Actions — Actions marchés émergents
 
-12 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+15 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -198,8 +240,11 @@ La performance porte sur le dernier exercice clos.
 | `LU0171275786` | BGF EMERGING FUND A2 EUR | BLACKROCK (LUXEMBOURG) SA | 2,72% | 12,80% | 0,75% | non renseignée |
 | `LU2719174067` | BLACKROCK EMERG MKT EXCHINA A2 | BLACKROCK (LUXEMBOURG) SA | 2,78% | 22,36% | 0,75% | non renseignée |
 | `LU0823413074` | BNPP FUNDS EMERGING EQUITY C | BNP PARIBAS ASSET MNGT LUX SA | 3,06% | 12,96% | 0,96% | Article 8 |
+| `FR0010149302` | CARMIGNAC EMERGENTS A EUR ACC | CARMIGNAC GESTION | 2,72% | 22,22% | 0,75% | Article 9 |
 | `LU0352132285` | FRANKLIN MENA FUND A EUR CAP | FRANKLIN TEMPLET INTL SVCES SA | 3,42% | -8,43% | 0,70% | non renseignée |
+| `LU0708055370` | HSBC GIF FRONT MARKET A USD | HSBC INVESTMENT FUNDS LUXEMBOU | 3,06% | 6,71% | 0,88% | non renseignée |
 | `LU0217576759` | JPM EMERGING MKT EQ A ACC-EUR | JPMORGAN ASSET MANAGEMENT EUR | 2,62% | 18,72% | 0,75% | Article 8 |
+| `FR0010380675` | LAZARD ACTIONS EMERGENTES R | LAZARD FRERES GESTION SAS | 3,06% | 22,37% | 0,74% | Article 8 |
 | `LU0118140002` | MSIF NEXTGEN EM FD A EUR | MSIM FUND MANAGEMENT IRL LTD | 2,68% | 6,19% | 0,80% | Article 8 |
 | `LU0552028184` | SAF AMUNDI FD EQ EM FOCUS AE | AMUNDI LUXEMBOURG SA | 2,65% | 13,59% | 0,70% | Article 8 |
 | `LU2028144173` | VONTOBEL MTX EMERG MKTS LEAD B | VONTOBEL ASSET MANAGEMENT SA | 2,92% | 17,68% | 0,82% | Article 8 |
@@ -443,6 +488,40 @@ La performance porte sur le dernier exercice clos.
 
 ---
 
+## CARMIGNAC EMERGENTS A EUR ACC
+
+`FR0010149302` · CARMIGNAC GESTION · FCP · SFDR Article 9
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0010149302` |
+| Société de gestion | CARMIGNAC GESTION |
+| Nature juridique | FCP |
+| Classification SFDR | Article 9 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions marchés émergents (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,80% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,72%** |
+| Taux de rétrocession de commissionnement | 0,75% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 24,94% |
+| Nette de l'unité de compte (C = A − B) | 23,14% |
+| **Finale (A − E)** | **22,22%** |
+
+---
+
 ## FRANKLIN MENA FUND A EUR CAP
 
 `LU0352132285` · FRANKLIN TEMPLET INTL SVCES SA · Compartiment SICAV · SFDR non renseignée
@@ -477,6 +556,40 @@ La performance porte sur le dernier exercice clos.
 
 ---
 
+## HSBC GIF FRONT MARKET A USD
+
+`LU0708055370` · HSBC INVESTMENT FUNDS LUXEMBOU · SICAV · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0708055370` |
+| Société de gestion | HSBC INVESTMENT FUNDS LUXEMBOU |
+| Nature juridique | SICAV |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Actions marchés émergents (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,25% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **3,06%** |
+| Taux de rétrocession de commissionnement | 0,88% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 9,76% |
+| Nette de l'unité de compte (C = A − B) | 7,51% |
+| **Finale (A − E)** | **6,71%** |
+
+---
+
 ## JPM EMERGING MKT EQ A ACC-EUR
 
 `LU0217576759` · JPMORGAN ASSET MANAGEMENT EUR · Compartiment SICAV · SFDR Article 8
@@ -508,6 +621,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 21,34% |
 | Nette de l'unité de compte (C = A − B) | 19,62% |
 | **Finale (A − E)** | **18,72%** |
+
+---
+
+## LAZARD ACTIONS EMERGENTES R
+
+`FR0010380675` · LAZARD FRERES GESTION SAS · FCP · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0010380675` |
+| Société de gestion | LAZARD FRERES GESTION SAS |
+| Nature juridique | FCP |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions marchés émergents (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,14% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **3,06%** |
+| Taux de rétrocession de commissionnement | 0,74% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 25,43% |
+| Nette de l'unité de compte (C = A − B) | 23,29% |
+| **Finale (A − E)** | **22,37%** |
 
 ---
 

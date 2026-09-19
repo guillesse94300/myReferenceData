@@ -5,7 +5,7 @@ slug: etf--actions-etats-unis
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 15
+nombre_de_supports: 16
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "IE000R85HL30"
@@ -204,6 +204,20 @@ supports:
     frais_totaux_e: "n.c."
     perf_finale: "n.c."
     retrocessions: "n.c."
+  - isin: "IE00BJZ2DD79"
+    nom: "XTRACKERS RUSSELL 2000 ETF"
+    societe: "DWS INVESTMENT SA"
+    nature: "FCP"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "1,63%"
+    frais_actif_b: "0,32%"
+    perf_nette_c: "1,31%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "1,08%"
+    perf_finale: "0,55%"
+    retrocessions: "n.c."
   - isin: "IE0002EI5AG0"
     nom: "XTRACKERS S&P500 EQW ETF"
     societe: "DWS INVESTMENT SA"
@@ -222,7 +236,7 @@ supports:
 
 # ETF — Actions États-Unis
 
-15 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+16 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -247,6 +261,7 @@ La performance porte sur le dernier exercice clos.
 | `IE0009VWHAE6` | SHARES US EQ ENHANCED ACTIVE | BLACKROCK ASSET MANAGEMENT IRL | n.c. | n.c. | n.c. | Article 8 |
 | `IE00BJZ2DC62` | XTRAC MSC USA ESG SCR UTS ETF | DWS INVESTMENT SA | 0,86% | 4,18% | n.c. | Article 8 |
 | `IE0000MMQ5M5` | XTRACKERS MSCI USA ESG ETF 2C | DWS INVESTMENT SA | n.c. | n.c. | n.c. | Article 8 |
+| `IE00BJZ2DD79` | XTRACKERS RUSSELL 2000 ETF | DWS INVESTMENT SA | 1,08% | 0,55% | n.c. | non renseignée |
 | `IE0002EI5AG0` | XTRACKERS S&P500 EQW ETF | DWS INVESTMENT SA | 1,12% | 8,49% | n.c. | non renseignée |
 
 ---
@@ -723,6 +738,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | n.c. |
 | Nette de l'unité de compte (C = A − B) | n.c. |
 | **Finale (A − E)** | **n.c.** |
+
+---
+
+## XTRACKERS RUSSELL 2000 ETF
+
+`IE00BJZ2DD79` · DWS INVESTMENT SA · FCP · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `IE00BJZ2DD79` |
+| Société de gestion | DWS INVESTMENT SA |
+| Nature juridique | FCP |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Actions États-Unis (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,32% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **1,08%** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 1,63% |
+| Nette de l'unité de compte (C = A − B) | 1,31% |
+| **Finale (A − E)** | **0,55%** |
 
 ---
 

@@ -5,7 +5,7 @@ slug: obligataire--obligations-d-entreprise
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 6
+nombre_de_supports: 7
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "FR001400C9Z9"
@@ -22,6 +22,20 @@ supports:
     frais_totaux_e: "n.c."
     perf_finale: "n.c."
     retrocessions: "0,30%"
+  - isin: "FR0010172767"
+    nom: "EDR EURO SUSTAINABLE CREDIT C"
+    societe: "EDMOND ROTHSCHILD ASSET MNGT"
+    nature: "FCP"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "3,89%"
+    frais_actif_b: "1,11%"
+    perf_nette_c: "2,78%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "1,88%"
+    perf_finale: "2,01%"
+    retrocessions: "0,54%"
   - isin: "FR0013460920"
     nom: "EDR SHORT DURATION CREDIT A"
     societe: "EDMOND ROTHSCHILD ASSET MNGT"
@@ -96,7 +110,7 @@ supports:
 
 # Obligataire — Obligations d'entreprise
 
-6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+7 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -108,6 +122,7 @@ La performance porte sur le dernier exercice clos.
 | ISIN | Support | Société | Frais totaux | Perf. finale | Rétrocessions | SFDR |
 |---|---|---|---|---|---|---|
 | `FR001400C9Z9` | BFT CREDIT EUR OBLI DUR P C | CPR ASSET MANAGEMENT | n.c. | n.c. | 0,30% | Article 8 |
+| `FR0010172767` | EDR EURO SUSTAINABLE CREDIT C | EDMOND ROTHSCHILD ASSET MNGT | 1,88% | 2,01% | 0,54% | Article 8 |
 | `FR0013460920` | EDR SHORT DURATION CREDIT A | EDMOND ROTHSCHILD ASSET MNGT | 1,63% | 3,59% | 0,35% | Article 8 |
 | `LU1752460292` | ODDO BHF CREDIT OPPORT CR EUR | ODDO BHF ASSET MANAGEMENT | 1,89% | 1,75% | 0,50% | Article 8 |
 | `LU1486845537` | ODDO BHF EURO CREDIT SHORT DUR | ODDO BHF ASSET MANAGEMENT | 1,70% | 2,87% | 0,20% | Article 8 |
@@ -146,6 +161,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | n.c. |
 | Nette de l'unité de compte (C = A − B) | n.c. |
 | **Finale (A − E)** | **n.c.** |
+
+---
+
+## EDR EURO SUSTAINABLE CREDIT C
+
+`FR0010172767` · EDMOND ROTHSCHILD ASSET MNGT · FCP · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0010172767` |
+| Société de gestion | EDMOND ROTHSCHILD ASSET MNGT |
+| Nature juridique | FCP |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Obligations d'entreprise (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,11% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **1,88%** |
+| Taux de rétrocession de commissionnement | 0,54% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 3,89% |
+| Nette de l'unité de compte (C = A − B) | 2,78% |
+| **Finale (A − E)** | **2,01%** |
 
 ---
 
