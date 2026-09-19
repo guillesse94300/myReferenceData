@@ -4,6 +4,17 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.13.0 — 19 septembre 2026
+
+- Couverture complète : **14 séries sur 14**, de 978 à 1 280 séances. Fidelity
+  China répond sur l'identifiant nu, la variante suffixée de Francfort donnant
+  404.
+- Le validateur tient compte de la devise. Un support libellé en dollar n'est
+  pas comparable à une performance publiée en euro : il est écarté du verdict
+  plutôt que compté en échec. Deux séries sont dans ce cas.
+- Validation : 24 couples sur 7 supports, 0,20 point d'écart médian, aucun hors
+  tolérance.
+
 ## 0.12.0 — 19 septembre 2026
 
 - La recherche par nom trouve pour Fidelity China l'identifiant `0P00000TDB`,
