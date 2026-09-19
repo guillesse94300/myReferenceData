@@ -41,12 +41,26 @@ def publiees():
     return perfs, noms
 
 
+def meilleures_series():
+    """La serie la plus fournie par support, toutes sondes confondues.
+
+    Un meme support peut avoir ete interroge par plusieurs sondes -- la
+    recherche directe et la sonde croisee passant par l'identifiant Boursorama.
+    C'est la plus longue qui est retenue.
+    """
+    retenues = {}
+    for chemin in sorted(glob.glob(os.path.join(HISTORIQUES, "*__yahoo*.json"))):
+        isin = os.path.basename(chemin).split("__")[0]
+        valeurs = yahoo.serie(open(chemin, encoding="utf-8").read())
+        if len(valeurs) > len(retenues.get(isin, {})):
+            retenues[isin] = valeurs
+    return retenues
+
+
 def main():
     perfs, noms = publiees()
     lignes, refuses = [], []
-    for chemin in sorted(glob.glob(os.path.join(HISTORIQUES, "*__yahoo_chart.json"))):
-        isin = os.path.basename(chemin).split("__")[0]
-        valeurs = yahoo.serie(open(chemin, encoding="utf-8").read())
+    for isin, valeurs in meilleures_series().items():
         if len(valeurs) < 100:
             refuses.append((isin, len(valeurs)))
             continue
