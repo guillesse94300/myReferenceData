@@ -25,9 +25,9 @@ l'interface dans le navigateur.
 
 Cinq pages, choisies dans la barre latérale :
 
-- **Accueil** — l'univers d'un coup d'œil : composition par classe d'actif, profil
-  de risque, et la dispersion du rendement à chaque niveau de risque. Trois
-  boutons mènent directement à l'exploration correspondante.
+- **Accueil** — page d'attente : le tableau de bord est en cours de refonte.
+  L'ancien a été supprimé plutôt que laissé en place, un tableau de bord qu'on
+  sait périmé orientant les lectures sans qu'on s'en aperçoive.
 - **Parcourir** — l'univers selon trois axes au choix : **classe d'actif**
   (avec un second niveau par type d'actif), **risque** ou **performance**. Le
   segment retenu est mis en avant, le reste s'efface. La première colonne du
@@ -43,7 +43,7 @@ Cinq pages, choisies dans la barre latérale :
 
 Les filtres de la barre latérale — favoris, recherche, nature, classe, SRI,
 rendement minimum, SFDR, et en repli les frais et la fiabilité de classification
-— s'appliquent à **Parcourir** et **Fiche**. L'accueil présente l'univers entier.
+— s'appliquent à **Parcourir** et **Fiche**.
 
 ## Favoris
 
