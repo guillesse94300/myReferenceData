@@ -111,7 +111,8 @@ if donnees is None:
     st.error(f"Base introuvable : {BASE}\n\nLancez `construire.bat` pour la créer.")
     st.stop()
 univers, performances, arbitrage, offres, anomalies, imports = donnees
-univers = univers.assign(favori=univers["isin"].isin(suivis))
+univers = univers.assign(favori=univers["isin"].isin(suivis),
+                         note=univers["isin"].map(lambda i: suivis.get(i, {}).get("note", "")))
 
 
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin",
@@ -359,6 +360,11 @@ def page_parcourir(vue):
     colonnes = {"favori": "Favori", "isin": "ISIN", "nom": "Support", "type_actif": "Type d'actif",
                 "sri": "SRI", "perf_annualisee": "Perf. ann.", "annees": "Ans",
                 "perf_n1": "Perf. N-1", "frais": "Frais", "disponibilite": "Disponible"}
+    # Pour un support detenu, savoir dans quelle enveloppe prime sur savoir chez
+    # quel assureur il s'achete : la colonne prend la place de l'autre.
+    if detail["note"].astype(bool).any():
+        del colonnes["disponibilite"]
+        colonnes["note"] = "Détenu dans"
     affiche = (detail[list(colonnes)].rename(columns=colonnes)
                .sort_values("Perf. ann.", ascending=False))
     # Le signe est porte par le format : une performance negative doit se
@@ -367,11 +373,18 @@ def page_parcourir(vue):
     edite = st.data_editor(
         affiche, width="stretch", hide_index=True, height=460, key=f"editeur_{axe}",
         disabled=[c for c in affiche.columns if c != "Favori"],
-        column_config={"Favori": st.column_config.CheckboxColumn("Favori", width="small"),
+        # Largeurs contraintes : laissees libres, le libelle et le type d'actif
+        # s'etalent et rejettent les dernieres colonnes hors du cadre.
+        column_config={"Favori": st.column_config.CheckboxColumn("Favori", width=78),
+                       "ISIN": st.column_config.TextColumn("ISIN", width=105),
+                       "Support": st.column_config.TextColumn("Support", width=200),
+                       "Type d'actif": st.column_config.TextColumn("Type d'actif", width=200),
+                       "Détenu dans": st.column_config.TextColumn("Détenu dans", width=150),
+                       "Disponible": st.column_config.TextColumn("Disponible", width=90),
                        "Perf. ann.": rendement("Perf. ann."), "Perf. N-1": rendement("Perf. N-1"),
-                       "Frais": st.column_config.NumberColumn("Frais", format="%.2f %%"),
-                       "SRI": st.column_config.NumberColumn("SRI", format="%d"),
-                       "Ans": st.column_config.NumberColumn("Ans", format="%d")})
+                       "Frais": st.column_config.NumberColumn("Frais", format="%.2f %%", width=70),
+                       "SRI": st.column_config.NumberColumn("SRI", format="%d", width=50),
+                       "Ans": st.column_config.NumberColumn("Ans", format="%d", width=50)})
     # L'alignement ne porte que sur les lignes affichées : un écran filtré ne
     # doit pas effacer le reste de la liste.
     _, modifie = suivi.appliquer(affiche["ISIN"].tolist(),
@@ -396,6 +409,8 @@ def page_fiche(vue):
         st.rerun()
     st.caption(f"`{isin}` · {ligne['societe_gestion'] or 'société non communiquée'} · "
                f"{ligne['type_actif']} · SFDR {ligne['sfdr']} · disponible chez {ligne['disponibilite']}")
+    if ligne["note"]:
+        st.info(f"Support suivi — détenu dans : {ligne['note']}")
     if ligne["origine_classification"] == "déduite du libellé":
         st.warning("Classe d'actif déduite du libellé du support, non confirmée par un référentiel.")
 

@@ -47,8 +47,9 @@ Les supports suivis se cochent dans la première colonne du tableau de
 **Parcourir**, ou par la bascule en haut de leur **fiche**. Le filtre
 « Favoris » de la barre latérale restreint l'affichage à la liste, ou l'en exclut.
 
-La liste vit dans **`data/favoris.csv`**, deux colonnes, modifiable dans un
-tableur. Elle est délibérément tenue **hors de la base** : `construire.bat`
+La liste vit dans **`data/favoris.csv`** — `isin`, `ajoute_le`, `note` —
+modifiable dans un tableur. La note est libre et sert aujourd'hui à porter
+l'enveloppe de détention ; elle s'affiche sur la fiche du support. Elle est délibérément tenue **hors de la base** : `construire.bat`
 efface et reconstruit `reference.db` à chaque exécution, une donnée saisie ne
 pourrait pas y survivre. Le fichier est suivi par Git, ce qui lui sert de
 sauvegarde.
@@ -156,6 +157,7 @@ la classification de ses supports est reconstituée, et le champ
 | `tools/fiches_boursorama.py` | Gabarit de lecture et d'écriture des fiches |
 | `tools/completer_boursorama.py` | Classe et insère des supports dans les fiches |
 | `tools/generer_index_boursorama.py` | Régénère l'index et la comparaison SwissLife |
+| `tools/importer_favoris.py` | Reprend `data/raw/favorites.txt` vers les favoris |
 
 ## Suite
 
