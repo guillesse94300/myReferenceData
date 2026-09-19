@@ -163,12 +163,6 @@ def en_tete(titre):
     st.caption(f"Version {VERSION} du {en_toutes_lettres(DATE)}  ·  données {millesimes}")
 
 
-def aller_a(page, **etat):
-    """Change de page depuis un bouton, en preparant l'etat de la page visee."""
-    st.session_state["page"] = page
-    st.session_state.update(etat)
-
-
 def classes_ordonnees(cadre):
     presentes = [c for c in ORDRE_CLASSES if c in set(cadre["grande_classe"].dropna())]
     return presentes + sorted(set(cadre["grande_classe"].dropna()) - set(presentes))
@@ -198,44 +192,6 @@ def barres_horizontales(cadre, champ, titre=None, ordre=None, mises_en_avant=Non
     graphique = (barres + valeurs).properties(height=hauteur)
     # Altair rejette un titre nul : il n'est pose que s'il existe.
     return graphique.properties(title=titre) if titre else graphique
-
-
-def barres_risque(cadre):
-    """Repartition par indicateur de risque, du plus clair au plus soutenu."""
-    comptes = (cadre.dropna(subset=["sri"]).astype({"sri": int})["sri"]
-               .value_counts().rename_axis("sri").reset_index(name="n").sort_values("sri"))
-    base = alt.Chart(comptes).encode(
-        alt.X("sri:O", title="Indicateur de risque (SRI)",
-              axis=alt.Axis(labelColor=ENCRE, titleColor=ENCRE_DOUCE, labelAngle=0, domainColor=GRILLE)),
-        alt.Y("n:Q", title=None, axis=None))
-    barres = base.mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4, size=42).encode(
-        alt.Color("sri:O", scale=alt.Scale(domain=list(range(1, 8)), range=RAMPE_RISQUE), legend=None),
-        tooltip=[alt.Tooltip("sri:O", title="SRI"), alt.Tooltip("n:Q", title="Instruments")])
-    valeurs = base.mark_text(dy=-8, color=ENCRE_DOUCE, fontSize=11).encode(text="n:Q")
-    return (barres + valeurs).properties(height=210, title="Profil de risque")
-
-
-def risque_rendement(cadre):
-    """Dispersion du rendement annualise a chaque niveau de risque.
-
-    Une boite par niveau plutot qu'un nuage : le SRI est discret, un nuage
-    n'afficherait que sept colonnes de points superposes, et c'est la
-    dispersion -- pas le detail des points -- qui dit si le risque est paye.
-    """
-    donnees = cadre.dropna(subset=["sri", "perf_annualisee"]).copy()
-    donnees["sri"] = donnees["sri"].astype(int)
-    return (alt.Chart(donnees).mark_boxplot(size=34, median={"color": ENCRE}, outliers={"size": 8})
-            .encode(
-                alt.X("sri:O", title="Indicateur de risque (SRI)",
-                      axis=alt.Axis(labelColor=ENCRE, titleColor=ENCRE_DOUCE, labelAngle=0,
-                                    domainColor=GRILLE)),
-                alt.Y("perf_annualisee:Q", title="Rendement annualisé (%/an)",
-                      axis=alt.Axis(gridColor=GRILLE, labelColor=ENCRE, titleColor=ENCRE_DOUCE)),
-                alt.Color("sri:O", scale=alt.Scale(domain=list(range(1, 8)), range=RAMPE_RISQUE),
-                          legend=None))
-            # Marge a gauche : sans elle le titre de l'axe, ecrit a la verticale,
-            # deborde du conteneur et se retrouve rogne.
-            .properties(height=300, padding={"left": 16, "top": 5, "right": 5, "bottom": 5}))
 
 
 # --------------------------------------------------------------------- filtres
@@ -360,48 +316,17 @@ def barre_laterale():
 
 # ----------------------------------------------------------------------- pages
 
-def page_accueil(vue):
+def page_accueil(_):
+    """Page d'attente : le tableau de bord est en cours de redefinition.
+
+    L'ancien est supprime plutot que laisse en place pendant la refonte : un
+    tableau de bord qu'on sait faux oriente les lectures sans qu'on s'en
+    apercoive. Mieux vaut une page vide qui le dit.
+    """
     en_tete("Univers d'investissement")
-
-    colonnes = st.columns(5)
-    colonnes[0].metric("Instruments", f"{len(univers):,}".replace(",", " "))
-    colonnes[1].metric("Favoris suivis", len(suivis))
-    colonnes[2].metric("Types d'actif", univers["type_actif"].nunique())
-    colonnes[3].metric("Chez les deux assureurs",
-                       int((univers["disponibilite"] == "les deux").sum()))
-    colonnes[4].metric("Avec historique de VL", int(univers["cotee"].sum()),
-                       help="Valeurs liquidatives quotidiennes collectées, "
-                            "qui permettent volatilité, perte maximale et corrélations.")
-
-    st.divider()
-    gauche, droite = st.columns([3, 2])
-    with gauche:
-        st.altair_chart(
-            barres_horizontales(univers, "grande_classe", "Composition de l'univers",
-                                ordre=classes_ordonnees(univers))
-            .configure_view(strokeWidth=0).configure_title(color=ENCRE, fontSize=15, anchor="start"),
-            width="stretch")
-        st.button("Parcourir par classe d'actif", width="stretch",
-                  on_click=aller_a, args=("Parcourir",), kwargs={"axe": "Classe d'actif"})
-    with droite:
-        st.altair_chart(
-            barres_risque(univers).configure_view(strokeWidth=0)
-            .configure_title(color=ENCRE, fontSize=15, anchor="start"), width="stretch")
-        manquants = int(univers["sri"].isna().sum())
-        st.caption(f"{manquants} instruments sans SRI : l'indicateur vient des annexes SwissLife, "
-                   "les supports présents uniquement chez BoursoVie n'en portent pas.")
-        st.button("Parcourir par risque", width="stretch",
-                  on_click=aller_a, args=("Parcourir",), kwargs={"axe": "Risque"})
-
-    st.divider()
-    st.subheader("Le risque est-il payé ?")
-    st.caption("Rendement annualisé sur l'historique disponible, net des frais du fonds, "
-               f"pour les {int(univers['perf_annualisee'].notna().sum())} instruments dont la "
-               "performance est connue. Chaque boîte couvre la moitié centrale des fonds du niveau, "
-               "le trait noir est la médiane.")
-    st.altair_chart(risque_rendement(univers).configure_view(strokeWidth=0), width="stretch")
-    st.button("Parcourir par performance", on_click=aller_a, args=("Parcourir",),
-              kwargs={"axe": "Performance"})
+    st.info("Le tableau de bord est en cours de refonte. "
+            "Utilisez **Parcourir** dans la barre latérale pour explorer l'univers.")
+    st.metric("Instruments au référentiel", f"{len(univers):,}".replace(",", " "))
 
 
 def page_parcourir(vue):

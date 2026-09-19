@@ -4,6 +4,18 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.17.0 — 19 septembre 2026
+
+- Le tableau de bord d'accueil est supprimé, en amont de sa refonte. Il est
+  remplacé par une page d'attente qui le dit : un tableau de bord qu'on sait
+  périmé oriente les lectures sans qu'on s'en aperçoive, le laisser en place
+  pendant la refonte coûte plus qu'il ne rend.
+- Disparaissent avec lui les graphiques qui ne servaient qu'à l'accueil —
+  répartition par SRI, dispersion rendement/risque — et le saut de page
+  `aller_a`. La rampe ordinale de risque est conservée : elle est validée en
+  contraste et resservira. `Parcourir`, `Fiche`, `Frais` et `Qualité des
+  données` sont inchangées.
+
 ## 0.16.1 — 19 septembre 2026
 
 - `data/favoris.csv` sort du suivi Git. L'application l'écrit à chaque coche :
