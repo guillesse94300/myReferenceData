@@ -3,5 +3,5 @@
 A incrementer a chaque evolution, en reportant la ligne correspondante dans
 CHANGELOG.md : mineure pour une fonctionnalite, corrective pour un correctif.
 """
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 DATE = "2026-09-19"
