@@ -1,5 +1,5 @@
 {
-  "capture_le": "2026-09-19T14:27:37",
+  "capture_le": "2026-09-19T14:40:19",
   "requetes": [
     {
       "isin": "FR0010011171",
@@ -11,7 +11,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.1
+      "secondes": 0.13
     },
     {
       "isin": "FR0010011171",
@@ -23,7 +23,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.13
+      "secondes": 0.18
     },
     {
       "isin": "FR0010011171",
@@ -35,7 +35,7 @@
       "statut": 200,
       "octets": 128645,
       "points_estimes": 1275,
-      "secondes": 0.13
+      "secondes": 0.11
     },
     {
       "isin": "FR0010315770",
@@ -59,7 +59,7 @@
       "statut": 200,
       "octets": 215,
       "points_estimes": 0,
-      "secondes": 0.22
+      "secondes": 0.2
     },
     {
       "isin": "FR0010315770",
@@ -69,9 +69,9 @@
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/WLD.PA?range=5y&interval=1d",
       "statut": 200,
-      "octets": 134416,
+      "octets": 134403,
       "points_estimes": 1281,
-      "secondes": 0.12
+      "secondes": 0.18
     },
     {
       "isin": "FR0013332418",
@@ -95,7 +95,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.15
+      "secondes": 0.19
     },
     {
       "isin": "FR0013332418",
@@ -107,7 +107,7 @@
       "statut": 200,
       "octets": 131357,
       "points_estimes": 1275,
-      "secondes": 0.12
+      "secondes": 0.11
     },
     {
       "isin": "FR0013367281",
@@ -119,7 +119,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.07
+      "secondes": 0.05
     },
     {
       "isin": "FR0013367281",
@@ -131,7 +131,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.19
+      "secondes": 0.15
     },
     {
       "isin": "FR0013367281",
@@ -143,7 +143,7 @@
       "statut": 200,
       "octets": 132259,
       "points_estimes": 1275,
-      "secondes": 0.11
+      "secondes": 0.09
     },
     {
       "isin": "IE000I8KRLL9",
@@ -155,7 +155,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.05
+      "secondes": 0.06
     },
     {
       "isin": "IE000I8KRLL9",
@@ -167,7 +167,7 @@
       "statut": 200,
       "octets": 214,
       "points_estimes": 0,
-      "secondes": 0.15
+      "secondes": 0.23
     },
     {
       "isin": "IE000I8KRLL9",
@@ -179,7 +179,7 @@
       "statut": 200,
       "octets": 137897,
       "points_estimes": 1281,
-      "secondes": 0.13
+      "secondes": 0.11
     },
     {
       "isin": "LU0173614495",
@@ -191,7 +191,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.06
+      "secondes": 0.11
     },
     {
       "isin": "LU0173614495",
@@ -203,7 +203,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.18
+      "secondes": 0.23
     },
     {
       "isin": "LU0173614495",
@@ -215,7 +215,7 @@
       "statut": 200,
       "octets": 1276,
       "points_estimes": 1,
-      "secondes": 0.08
+      "secondes": 0.1
     },
     {
       "isin": "LU0496786574",
@@ -239,7 +239,7 @@
       "statut": 200,
       "octets": 215,
       "points_estimes": 0,
-      "secondes": 0.22
+      "secondes": 0.14
     },
     {
       "isin": "LU0496786574",
@@ -249,9 +249,9 @@
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/LYPS.DE?range=5y&interval=1d",
       "statut": 200,
-      "octets": 137300,
+      "octets": 137311,
       "points_estimes": 1275,
-      "secondes": 0.16
+      "secondes": 0.12
     },
     {
       "isin": "LU0503631987",
@@ -263,7 +263,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.06
+      "secondes": 0.1
     },
     {
       "isin": "LU0503631987",
@@ -275,7 +275,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.18
+      "secondes": 0.21
     },
     {
       "isin": "LU0503631987",
@@ -287,7 +287,19 @@
       "statut": 200,
       "octets": 1311,
       "points_estimes": 1,
-      "secondes": 0.07
+      "secondes": 0.1
+    },
+    {
+      "isin": "LU0503631987",
+      "source": "boursorama",
+      "sonde": "yahoo_via_boursorama",
+      "symbole": "0P0000PTZT",
+      "genre": "vl",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P0000PTZT.F?range=5y&interval=1d",
+      "statut": 200,
+      "octets": 111573,
+      "points_estimes": 1157,
+      "secondes": 0.09
     },
     {
       "isin": "LU0524465977",
@@ -311,7 +323,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.15
+      "secondes": 0.21
     },
     {
       "isin": "LU0524465977",
@@ -323,7 +335,7 @@
       "statut": 200,
       "octets": 116630,
       "points_estimes": 1157,
-      "secondes": 0.12
+      "secondes": 0.13
     },
     {
       "isin": "LU1250158166",
@@ -335,7 +347,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.08
+      "secondes": 0.09
     },
     {
       "isin": "LU1250158166",
@@ -347,7 +359,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.2
+      "secondes": 0.22
     },
     {
       "isin": "LU1250158166",
@@ -359,7 +371,7 @@
       "statut": 200,
       "octets": 110499,
       "points_estimes": 1157,
-      "secondes": 0.12
+      "secondes": 0.1
     },
     {
       "isin": "LU1379103812",
@@ -371,7 +383,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.06
+      "secondes": 0.08
     },
     {
       "isin": "LU1379103812",
@@ -383,7 +395,7 @@
       "statut": 200,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.16
+      "secondes": 0.2
     },
     {
       "isin": "LU1379103812",
@@ -395,7 +407,7 @@
       "statut": 200,
       "octets": 112861,
       "points_estimes": 1157,
-      "secondes": 0.14
+      "secondes": 0.1
     },
     {
       "isin": "LU1681044480",
@@ -407,7 +419,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.05
+      "secondes": 0.12
     },
     {
       "isin": "LU1681044480",
@@ -431,7 +443,7 @@
       "statut": 200,
       "octets": 138346,
       "points_estimes": 1281,
-      "secondes": 0.14
+      "secondes": 0.16
     },
     {
       "isin": "LU1829219390",
@@ -443,7 +455,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.06
+      "secondes": 0.08
     },
     {
       "isin": "LU1829219390",
@@ -467,7 +479,7 @@
       "statut": 200,
       "octets": 136697,
       "points_estimes": 1281,
-      "secondes": 0.17
+      "secondes": 0.13
     },
     {
       "isin": "LU1829221024",
@@ -479,7 +491,7 @@
       "statut": 410,
       "octets": 2,
       "points_estimes": 0,
-      "secondes": 0.08
+      "secondes": 0.09
     },
     {
       "isin": "LU1829221024",
@@ -491,7 +503,7 @@
       "statut": 200,
       "octets": 227,
       "points_estimes": 0,
-      "secondes": 0.21
+      "secondes": 0.23
     },
     {
       "isin": "LU1829221024",
@@ -503,7 +515,7 @@
       "statut": 200,
       "octets": 135895,
       "points_estimes": 1281,
-      "secondes": 0.13
+      "secondes": 0.14
     }
   ]
 }
