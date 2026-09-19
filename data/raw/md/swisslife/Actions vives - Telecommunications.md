@@ -1,0 +1,251 @@
+---
+grande_classe: "Actions vives"
+type_actif: "Télécommunications"
+slug: actions-vives--telecommunications
+annexe: IB / IC
+millesime: "2026-06-01"
+nombre_de_titres: 33
+source: "SwissLife Assurance et Patrimoine — Liste des UC éligibles, 1er juin 2026"
+titres:
+  - isin: "US0404132054"
+    nom: "Arista Networks Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: ""
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "US00206R1023"
+    nom: "At&T Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "BBB"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "GB0030913577"
+    nom: "Bt Group Plc"
+    devise: "GBP"
+    pays: "Royaume Uni"
+    notation: "BBB"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "ES0105066007"
+    nom: "Cellnex Telecom Sa"
+    devise: "EUR"
+    pays: "Espagne"
+    notation: "BBB-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "US16119P1084"
+    nom: "Charter Communications Inc-A"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "BB+"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "US17275R1023"
+    nom: "Cisco Systems Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "AA-"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "US20030N1019"
+    nom: "Comcast Corp-Class A"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "A-"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "DE0005557508"
+    nom: "Deutsche Telekom Ag-Reg"
+    devise: "EUR"
+    pays: "Allemagne"
+    notation: "BBB+"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "FI0009007884"
+    nom: "Elisa Oyj"
+    devise: "EUR"
+    pays: "Finlande"
+    notation: "BBB+"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "SE0000108656"
+    nom: "Ericsson Lm-B Shs"
+    devise: "SEK"
+    pays: "Suède"
+    notation: "BBB-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "FR0010221234"
+    nom: "Eutelsat Communications"
+    devise: "EUR"
+    pays: "France"
+    notation: "B-"
+    indice: "Actions présentes dans le CAC All Tradable (hors actions communes avec le Stoxx 600 et/ou le SBF 120) ayant une capitalisation boursière > à 200M€"
+  - isin: "DE000A0Z2ZZ5"
+    nom: "Freenet Ag"
+    devise: "EUR"
+    pays: "Allemagne"
+    notation: ""
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "IT0005090300"
+    nom: "Infrastrutture Wireless Ital"
+    devise: "EUR"
+    pays: "Italie"
+    notation: "BB+"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "US48203R1041"
+    nom: "Juniper Networks Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "BBB"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "JP3496400007"
+    nom: "Kddi Corp"
+    devise: "JPY"
+    pays: "Japan"
+    notation: "NR"
+    indice: "Actions présentes dans le Nikkei 225"
+  - isin: "NL0000009082"
+    nom: "Koninklijke Kpn Nv"
+    devise: "EUR"
+    pays: "Pays-Bas"
+    notation: "BBB"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "US6200763075"
+    nom: "Motorola Solutions Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "BBB"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "JP3735400008"
+    nom: "Nippon Telegraph & Telephone"
+    devise: "JPY"
+    pays: "Japan"
+    notation: "A"
+    indice: "Actions présentes dans le Nikkei 225"
+  - isin: "FI0009000681"
+    nom: "Nokia Oyj"
+    devise: "EUR"
+    pays: "Finlande"
+    notation: "BBB-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "FR0000133308"
+    nom: "Orange"
+    devise: "EUR"
+    pays: "France"
+    notation: "BBB+"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "LU0088087324"
+    nom: "Ses"
+    devise: "EUR"
+    pays: "Luxembourg"
+    notation: "NR"
+    indice: "Actions présentes dans le SBF 120 (hors actions communes avec le Stoxx 600)"
+  - isin: "JP3732000009"
+    nom: "Softbank Corp"
+    devise: "JPY"
+    pays: "Japan"
+    notation: "BBB"
+    indice: "Actions présentes dans le Nikkei 225"
+  - isin: "JP3436100006"
+    nom: "Softbank Group Corp"
+    devise: "JPY"
+    pays: "Japan"
+    notation: "BB+"
+    indice: "Actions présentes dans le Nikkei 225"
+  - isin: "CH1386220409"
+    nom: "Sunrise Communications Ag-A"
+    devise: "CHF"
+    pays: "Suisse"
+    notation: "BBB-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "CH0008742519"
+    nom: "Swisscom Ag-Reg"
+    devise: "CHF"
+    pays: "Suisse"
+    notation: "A-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "US8725901040"
+    nom: "T-Mobile Us Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "BBB"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "SE0005190238"
+    nom: "Tele2 Ab-B Shs"
+    devise: "SEK"
+    pays: "Suède"
+    notation: "BBB"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "IT0003497168"
+    nom: "Telecom Italia Spa"
+    devise: "EUR"
+    pays: "Italie"
+    notation: "BB"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "ES0178430E18"
+    nom: "Telefonica Sa"
+    devise: "EUR"
+    pays: "Espagne"
+    notation: "BBB-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "NO0010063308"
+    nom: "Telenor Asa"
+    devise: "NOK"
+    pays: "Norvège"
+    notation: "A-"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "SE0000667925"
+    nom: "Telia Co Ab"
+    devise: "SEK"
+    pays: "Suède"
+    notation: "BBB+"
+    indice: "Actions présentes dans le Stoxx 600"
+  - isin: "US92343V1044"
+    nom: "Verizon Communications Inc"
+    devise: "USD"
+    pays: "Etats-Unis"
+    notation: "BBB+"
+    indice: "Actions présentes dans le S&P 500"
+  - isin: "GB00BH4HKS39"
+    nom: "Vodafone Group Plc"
+    devise: "GBP"
+    pays: "Royaume Uni"
+    notation: "BBB"
+    indice: "Actions présentes dans le Stoxx 600"
+---
+
+# Actions vives — Télécommunications
+
+33 titre(s) détenus en direct · Annexes IB et IC · SwissLife Assurance et Patrimoine — Liste des UC éligibles, 1er juin 2026.
+
+Accessibles uniquement en « Allocation déléguée personnalisée » et
+« Conseil en arbitrage ». Le document ne publie ni frais ni performance pour ces lignes.
+
+| ISIN | Titre | Devise | Pays | Notation émetteur | Indice de rattachement |
+|---|---|---|---|---|---|
+| `US0404132054` | Arista Networks Inc | USD | Etats-Unis | — | S&P 500 |
+| `US00206R1023` | At&T Inc | USD | Etats-Unis | BBB | S&P 500 |
+| `GB0030913577` | Bt Group Plc | GBP | Royaume Uni | BBB | Stoxx 600 |
+| `ES0105066007` | Cellnex Telecom Sa | EUR | Espagne | BBB- | Stoxx 600 |
+| `US16119P1084` | Charter Communications Inc-A | USD | Etats-Unis | BB+ | S&P 500 |
+| `US17275R1023` | Cisco Systems Inc | USD | Etats-Unis | AA- | S&P 500 |
+| `US20030N1019` | Comcast Corp-Class A | USD | Etats-Unis | A- | S&P 500 |
+| `DE0005557508` | Deutsche Telekom Ag-Reg | EUR | Allemagne | BBB+ | Stoxx 600 |
+| `FI0009007884` | Elisa Oyj | EUR | Finlande | BBB+ | Stoxx 600 |
+| `SE0000108656` | Ericsson Lm-B Shs | SEK | Suède | BBB- | Stoxx 600 |
+| `FR0010221234` | Eutelsat Communications | EUR | France | B- | CAC All Tradable (hors actions communes avec le Stoxx 600 et/ou le SBF 120) ayant une capitalisation boursière > à 200M€ |
+| `DE000A0Z2ZZ5` | Freenet Ag | EUR | Allemagne | — | Stoxx 600 |
+| `IT0005090300` | Infrastrutture Wireless Ital | EUR | Italie | BB+ | Stoxx 600 |
+| `US48203R1041` | Juniper Networks Inc | USD | Etats-Unis | BBB | S&P 500 |
+| `JP3496400007` | Kddi Corp | JPY | Japan | NR | Nikkei 225 |
+| `NL0000009082` | Koninklijke Kpn Nv | EUR | Pays-Bas | BBB | Stoxx 600 |
+| `US6200763075` | Motorola Solutions Inc | USD | Etats-Unis | BBB | S&P 500 |
+| `JP3735400008` | Nippon Telegraph & Telephone | JPY | Japan | A | Nikkei 225 |
+| `FI0009000681` | Nokia Oyj | EUR | Finlande | BBB- | Stoxx 600 |
+| `FR0000133308` | Orange | EUR | France | BBB+ | Stoxx 600 |
+| `LU0088087324` | Ses | EUR | Luxembourg | NR | SBF 120 (hors actions communes avec le Stoxx 600) |
+| `JP3732000009` | Softbank Corp | JPY | Japan | BBB | Nikkei 225 |
+| `JP3436100006` | Softbank Group Corp | JPY | Japan | BB+ | Nikkei 225 |
+| `CH1386220409` | Sunrise Communications Ag-A | CHF | Suisse | BBB- | Stoxx 600 |
+| `CH0008742519` | Swisscom Ag-Reg | CHF | Suisse | A- | Stoxx 600 |
+| `US8725901040` | T-Mobile Us Inc | USD | Etats-Unis | BBB | S&P 500 |
+| `SE0005190238` | Tele2 Ab-B Shs | SEK | Suède | BBB | Stoxx 600 |
+| `IT0003497168` | Telecom Italia Spa | EUR | Italie | BB | Stoxx 600 |
+| `ES0178430E18` | Telefonica Sa | EUR | Espagne | BBB- | Stoxx 600 |
+| `NO0010063308` | Telenor Asa | NOK | Norvège | A- | Stoxx 600 |
+| `SE0000667925` | Telia Co Ab | SEK | Suède | BBB+ | Stoxx 600 |
+| `US92343V1044` | Verizon Communications Inc | USD | Etats-Unis | BBB+ | S&P 500 |
+| `GB00BH4HKS39` | Vodafone Group Plc | GBP | Royaume Uni | BBB | Stoxx 600 |
