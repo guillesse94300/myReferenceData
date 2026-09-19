@@ -4,6 +4,18 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.7.0 — 19 septembre 2026
+
+- Les favoris portent une note libre, qui sert à indiquer l'enveloppe de
+  détention. Elle s'affiche sur la fiche du support, et remplace la colonne
+  « Disponible » dans le tableau dès qu'un support affiché en porte une.
+- `tools/importer_favoris.py` reprend la liste tenue à la main dans
+  `data/raw/favorites.txt` vers les favoris de l'application, et énumère les
+  supports qu'il n'a pas pu rattacher.
+- Premier import : 14 des 21 supports de la liste. Les 6 autres — fonds de PEE,
+  ETF réservé au PEA, part de SCPI — ne figurent dans aucun des deux contrats,
+  et un septième ne porte pas d'ISIN.
+
 ## 0.6.0 — 19 septembre 2026
 
 - Favoris : une case à cocher dans le tableau de la page Parcourir et une
