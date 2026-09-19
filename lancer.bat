@@ -29,6 +29,12 @@ if not exist "data\reference.db" (
     ".venv\Scripts\python.exe" tools\construire_base.py || goto :erreur
 )
 
+REM Cotations : chargees depuis les captures tant que le collecteur n'existe pas.
+if not exist "data\cotations.db" (
+    echo Chargement des valeurs liquidatives...
+    ".venv\Scripts\python.exe" tools\charger_cotations.py || goto :erreur
+)
+
 echo Ouverture de l'interface dans le navigateur, Ctrl+C pour arreter...
 ".venv\Scripts\python.exe" -m streamlit run app\univers.py
 exit /b 0

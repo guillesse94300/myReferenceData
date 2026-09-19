@@ -13,12 +13,14 @@ import pandas as pd
 import streamlit as st
 
 import favoris as suivi
+import indicateurs
 from version import DATE, VERSION
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 RACINE = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 BASE = os.path.join(RACINE, "data/reference.db")
+COTATIONS = os.path.join(RACINE, "data/cotations.db")
 
 # Palette de reference, declinaison claire, validee contre la surface #fcfcfb.
 ENCRE, ENCRE_DOUCE, GRILLE = "#0b0b0b", "#52514e", "#e6e5e1"
@@ -71,6 +73,22 @@ def annualiser(rendements):
 
 
 @st.cache_data
+def charger_cotations():
+    """Valeurs liquidatives, si la base des cotations existe.
+
+    Elle est facultative : l'application reste utilisable sans elle, les
+    sections qui en dependent disparaissant simplement.
+    """
+    if not os.path.exists(COTATIONS):
+        return pd.DataFrame(columns=["isin", "date", "valeur", "devise"])
+    cx = sqlite3.connect(COTATIONS)
+    series = pd.read_sql("SELECT isin, date, valeur, devise FROM valeur_liquidative", cx,
+                         parse_dates=["date"])
+    cx.close()
+    return series
+
+
+@st.cache_data
 def charger():
     if not os.path.exists(BASE):
         return None
@@ -106,12 +124,15 @@ def charger():
 
 
 suivis = suivi.charger()
+cotations = charger_cotations()
 donnees = charger()
 if donnees is None:
     st.error(f"Base introuvable : {BASE}\n\nLancez `construire.bat` pour la créer.")
     st.stop()
 univers, performances, arbitrage, offres, anomalies, imports = donnees
-univers = univers.assign(favori=univers["isin"].isin(suivis),
+avec_vl = set(cotations["isin"].unique())
+univers = univers.assign(cotee=univers["isin"].isin(avec_vl),
+                         favori=univers["isin"].isin(suivis),
                          note=univers["isin"].map(lambda i: suivis.get(i, {}).get("note", "")))
 
 
@@ -211,6 +232,53 @@ def risque_rendement(cadre):
 
 # --------------------------------------------------------------------- filtres
 
+def parcours_et_pertes(serie):
+    """Trajectoire du support ramenee a 100, et perte depuis le plus haut.
+
+    Deux graphiques empiles partageant l'axe des dates : le premier dit ce que
+    serait devenu un placement, le second ce qu'il aurait fallu supporter en
+    chemin. La valeur liquidative brute n'est pas tracee telle quelle -- son
+    niveau, de quelques euros a plusieurs centaines, n'a aucun sens en soi.
+    """
+    valeurs = {ligne.date.date(): ligne.valeur for ligne in serie.itertuples()}
+    trajectoire = pd.DataFrame(
+        [{"date": d, "base": v, "perte": p} for (d, v), p
+         in zip(sorted(indicateurs.base_cent(valeurs).items()),
+                [indicateurs.courbe_de_perte(valeurs)[d] for d in sorted(valeurs)])])
+
+    survol = alt.selection_point(nearest=True, on="pointerover", fields=["date"], empty=False)
+    axe_dates = alt.Axis(gridColor=GRILLE, labelColor=ENCRE, format="%b %Y", tickCount=6)
+
+    # Les deux graphiques partagent la même échelle de temps : seul celui du bas
+    # en porte les libellés, pour ne pas les afficher deux fois.
+    base = alt.Chart(trajectoire).encode(
+        alt.X("date:T", title=None, axis=alt.Axis(gridColor=GRILLE, labels=False,
+                                                  tickCount=6, domainColor=GRILLE)))
+    ligne = base.mark_line(color=BLEU, strokeWidth=2).encode(
+        alt.Y("base:Q", title="Base 100", scale=alt.Scale(zero=False),
+              axis=alt.Axis(gridColor=GRILLE, labelColor=ENCRE, titleColor=ENCRE_DOUCE)))
+    reperes = base.mark_point(size=60, opacity=0).encode(
+        tooltip=[alt.Tooltip("date:T", title="Date", format="%d/%m/%Y"),
+                 alt.Tooltip("base:Q", title="Base 100", format=".1f"),
+                 alt.Tooltip("perte:Q", title="Perte depuis le plus haut", format="+.1f")]
+    ).add_params(survol)
+    trait = base.mark_rule(color=ENCRE_DOUCE, strokeWidth=1).encode(
+        opacity=alt.condition(survol, alt.value(0.4), alt.value(0)))
+
+    perte = alt.Chart(trajectoire).mark_area(
+        color=ROUGE, opacity=0.18, line={"color": ROUGE, "strokeWidth": 1.5}).encode(
+        alt.X("date:T", title=None, axis=axe_dates),
+        alt.Y("perte:Q", title="Perte (%)",
+              axis=alt.Axis(gridColor=GRILLE, labelColor=ENCRE, titleColor=ENCRE_DOUCE)))
+
+    # La marge se pose sur l'empilement, Altair la refusant sur ses éléments.
+    return alt.vconcat(
+        (ligne + trait + reperes).properties(height=240),
+        perte.properties(height=110),
+        spacing=8).properties(padding={"left": 16, "top": 5, "right": 5, "bottom": 5}) \
+        .configure_view(strokeWidth=0)
+
+
 def barre_laterale():
     barre = st.sidebar
     barre.radio("Navigation", PAGES, key="page", label_visibility="collapsed")
@@ -279,7 +347,9 @@ def page_accueil(vue):
     colonnes[2].metric("Types d'actif", univers["type_actif"].nunique())
     colonnes[3].metric("Chez les deux assureurs",
                        int((univers["disponibilite"] == "les deux").sum()))
-    colonnes[4].metric("Avec 5 ans d'historique", int((univers["annees"] == 5).sum()))
+    colonnes[4].metric("Avec historique de VL", int(univers["cotee"].sum()),
+                       help="Valeurs liquidatives quotidiennes collectées, "
+                            "qui permettent volatilité, perte maximale et corrélations.")
 
     st.divider()
     gauche, droite = st.columns([3, 2])
@@ -418,11 +488,35 @@ def page_fiche(vue):
     colonnes[0].metric("Indicateur de risque",
                        "non renseigné" if pd.isna(ligne["sri"]) else f"{int(ligne['sri'])} / 7")
     colonnes[1].metric(
-        "Rendement annualisé",
+        "Rendement annualisé publié",
         "—" if pd.isna(ligne["perf_annualisee"]) else f"{ligne['perf_annualisee']:+.2f} %/an",
-        help=None if pd.isna(ligne["annees"]) else f"sur {int(ligne['annees'])} exercice(s)")
+        help="Calculé sur les performances annuelles publiées par l'assureur, en euro"
+             + ("" if pd.isna(ligne["annees"]) else f", sur {int(ligne['annees'])} exercice(s)."))
     colonnes[2].metric("Frais totaux",
                        "—" if pd.isna(ligne["frais"]) else f"{ligne['frais']:.2f} %")
+
+    serie = cotations[cotations["isin"] == isin].sort_values("date")
+    if len(serie) > 100:
+        valeurs = {ligne.date.date(): ligne.valeur for ligne in serie.itertuples()}
+        devise = serie["devise"].iloc[0]
+        debut, fin = min(valeurs), max(valeurs)
+        st.markdown("**Parcours de la valeur liquidative**")
+        mesures = st.columns(3)
+        mesures[0].metric("Rendement annualisé observé",
+                          f"{indicateurs.rendement_annualise(valeurs):+.2f} %/an",
+                          help="Calculé sur la série de valeurs liquidatives, dans la devise du "
+                               "fonds et sur la période couverte — il diffère donc du rendement "
+                               "publié, qui porte sur des exercices civils et en euro.")
+        mesures[1].metric("Volatilité annualisée",
+                          f"{indicateurs.volatilite_annualisee(valeurs):.1f} %")
+        mesures[2].metric("Perte maximale", f"{indicateurs.perte_maximale(valeurs):.1f} %",
+                          help="La plus forte baisse depuis un plus haut, sur la période couverte.")
+        st.caption(f"{len(valeurs)} séances du {debut.strftime('%d/%m/%Y')} au "
+                   f"{fin.strftime('%d/%m/%Y')}, en {devise}."
+                   + ("" if devise == "EUR" else
+                      " Support hors euro : ces mesures portent sur le fonds seul, "
+                      "sans l'effet du change subi par un investisseur en euro."))
+        st.altair_chart(parcours_et_pertes(serie), width="stretch")
 
     historique = performances[performances["isin"] == isin].sort_values("annee")
     if not historique.empty:

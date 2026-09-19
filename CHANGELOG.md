@@ -4,6 +4,17 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.14.0 — 19 septembre 2026
+
+- Base `cotations.db`, accumulée et distincte de `reference.db`, chargée depuis
+  les captures par `tools/charger_cotations.py` : 16 696 valeurs sur 14 supports.
+- La fiche d'un support affiche sa trajectoire quotidienne ramenée à 100, sa
+  perte depuis chaque plus haut, et trois mesures : rendement annualisé observé,
+  volatilité annualisée, perte maximale.
+- `app/indicateurs.py` et ses six tests.
+- Le rendement publié et le rendement observé portent désormais des libellés
+  distincts : ils ne mesurent ni la même période ni la même devise.
+
 ## 0.13.0 — 19 septembre 2026
 
 - Couverture complète : **14 séries sur 14**, de 978 à 1 280 séances. Fidelity

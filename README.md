@@ -32,8 +32,11 @@ Cinq pages, choisies dans la barre latérale :
   (avec un second niveau par type d'actif), **risque** ou **performance**. Le
   segment retenu est mis en avant, le reste s'efface. La première colonne du
   tableau permet de suivre un support.
-- **Fiche** — un support en détail : risque, rendement, frais, performance nette
-  annuelle et conditions comparées des deux assureurs.
+- **Fiche** — un support en détail : risque, rendement, frais, conditions
+  comparées des deux assureurs, performance nette annuelle, et — lorsque sa
+  valeur liquidative a été collectée — sa trajectoire quotidienne ramenée à 100,
+  sa perte depuis chaque plus haut, sa volatilité annualisée et sa perte
+  maximale.
 - **Frais** — les fonds communs, avec la réserve de lecture ci-dessous.
 - **Qualité des données** — provenance, couverture et écarts relevés au chargement.
 
@@ -76,7 +79,10 @@ l'effectif chargé ne correspond pas à l'inventaire des ISIN des PDF d'origine.
 
 ## Schéma
 
-`db/schema.sql` — cinq tables et deux vues.
+Deux bases aux cycles de vie distincts, jointes au besoin par `ATTACH`.
+
+`db/schema.sql` — **`reference.db`**, cinq tables et deux vues, reconstruite
+intégralement à chaque exécution.
 
 - **`instrument`** — référentiel par ISIN : ce qui ne dépend pas de l'assureur.
 - **`offre`** — conditions d'accès chez un assureur : classification, frais,
@@ -87,6 +93,11 @@ l'effectif chargé ne correspond pas à l'inventaire des ISIN des PDF d'origine.
 - **`v_univers`** — une ligne par instrument, les deux assureurs côte à côte.
 - **`v_arbitrage`** — les fonds communs, classés par écart de frais, avec une
   colonne `fiabilite` (voir la réserve ci-dessous).
+
+`db/schema_cotations.sql` — **`cotations.db`**, les valeurs liquidatives et le
+journal des collectes. Elle est **accumulée, jamais effacée** : un historique
+quotidien coûte des heures de collecte et ne se régénère pas depuis les
+documents. Le chargement y est idempotent.
 
 ## Comment lire la performance
 
@@ -158,6 +169,10 @@ la classification de ses supports est reconstituée, et le champ
 | `tools/completer_boursorama.py` | Classe et insère des supports dans les fiches |
 | `tools/generer_index_boursorama.py` | Régénère l'index et la comparaison SwissLife |
 | `tools/importer_favoris.py` | Reprend `data/raw/favorites.txt` vers les favoris |
+| `tools/capturer_sources.py` | Sonde les sources de valeur liquidative et archive leurs réponses |
+| `tools/capturer_historiques.py` | Sonde les points d'accès d'historique |
+| `tools/charger_cotations.py` | Charge les séries capturées dans `cotations.db` |
+| `tools/valider_series.py` | Confronte les séries aux performances publiées |
 
 ## Suite
 
