@@ -1,2 +1,8 @@
 __pycache__/
 *.py[cod]
+
+# Environnement Python
+.venv/
+
+# Base reconstructible a la demande
+data/*.db
