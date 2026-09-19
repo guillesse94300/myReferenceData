@@ -166,6 +166,22 @@ Convertir demanderait un historique de change et mêlerait deux sources d'écart
 la performance du fonds et le mouvement de la devise. Les indicateurs sont donc
 calculés en devise native, et les supports non libellés en euro sont signalés.
 
+**La réserve s'est vérifiée dès les 14 premiers supports.** Fidelity China Focus
+est libellé en dollar : sa série l'est aussi, quand l'assureur publie la
+performance telle que la voit un investisseur en euro. L'écart atteignait
+−9,29 points en 2024 et +12,74 en 2025, soit des mouvements de change implicites
+de +8,75 % puis −10,26 % — l'ordre de grandeur de l'euro-dollar sur ces deux
+années, et des signes opposés caractéristiques d'un aller-retour.
+
+Un support hors euro n'est donc **pas comparable sans historique de change** :
+il est écarté du verdict plutôt que compté en échec. Sur l'univers entier, 31
+supports sont libellés en dollar, 3 en franc suisse et 1 en couronne suédoise.
+
+Yahoo sert aussi les parités de change, sous la forme `EURUSD=X`. Les convertir
+est donc à portée, mais relève d'une étape ultérieure : en devise native, la
+volatilité et le maximum drawdown mesurent le fonds seul, ce qui est la bonne
+grandeur pour le comparer. La conversion importera pour agréger un portefeuille.
+
 ## 6 bis. Résultat du second tour et source retenue
 
 Capture du 19 septembre 2026, 14 supports.
@@ -195,8 +211,9 @@ La sonde par nom a trouvé, pour Fidelity China, l'identifiant `0P00000TDB` que
 ni l'ISIN ni Boursorama ne donnaient. La demande de série s'enchaîne désormais
 automatiquement sur l'identifiant trouvé, avec et sans suffixe de place.
 
-Couverture après la sonde croisée : **13 supports sur 14**, le quatorzième
-restant à confirmer.
+Couverture finale : **14 supports sur 14**, de 978 à 1 280 séances chacun.
+L'identifiant nu a répondu pour Fidelity China, la variante suffixée de
+Francfort renvoyant 404 — d'où les deux formes tentées.
 
 ## 7. Critère d'acceptation
 
@@ -251,6 +268,7 @@ support.
 | Couples comparés | 24, sur 7 supports |
 | Écart médian | **0,20 point** |
 | Hors tolérance | **0 (0 %)** |
+| Écartés faute de taux de change | 2 séries en dollar |
 
 Les six autres séries obtenues sont des ETF, pour lesquels les annexes ne
 publient pas d'historique annuel : elles ne sont pas validables par ce contrôle.

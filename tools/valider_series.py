@@ -4,7 +4,12 @@ Une valeur liquidative est nette des frais du fonds, comme la performance
 annuelle que publie l'assureur : les deux doivent concorder. C'est le controle
 qui permet d'accepter une source sans avoir a lui faire confiance.
 
-La concordance ne peut toutefois pas etre exacte. L'assureur arrete au
+Deux reserves. D'abord la devise : l'assureur publie la performance telle que
+la voit un investisseur en euro, la source donne la valeur liquidative dans la
+devise du fonds. Un support libelle en dollar n'est donc pas comparable sans
+historique de change, et il est ecarte du verdict plutot que compte en echec.
+
+Ensuite, la concordance ne peut pas etre exacte. L'assureur arrete au
 31 decembre, date souvent absente des series, si bien que le calcul porte sur
 la derniere seance disponible de chaque annee. L'ecart qui en resulte vaut un a
 deux mouvements quotidiens du fonds : nul sur un fonds obligataire, sensible
@@ -42,27 +47,31 @@ def publiees():
 
 
 def meilleures_series():
-    """La serie la plus fournie par support, toutes sondes confondues.
+    """La serie la plus fournie par support, avec sa devise de cotation.
 
-    Un meme support peut avoir ete interroge par plusieurs sondes -- la
-    recherche directe et la sonde croisee passant par l'identifiant Boursorama.
+    Un meme support peut avoir ete interroge par plusieurs sondes -- recherche
+    directe, sonde croisee par l'identifiant Boursorama, recherche par libelle.
     C'est la plus longue qui est retenue.
     """
     retenues = {}
     for chemin in sorted(glob.glob(os.path.join(HISTORIQUES, "*__yahoo*.json"))):
         isin = os.path.basename(chemin).split("__")[0]
-        valeurs = yahoo.serie(open(chemin, encoding="utf-8").read())
-        if len(valeurs) > len(retenues.get(isin, {})):
-            retenues[isin] = valeurs
+        charge = open(chemin, encoding="utf-8").read()
+        valeurs = yahoo.serie(charge)
+        if len(valeurs) > len(retenues.get(isin, (None, {}))[1] if isin in retenues else {}):
+            retenues[isin] = (yahoo.metadonnees(charge).get("currency"), valeurs)
     return retenues
 
 
 def main():
     perfs, noms = publiees()
-    lignes, refuses = [], []
-    for isin, valeurs in meilleures_series().items():
+    lignes, refuses, hors_euro = [], [], []
+    for isin, (devise, valeurs) in meilleures_series().items():
         if len(valeurs) < 100:
             refuses.append((isin, len(valeurs)))
+            continue
+        if devise != "EUR":
+            hors_euro.append((isin, devise, len(valeurs)))
             continue
         volatilite = yahoo.volatilite_quotidienne(valeurs)
         tolerance = max(PLANCHER, TOLERANCE_EN_JOURNEES * volatilite)
@@ -96,6 +105,10 @@ def main():
     for l in hors:
         print(f"      {l['isin']} {l['annee']} : {l['ecart']:+.2f} pt pour "
               f"{l['tolerance']:.2f} toléré")
+    if hors_euro:
+        print(f"  écartées faute de taux de change : {len(hors_euro)}")
+        for isin, devise, n in hors_euro:
+            print(f"      {isin} — série en {devise}, {n} points, performance publiée en euro")
     if refuses:
         print(f"  séries inexploitables : {len(refuses)}")
         for isin, n in refuses:
