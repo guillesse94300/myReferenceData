@@ -182,8 +182,16 @@ Morningstar suffixés de la place de Francfort, et Boursorama les donne là où 
 recherche Yahoo renvoie parfois une cotation secondaire.
 
 Les deux échecs sont exactement ceux-là : Fidelity China et Pictet, résolus vers
-`FJRH.F` et `PBFW.MU`, deux cotations quasi sans échanges. Une sonde croisée a
-été ajoutée pour rejouer ces cas avec l'identifiant Boursorama.
+`FJRH.F` et `PBFW.MU`, deux cotations quasi sans échanges.
+
+Une **sonde croisée** rejoue ces cas avec l'identifiant Boursorama suffixé de
+Francfort. Elle a résolu Pictet : de 1 à **1 157 séances**. Restait Fidelity
+China, dont Boursorama ne donne qu'un code interne `MP-358709`, sans équivalent
+Morningstar ; une **sonde par nom** interroge alors Yahoo sur le libellé du
+fonds. Elle ne vise que les fonds non cotés — sur un tracker, le cours de bourse
+est la donnée pertinente.
+
+Couverture après la sonde croisée : **13 supports sur 14**.
 
 ## 7. Critère d'acceptation
 
@@ -235,8 +243,8 @@ support.
 
 | | |
 |---|---|
-| Couples comparés | 21, sur 6 supports |
-| Écart médian | **0,19 point** |
+| Couples comparés | 24, sur 7 supports |
+| Écart médian | **0,20 point** |
 | Hors tolérance | **0 (0 %)** |
 
 Les six autres séries obtenues sont des ETF, pour lesquels les annexes ne

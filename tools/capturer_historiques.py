@@ -17,6 +17,7 @@ import os
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 RACINE = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
@@ -59,6 +60,22 @@ SONDES = {
 SONDE_CROISEE = ("yahoo_via_boursorama",
                  "https://query1.finance.yahoo.com/v8/finance/chart/{symbole}.F"
                  "?range=5y&interval=1d")
+
+# Dernier recours : chercher par le nom du fonds plutot que par son ISIN.
+# Certains supports ne sont resolus par aucune source vers un identifiant de
+# valeur liquidative, alors que la recherche par libelle en trouve un.
+SONDE_PAR_NOM = ("yahoo_recherche_nom",
+                 "https://query1.finance.yahoo.com/v1/finance/search"
+                 "?q={nom}&quotesCount=10")
+
+
+def libelles():
+    """Nom de chaque support, pour la recherche de dernier recours."""
+    import sqlite3
+    cx = sqlite3.connect(os.path.join(RACINE, "data/reference.db"))
+    noms = {r[0]: r[1] for r in cx.execute("SELECT isin, nom FROM instrument")}
+    cx.close()
+    return noms
 
 
 def resoudre():
@@ -118,7 +135,7 @@ def main():
     options = analyseur.parse_args()
     os.makedirs(HISTORIQUES, exist_ok=True)
 
-    table = resoudre()
+    table, noms = resoudre(), libelles()
     if not table:
         raise SystemExit("Aucun symbole : lancez d'abord tools/capturer_sources.py.")
     supports = list(table.items())[:options.limite] if options.limite else list(table.items())
@@ -135,8 +152,18 @@ def main():
         bourso, yh = sources.get("boursorama"), sources.get("yahoo")
         if bourso and yh and bourso["symbole"].startswith("0P") and yh["genre"] != "vl":
             tentatives.append(("boursorama", bourso, *SONDE_CROISEE))
+        # Un fonds non coté dont aucune source ne donne d'identifiant Morningstar :
+        # la recherche par libellé est le dernier recours. Les trackers en sont
+        # exclus, un cours de bourse y étant la donnée pertinente.
+        elif (bourso and bourso["genre"] == "vl" and not bourso["symbole"].startswith("0P")
+              and yh and yh["genre"] != "vl"):
+            nom = urllib.parse.quote(noms.get(isin, ""))
+            if nom:
+                tentatives.append(("yahoo", {"symbole": nom, "genre": "recherche"},
+                                   *SONDE_PAR_NOM))
         for source, resolu, nom, gabarit in tentatives:
-                url = gabarit.format(symbole=resolu["symbole"], jours=JOURS)
+                url = gabarit.format(symbole=resolu["symbole"], jours=JOURS,
+                                     nom=resolu["symbole"])
                 statut, corps, duree = interroger(url)
                 points = compter_points(corps)
                 if statut and statut < 400 and corps:

@@ -4,6 +4,19 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.11.0 — 19 septembre 2026
+
+- La sonde croisée résout Pictet : de 1 à 1 157 séances. Couverture portée à
+  13 supports sur 14.
+- Sonde par nom ajoutée pour le dernier manquant, Fidelity China, dont aucune
+  source ne donne d'identifiant Morningstar. Elle ne vise que les fonds non
+  cotés.
+- Le validateur retient la série la plus fournie par support, toutes sondes
+  confondues, et le lecteur de séries ignore les réponses qui ne suivent pas le
+  format attendu au lieu de lever une exception.
+- Validation : 24 couples sur 7 supports, 0,20 point d'écart médian, aucun hors
+  tolérance.
+
 ## 0.10.0 — 19 septembre 2026
 
 - Second tour de capture dépouillé. Les deux points d'accès Boursorama sont
