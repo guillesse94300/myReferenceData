@@ -5,7 +5,7 @@ slug: actions--actions-europe
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 12
+nombre_de_supports: 13
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU1883311224"
@@ -92,6 +92,20 @@ supports:
     frais_totaux_e: "2,61%"
     perf_finale: "-2,57%"
     retrocessions: "0,75%"
+  - isin: "LU0284396016"
+    nom: "DNCA INVEST VALUE EUROPE A"
+    societe: "DNCA FINANCE"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "25,32%"
+    frais_actif_b: "2,13%"
+    perf_nette_c: "23,19%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "3,05%"
+    perf_finale: "22,26%"
+    retrocessions: "1,00%"
   - isin: "LU0048580004"
     nom: "FIDELITY GERMANY A-EUR"
     societe: "FIL INVESTMENT MANAGEMENT LUX"
@@ -180,7 +194,7 @@ supports:
 
 # Actions — Actions Europe
 
-12 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+13 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -197,6 +211,7 @@ La performance porte sur le dernier exercice clos.
 | `LU0212178916` | BNP PARIBAS FDS EUROPE SMALL C | BNP PARIBAS ASSET MNGT LUX SA | 3,14% | 23,19% | 0,96% | Article 8 |
 | `FR001400RWJ8` | BOURSO EUROPE | SG INVT SOLUTIONS FRANCE | n.c. | n.c. | 0,00% | non renseignée |
 | `LU0411704413` | BSF EUROP ABSOLUTE RETURN A2 | BLACKROCK (LUXEMBOURG) SA | 2,61% | -2,57% | 0,75% | non renseignée |
+| `LU0284396016` | DNCA INVEST VALUE EUROPE A | DNCA FINANCE | 3,05% | 22,26% | 1,00% | Article 8 |
 | `LU0048580004` | FIDELITY GERMANY A-EUR | FIL INVESTMENT MANAGEMENT LUX | 2,83% | 21,53% | 0,75% | Article 8 |
 | `LU0571100824` | GROUPAMA EUROPE CONVERTIBLE NC | GROUPAMA ASSET MANAGEMENT | 1,97% | 9,71% | 0,50% | Article 8 |
 | `FR0000427809` | HSBC ACTIONS EUROPE AC | HSBC GLOBAL ASSET MNGMT FRANCE | 2,49% | 24,78% | 0,75% | non renseignée |
@@ -406,6 +421,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 0,03% |
 | Nette de l'unité de compte (C = A − B) | -1,84% |
 | **Finale (A − E)** | **-2,57%** |
+
+---
+
+## DNCA INVEST VALUE EUROPE A
+
+`LU0284396016` · DNCA FINANCE · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0284396016` |
+| Société de gestion | DNCA FINANCE |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Europe (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,13% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **3,05%** |
+| Taux de rétrocession de commissionnement | 1,00% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 25,32% |
+| Nette de l'unité de compte (C = A − B) | 23,19% |
+| **Finale (A − E)** | **22,26%** |
 
 ---
 

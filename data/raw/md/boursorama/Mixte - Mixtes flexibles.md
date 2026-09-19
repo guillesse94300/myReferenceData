@@ -5,7 +5,7 @@ slug: mixte--mixtes-flexibles
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 3
+nombre_de_supports: 4
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0224105477"
@@ -50,11 +50,25 @@ supports:
     frais_totaux_e: "2,66%"
     perf_finale: "12,76%"
     retrocessions: "0,75%"
+  - isin: "LU0284394664"
+    nom: "DNCA INVEST EVOLUTIF A"
+    societe: "DNCA FINANCE"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "8,02%"
+    frais_actif_b: "2,12%"
+    perf_nette_c: "5,90%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,91%"
+    perf_finale: "5,10%"
+    retrocessions: "1,00%"
 ---
 
 # Mixte — Mixtes flexibles
 
-3 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+4 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -68,6 +82,7 @@ La performance porte sur le dernier exercice clos.
 | `LU0224105477` | BGF CONTINENT EURP FLEX A2RF E | BLACKROCK (LUXEMBOURG) SA | 2,64% | 9,67% | 0,75% | non renseignée |
 | `LU0200684693` | BGF US FLEXIBLE EQUITY FD A2 | BLACKROCK (LUXEMBOURG) SA | 2,75% | 25,05% | 0,75% | non renseignée |
 | `LU0171296865` | BGF US FLEXIBLE EQUITY FUND | BLACKROCK (LUXEMBOURG) SA | 2,66% | 12,76% | 0,75% | non renseignée |
+| `LU0284394664` | DNCA INVEST EVOLUTIF A | DNCA FINANCE | 2,91% | 5,10% | 1,00% | Article 8 |
 
 ---
 ## BGF CONTINENT EURP FLEX A2RF E
@@ -169,3 +184,37 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 15,42% |
 | Nette de l'unité de compte (C = A − B) | 13,61% |
 | **Finale (A − E)** | **12,76%** |
+
+---
+
+## DNCA INVEST EVOLUTIF A
+
+`LU0284394664` · DNCA FINANCE · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0284394664` |
+| Société de gestion | DNCA FINANCE |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Mixtes flexibles (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,12% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,91%** |
+| Taux de rétrocession de commissionnement | 1,00% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 8,02% |
+| Nette de l'unité de compte (C = A − B) | 5,90% |
+| **Finale (A − E)** | **5,10%** |

@@ -5,7 +5,7 @@ slug: actions--secteur-technologies
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 14
+nombre_de_supports: 16
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU1861217674"
@@ -21,6 +21,20 @@ supports:
     frais_contrat_d: "0,75%"
     frais_totaux_e: "0,84%"
     perf_finale: "11,20%"
+    retrocessions: "0,75%"
+  - isin: "LU1861216510"
+    nom: "BGF NEXT GENER TECHNO A2 H"
+    societe: "BLACKROCK (LUXEMBOURG) SA"
+    nature: "SICAV"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "23,24%"
+    frais_actif_b: "1,81%"
+    perf_nette_c: "21,43%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,72%"
+    perf_finale: "20,52%"
     retrocessions: "0,75%"
   - isin: "LU0171310443"
     nom: "BGF WORLD TECHNOLOGY FD A2"
@@ -148,6 +162,20 @@ supports:
     frais_totaux_e: "2,83%"
     perf_finale: "3,15%"
     retrocessions: "0,88%"
+  - isin: "LU1919842267"
+    nom: "ODDO BHF ARTIFIC INTEL CR EUR"
+    societe: "ODDO BHF ASSET MANAGEMENT"
+    nature: "Compartiment SICAV"
+    sfdr: "Article 9"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "5,58%"
+    frais_actif_b: "1,71%"
+    perf_nette_c: "3,87%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,49%"
+    perf_finale: "3,09%"
+    retrocessions: "0,80%"
   - isin: "LU0340554913"
     nom: "PICTET DIGITAL P EUR CAP"
     societe: "PICTET ASSET MANAGEMENT EUROPE"
@@ -208,7 +236,7 @@ supports:
 
 # Actions — Secteur Technologies
 
-14 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+16 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -220,6 +248,7 @@ La performance porte sur le dernier exercice clos.
 | ISIN | Support | Société | Frais totaux | Perf. finale | Rétrocessions | SFDR |
 |---|---|---|---|---|---|---|
 | `LU1861217674` | BGF FINTECH A2 EUR HEDGED | BLACKROCK (LUXEMBOURG) SA | 0,84% | 11,20% | 0,75% | non renseignée |
+| `LU1861216510` | BGF NEXT GENER TECHNO A2 H | BLACKROCK (LUXEMBOURG) SA | 2,72% | 20,52% | 0,75% | non renseignée |
 | `LU0171310443` | BGF WORLD TECHNOLOGY FD A2 | BLACKROCK (LUXEMBOURG) SA | 2,59% | 3,61% | 0,75% | Article 8 |
 | `LU0823421333` | BNPP FDS DISRUPTIVE TECHNOLO C | BNP PARIBAS ASSET MNGT LUX SA | 2,77% | 7,69% | 0,82% | Article 8 |
 | `FR001400RWO8` | BOURSO TECH | SG INVT SOLUTIONS FRANCE | n.c. | n.c. | 0,00% | Article 8 |
@@ -229,6 +258,7 @@ La performance porte sur le dernier exercice clos.
 | `FR0013488244` | EDR SICAV TECH FOR TOMOROW A | EDMOND ROTHSCHILD ASSET MNGT | 2,81% | 13,13% | 0,98% | Article 9 |
 | `LU0115773425` | FF GLOBAL TECHNOLOGY FUND | FIL INVESTMENT MANAGEMENT LUX | 3,46% | 8,33% | 0,75% | Article 8 |
 | `LU1951200481` | MIROVA THEM AIROBOT RC EUR | NATIXIS INVEST MANAGERS INTL | 2,83% | 3,15% | 0,88% | Article 8 |
+| `LU1919842267` | ODDO BHF ARTIFIC INTEL CR EUR | ODDO BHF ASSET MANAGEMENT | 2,49% | 3,09% | 0,80% | Article 9 |
 | `LU0340554913` | PICTET DIGITAL P EUR CAP | PICTET ASSET MANAGEMENT EUROPE | 2,78% | 3,94% | 0,80% | Article 8 |
 | `FR0000431538` | SG ACTIONS US TECHNO C | SOCIETE GENERALE GESTION | 2,96% | 5,35% | 1,00% | Article 8 |
 | `LU2181906426` | SYCOMORE SUSTAINABLE TECH RC | SYCOMORE ASSET MANAGEMENT | 2,80% | 12,37% | 0,95% | Article 9 |
@@ -266,6 +296,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 12,04% |
 | Nette de l'unité de compte (C = A − B) | 12,04% |
 | **Finale (A − E)** | **11,20%** |
+
+---
+
+## BGF NEXT GENER TECHNO A2 H
+
+`LU1861216510` · BLACKROCK (LUXEMBOURG) SA · SICAV · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU1861216510` |
+| Société de gestion | BLACKROCK (LUXEMBOURG) SA |
+| Nature juridique | SICAV |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Secteur Technologies (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,81% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,72%** |
+| Taux de rétrocession de commissionnement | 0,75% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 23,24% |
+| Nette de l'unité de compte (C = A − B) | 21,43% |
+| **Finale (A − E)** | **20,52%** |
 
 ---
 
@@ -572,6 +636,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 5,98% |
 | Nette de l'unité de compte (C = A − B) | 3,93% |
 | **Finale (A − E)** | **3,15%** |
+
+---
+
+## ODDO BHF ARTIFIC INTEL CR EUR
+
+`LU1919842267` · ODDO BHF ASSET MANAGEMENT · Compartiment SICAV · SFDR Article 9
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU1919842267` |
+| Société de gestion | ODDO BHF ASSET MANAGEMENT |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | Article 9 |
+| Avenant spécifique | non |
+| Classification d'actif | Secteur Technologies (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,71% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,49%** |
+| Taux de rétrocession de commissionnement | 0,80% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 5,58% |
+| Nette de l'unité de compte (C = A − B) | 3,87% |
+| **Finale (A − E)** | **3,09%** |
 
 ---
 

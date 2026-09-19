@@ -5,9 +5,23 @@ slug: immobilier--immobilier-cote
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 1
+nombre_de_supports: 2
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
+  - isin: "LU0088927925"
+    nom: "JANUS H HRZ PAN EUP PTY EQ A2"
+    societe: "JANUS HENDERS INVESTORS EUROPE"
+    nature: "Compartiment SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "6,89%"
+    frais_actif_b: "1,89%"
+    perf_nette_c: "5,00%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,68%"
+    perf_finale: "4,21%"
+    retrocessions: "0,60%"
   - isin: "FR0000989923"
     nom: "ODDO BHF IMMOBILIER DR"
     societe: "ODDO BHF ASSET MANAGEMENT"
@@ -26,7 +40,7 @@ supports:
 
 # Immobilier — Immobilier coté
 
-1 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+2 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -37,9 +51,44 @@ La performance porte sur le dernier exercice clos.
 
 | ISIN | Support | Société | Frais totaux | Perf. finale | Rétrocessions | SFDR |
 |---|---|---|---|---|---|---|
+| `LU0088927925` | JANUS H HRZ PAN EUP PTY EQ A2 | JANUS HENDERS INVESTORS EUROPE | 2,68% | 4,21% | 0,60% | Article 8 |
 | `FR0000989923` | ODDO BHF IMMOBILIER DR | ODDO BHF ASSET MANAGEMENT | 2,60% | 4,74% | 0,90% | Article 8 |
 
 ---
+## JANUS H HRZ PAN EUP PTY EQ A2
+
+`LU0088927925` · JANUS HENDERS INVESTORS EUROPE · Compartiment SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0088927925` |
+| Société de gestion | JANUS HENDERS INVESTORS EUROPE |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Immobilier coté (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 1,89% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,68%** |
+| Taux de rétrocession de commissionnement | 0,60% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 6,89% |
+| Nette de l'unité de compte (C = A − B) | 5,00% |
+| **Finale (A − E)** | **4,21%** |
+
+---
+
 ## ODDO BHF IMMOBILIER DR
 
 `FR0000989923` · ODDO BHF ASSET MANAGEMENT · FCP · SFDR Article 8

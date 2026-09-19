@@ -5,7 +5,7 @@ slug: actions--secteur-sante
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 8
+nombre_de_supports: 9
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU0171307068"
@@ -120,11 +120,25 @@ supports:
     frais_totaux_e: "n.c."
     perf_finale: "n.c."
     retrocessions: "0,88%"
+  - isin: "LU0190161025"
+    nom: "PICTET BIOTECH HP EUR"
+    societe: "PICTET ASSET MANAGEMENT EUROPE"
+    nature: "Compartiment SICAV"
+    sfdr: "Article 9"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "48,70%"
+    frais_actif_b: "2,04%"
+    perf_nette_c: "46,66%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "3,14%"
+    perf_finale: "45,57%"
+    retrocessions: "0,80%"
 ---
 
 # Actions — Secteur Santé
 
-8 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+9 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -143,6 +157,7 @@ La performance porte sur le dernier exercice clos.
 | `LU0261952419` | FF GLOBAL HEALTH CARE A A EUR | FIL INVESTMENT MANAGEMENT LUX | 2,60% | -7,96% | 0,75% | Article 8 |
 | `LU0880062913` | JPM GLOB HEALTHCARE FND A C | JPMORGAN ASSET MANAGEMENT EUR | 2,46% | 0,30% | 0,75% | Article 8 |
 | `LU2932856839` | MIROVA THEM HEALTH RA USD C | NATIXIS INVEST MANAGERS INTL | n.c. | n.c. | 0,88% | Article 9 |
+| `LU0190161025` | PICTET BIOTECH HP EUR | PICTET ASSET MANAGEMENT EUROPE | 3,14% | 45,57% | 0,80% | Article 9 |
 
 ---
 ## BGF WORLD HEALTHSCIENCE A2 EUR
@@ -414,3 +429,37 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | n.c. |
 | Nette de l'unité de compte (C = A − B) | n.c. |
 | **Finale (A − E)** | **n.c.** |
+
+---
+
+## PICTET BIOTECH HP EUR
+
+`LU0190161025` · PICTET ASSET MANAGEMENT EUROPE · Compartiment SICAV · SFDR Article 9
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0190161025` |
+| Société de gestion | PICTET ASSET MANAGEMENT EUROPE |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | Article 9 |
+| Avenant spécifique | non |
+| Classification d'actif | Secteur Santé (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,04% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **3,14%** |
+| Taux de rétrocession de commissionnement | 0,80% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 48,70% |
+| Nette de l'unité de compte (C = A − B) | 46,66% |
+| **Finale (A − E)** | **45,57%** |

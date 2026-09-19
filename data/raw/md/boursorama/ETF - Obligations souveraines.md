@@ -5,7 +5,7 @@ slug: etf--obligations-souveraines
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 9
+nombre_de_supports: 10
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "IE00BDQYWQ65"
@@ -63,6 +63,20 @@ supports:
     frais_contrat_d: "0,75%"
     frais_totaux_e: "0,86%"
     perf_finale: "5,31%"
+    retrocessions: "n.c."
+  - isin: "LU0290356954"
+    nom: "XTRACK II EURO GOV BD 3-5 ETF"
+    societe: "DWS INVESTMENT SA"
+    nature: "Compartiment SICAV"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "2,66%"
+    frais_actif_b: "0,17%"
+    perf_nette_c: "2,49%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "0,94%"
+    perf_finale: "1,72%"
     retrocessions: "n.c."
   - isin: "LU0290357259"
     nom: "XTRACK II EUROGOV BD 7-10 1C"
@@ -138,7 +152,7 @@ supports:
 
 # ETF — Obligations souveraines
 
-9 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+10 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -153,6 +167,7 @@ La performance porte sur le dernier exercice clos.
 | `IE00B4WXJH41` | ISHARES EUR GOVTBD 10-15YR | BLACKROCK ASSET MANAGEMENT IRL | 0,88% | -3,18% | n.c. | non renseignée |
 | `IE00B0M62X26` | ISHARES EURO INF LNKD GV BND | BLACKROCK ASSET MANAGEMENT IRL | 0,85% | 0,17% | n.c. | non renseignée |
 | `LU1407888137` | MUL AMUNDI US TREASBD 7-10Y HA | AMUNDI LUXEMBOURG SA | 0,86% | 5,31% | n.c. | non renseignée |
+| `LU0290356954` | XTRACK II EURO GOV BD 3-5 ETF | DWS INVESTMENT SA | 0,94% | 1,72% | n.c. | non renseignée |
 | `LU0290357259` | XTRACK II EUROGOV BD 7-10 1C | DB PLATINUM ADVISORS | 0,93% | 0,96% | n.c. | non renseignée |
 | `LU0290357846` | XTRACK II EZ GVT BD 25 ETF 1C | DB PLATINUM ADVISORS | 0,85% | -10,09% | n.c. | non renseignée |
 | `LU0290357929` | XTRACK II GBL INF-LKD BD ETF1C | DWS INVESTMENT SA | 1,05% | 1,63% | n.c. | non renseignée |
@@ -293,6 +308,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 6,17% |
 | Nette de l'unité de compte (C = A − B) | 6,11% |
 | **Finale (A − E)** | **5,31%** |
+
+---
+
+## XTRACK II EURO GOV BD 3-5 ETF
+
+`LU0290356954` · DWS INVESTMENT SA · Compartiment SICAV · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU0290356954` |
+| Société de gestion | DWS INVESTMENT SA |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Obligations souveraines (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,17% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **0,94%** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 2,66% |
+| Nette de l'unité de compte (C = A − B) | 2,49% |
+| **Finale (A − E)** | **1,72%** |
 
 ---
 

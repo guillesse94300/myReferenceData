@@ -5,9 +5,23 @@ slug: actions-vives--automobile-et-equipementiers
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 8
+nombre_de_supports: 9
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
+  - isin: "DE0005190003"
+    nom: "BMW AG"
+    societe: "NC"
+    nature: "Action"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "annexe IB SwissLife (par ISIN)"
+    perf_brute_a: "n.c."
+    frais_actif_b: "n.c."
+    perf_nette_c: "18,73%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "n.c."
+    perf_finale: "17,84%"
+    retrocessions: "n.c."
   - isin: "DE0007100000"
     nom: "DAIMLER AG"
     societe: "NC"
@@ -124,7 +138,7 @@ supports:
 
 # Actions vives — Automobile et équipementiers
 
-8 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+9 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -135,6 +149,7 @@ La performance porte sur le dernier exercice clos.
 
 | ISIN | Support | Société | Frais totaux | Perf. finale | Rétrocessions | SFDR |
 |---|---|---|---|---|---|---|
+| `DE0005190003` | BMW AG | n.c. | n.c. | 17,84% | n.c. | non renseignée |
 | `DE0007100000` | DAIMLER AG | n.c. | n.c. | 10,82% | n.c. | non renseignée |
 | `NL0011585146` | FERRARI N.V - RACE | n.c. | n.c. | -23,30% | n.c. | non renseignée |
 | `FR0000121147` | FORVIA | n.c. | n.c. | 55,74% | n.c. | non renseignée |
@@ -145,6 +160,40 @@ La performance porte sur le dernier exercice clos.
 | `DE0007664039` | VOLKSWAGEN PRIV. | n.c. | n.c. | 15,42% | n.c. | non renseignée |
 
 ---
+## BMW AG
+
+`DE0005190003` · n.c. · Action · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `DE0005190003` |
+| Société de gestion | n.c. |
+| Nature juridique | Action |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Automobile et équipementiers (annexe IB SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | n.c. |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **n.c.** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | n.c. |
+| Nette de l'unité de compte (C = A − B) | 18,73% |
+| **Finale (A − E)** | **17,84%** |
+
+---
+
 ## DAIMLER AG
 
 `DE0007100000` · n.c. · Action · SFDR non renseignée

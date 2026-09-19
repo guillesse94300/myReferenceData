@@ -5,7 +5,7 @@ slug: actions--actions-europe-petites-capitalisations
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 2
+nombre_de_supports: 3
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "FR0011558246"
@@ -36,11 +36,25 @@ supports:
     frais_totaux_e: "2,72%"
     perf_finale: "6,74%"
     retrocessions: "0,75%"
+  - isin: "LU1303940784"
+    nom: "MANDARINE EUROPE MICROCAP R"
+    societe: "MANDARINE GESTION"
+    nature: "Compartiment SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "annexe IA SwissLife (par ISIN)"
+    perf_brute_a: "14,96%"
+    frais_actif_b: "2,12%"
+    perf_nette_c: "12,84%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "2,97%"
+    perf_finale: "12,00%"
+    retrocessions: "0,98%"
 ---
 
 # Actions — Actions Europe Petites Capitalisations
 
-2 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+3 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -53,6 +67,7 @@ La performance porte sur le dernier exercice clos.
 |---|---|---|---|---|---|---|
 | `FR0011558246` | ECHIQUIER ENTREPRENEURS A | FINANCIERE DE L ECHIQUIER | 3,12% | 3,13% | 1,08% | Article 8 |
 | `LU0061175625` | FIDELITY FDS-EUROPEAN SM-A | FIL INVESTMENT MANAGEMENT LUX | 2,72% | 6,74% | 0,75% | non renseignée |
+| `LU1303940784` | MANDARINE EUROPE MICROCAP R | MANDARINE GESTION | 2,97% | 12,00% | 0,98% | Article 8 |
 
 ---
 ## ECHIQUIER ENTREPRENEURS A
@@ -120,3 +135,37 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 9,45% |
 | Nette de l'unité de compte (C = A − B) | 7,54% |
 | **Finale (A − E)** | **6,74%** |
+
+---
+
+## MANDARINE EUROPE MICROCAP R
+
+`LU1303940784` · MANDARINE GESTION · Compartiment SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU1303940784` |
+| Société de gestion | MANDARINE GESTION |
+| Nature juridique | Compartiment SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Europe Petites Capitalisations (annexe IA SwissLife (par ISIN)) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,12% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **2,97%** |
+| Taux de rétrocession de commissionnement | 0,98% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 14,96% |
+| Nette de l'unité de compte (C = A − B) | 12,84% |
+| **Finale (A − E)** | **12,00%** |

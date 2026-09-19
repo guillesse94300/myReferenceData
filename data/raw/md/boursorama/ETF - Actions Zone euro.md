@@ -5,9 +5,23 @@ slug: etf--actions-zone-euro
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 4
+nombre_de_supports: 7
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
+  - isin: "FR0007054358"
+    nom: "AMUNDI EURO STOXX 50 II ETF A"
+    societe: "AMUNDI ASSET MANAGEMENT"
+    nature: "FCP"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "21,54%"
+    frais_actif_b: "0,20%"
+    perf_nette_c: "21,34%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "1,11%"
+    perf_finale: "20,43%"
+    retrocessions: "0,00%"
   - isin: "LU2244387457"
     nom: "BNPP E JPM TILT EMU GB IG 3 5Y"
     societe: "BNP PARIBAS ASSET MNGT LUX SA"
@@ -50,6 +64,20 @@ supports:
     frais_totaux_e: "1,02%"
     perf_finale: "21,19%"
     retrocessions: "n.c."
+  - isin: "LU1291098827"
+    nom: "BNPP EASY MSCI EMU MIN TE C"
+    societe: "BNP PARIBAS ASSET MNGT LUX SA"
+    nature: "SICAV"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "24,16%"
+    frais_actif_b: "0,15%"
+    perf_nette_c: "24,00%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "1,08%"
+    perf_finale: "23,07%"
+    retrocessions: "n.c."
   - isin: "IE00BHZPJ015"
     nom: "ISH MSCI EMU ESG ENHAN CTB ETF"
     societe: "BLACKROCK ASSET MANAGEMENT IRL"
@@ -64,11 +92,25 @@ supports:
     frais_totaux_e: "1,04%"
     perf_finale: "21,22%"
     retrocessions: "n.c."
+  - isin: "IE00B3VWMM18"
+    nom: "ISHARES MSCI EMU SMALL CAP ETF"
+    societe: "BLACKROCK ASSET MANAGEMENT IRL"
+    nature: "SICAV"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "25,80%"
+    frais_actif_b: "0,58%"
+    perf_nette_c: "25,22%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "1,52%"
+    perf_finale: "24,28%"
+    retrocessions: "n.c."
 ---
 
 # ETF — Actions Zone euro
 
-4 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+7 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -79,12 +121,49 @@ La performance porte sur le dernier exercice clos.
 
 | ISIN | Support | Société | Frais totaux | Perf. finale | Rétrocessions | SFDR |
 |---|---|---|---|---|---|---|
+| `FR0007054358` | AMUNDI EURO STOXX 50 II ETF A | AMUNDI ASSET MANAGEMENT | 1,11% | 20,43% | 0,00% | non renseignée |
 | `LU2244387457` | BNPP E JPM TILT EMU GB IG 3 5Y | BNP PARIBAS ASSET MNGT LUX SA | 0,92% | 1,65% | n.c. | Article 8 |
 | `LU2533810862` | BNPP E JPM TILT EMU GD IG 1 3Y | BNP PARIBAS ASSET MNGT LUX SA | 0,92% | 1,39% | n.c. | Article 8 |
 | `FR0012739431` | BNPP EASY EURO STOXX 50 UE C | BNP PARIBAS ASSET MNGT EUROPE | 1,02% | 21,19% | n.c. | non renseignée |
+| `LU1291098827` | BNPP EASY MSCI EMU MIN TE C | BNP PARIBAS ASSET MNGT LUX SA | 1,08% | 23,07% | n.c. | non renseignée |
 | `IE00BHZPJ015` | ISH MSCI EMU ESG ENHAN CTB ETF | BLACKROCK ASSET MANAGEMENT IRL | 1,04% | 21,22% | n.c. | non renseignée |
+| `IE00B3VWMM18` | ISHARES MSCI EMU SMALL CAP ETF | BLACKROCK ASSET MANAGEMENT IRL | 1,52% | 24,28% | n.c. | non renseignée |
 
 ---
+## AMUNDI EURO STOXX 50 II ETF A
+
+`FR0007054358` · AMUNDI ASSET MANAGEMENT · FCP · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `FR0007054358` |
+| Société de gestion | AMUNDI ASSET MANAGEMENT |
+| Nature juridique | FCP |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Zone euro (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,20% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **1,11%** |
+| Taux de rétrocession de commissionnement | 0,00% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 21,54% |
+| Nette de l'unité de compte (C = A − B) | 21,34% |
+| **Finale (A − E)** | **20,43%** |
+
+---
+
 ## BNPP E JPM TILT EMU GB IG 3 5Y
 
 `LU2244387457` · BNP PARIBAS ASSET MNGT LUX SA · SICAV · SFDR Article 8
@@ -187,6 +266,40 @@ La performance porte sur le dernier exercice clos.
 
 ---
 
+## BNPP EASY MSCI EMU MIN TE C
+
+`LU1291098827` · BNP PARIBAS ASSET MNGT LUX SA · SICAV · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU1291098827` |
+| Société de gestion | BNP PARIBAS ASSET MNGT LUX SA |
+| Nature juridique | SICAV |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Zone euro (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,15% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **1,08%** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 24,16% |
+| Nette de l'unité de compte (C = A − B) | 24,00% |
+| **Finale (A − E)** | **23,07%** |
+
+---
+
 ## ISH MSCI EMU ESG ENHAN CTB ETF
 
 `IE00BHZPJ015` · BLACKROCK ASSET MANAGEMENT IRL · SICAV · SFDR non renseignée
@@ -218,3 +331,37 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 22,25% |
 | Nette de l'unité de compte (C = A − B) | 22,13% |
 | **Finale (A − E)** | **21,22%** |
+
+---
+
+## ISHARES MSCI EMU SMALL CAP ETF
+
+`IE00B3VWMM18` · BLACKROCK ASSET MANAGEMENT IRL · SICAV · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `IE00B3VWMM18` |
+| Société de gestion | BLACKROCK ASSET MANAGEMENT IRL |
+| Nature juridique | SICAV |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Zone euro (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,58% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **1,52%** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 25,80% |
+| Nette de l'unité de compte (C = A − B) | 25,22% |
+| **Finale (A − E)** | **24,28%** |

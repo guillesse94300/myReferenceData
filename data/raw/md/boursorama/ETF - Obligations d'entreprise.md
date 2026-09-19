@@ -5,7 +5,7 @@ slug: etf--obligations-d-entreprise
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 5
+nombre_de_supports: 6
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU1681039647"
@@ -50,6 +50,20 @@ supports:
     frais_totaux_e: "0,84%"
     perf_finale: "-1,21%"
     retrocessions: "n.c."
+  - isin: "IE000UX5WPU4"
+    nom: "XTRACK IBOXXCORPBD YIPLUS 1C"
+    societe: "XTRACKERS IE PLC"
+    nature: "SICAV"
+    sfdr: "non renseignée"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "3,49%"
+    frais_actif_b: "0,00%"
+    perf_nette_c: "3,49%"
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "0,78%"
+    perf_finale: "2,72%"
+    retrocessions: "n.c."
   - isin: "IE00BZ036J45"
     nom: "XTRACKERS CORPOBD ETF 2D H"
     societe: "DWS INVESTMENT SA"
@@ -82,7 +96,7 @@ supports:
 
 # ETF — Obligations d'entreprise
 
-5 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -96,6 +110,7 @@ La performance porte sur le dernier exercice clos.
 | `LU1681039647` | AM EURO CORP SRI ETF 2 DR C | AMUNDI LUXEMBOURG SA | 0,91% | 2,17% | n.c. | non renseignée |
 | `IE00BG0J4B71` | ISHARES BROAD H-Y CORP BD ETF | BLACKROCK ASSET MANAGEMENT IRL | n.c. | n.c. | n.c. | non renseignée |
 | `IE00BZ163G84` | VANGUARD EUR CORP BD ETF | VANGUARD GROUP IRELAND LIMITED | 0,84% | -1,21% | n.c. | non renseignée |
+| `IE000UX5WPU4` | XTRACK IBOXXCORPBD YIPLUS 1C | XTRACKERS IE PLC | 0,78% | 2,72% | n.c. | non renseignée |
 | `IE00BZ036J45` | XTRACKERS CORPOBD ETF 2D H | DWS INVESTMENT SA | n.c. | n.c. | n.c. | non renseignée |
 | `LU0478205379` | XTRACKERS II CORP BD ETF 1C | DB PLATINUM ADVISORS | n.c. | n.c. | n.c. | non renseignée |
 
@@ -199,6 +214,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | -0,37% |
 | Nette de l'unité de compte (C = A − B) | -0,46% |
 | **Finale (A − E)** | **-1,21%** |
+
+---
+
+## XTRACK IBOXXCORPBD YIPLUS 1C
+
+`IE000UX5WPU4` · XTRACKERS IE PLC · SICAV · SFDR non renseignée
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `IE000UX5WPU4` |
+| Société de gestion | XTRACKERS IE PLC |
+| Nature juridique | SICAV |
+| Classification SFDR | non renseignée |
+| Avenant spécifique | non |
+| Classification d'actif | Obligations d'entreprise (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 0,00% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **0,78%** |
+| Taux de rétrocession de commissionnement | n.c. |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | 3,49% |
+| Nette de l'unité de compte (C = A − B) | 3,49% |
+| **Finale (A − E)** | **2,72%** |
 
 ---
 

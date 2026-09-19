@@ -5,7 +5,7 @@ slug: actions--actions-zone-euro
 contrat: "Bourso Vie (5101) — gestion libre"
 assureur: "Generali Vie"
 millesime: "2026-09-18"
-nombre_de_supports: 6
+nombre_de_supports: 7
 source: "Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026"
 supports:
   - isin: "LU1883303635"
@@ -50,6 +50,20 @@ supports:
     frais_totaux_e: "2,77%"
     perf_finale: "12,32%"
     retrocessions: "0,90%"
+  - isin: "LU2985305460"
+    nom: "IMGP EURO SELECT FUND C"
+    societe: "IM GLOBAL PARTNER ASSET MGMT"
+    nature: "SICAV"
+    sfdr: "Article 8"
+    avenant: "non"
+    origine_classification: "déduite du libellé"
+    perf_brute_a: "n.c."
+    frais_actif_b: "2,39%"
+    perf_nette_c: "n.c."
+    frais_contrat_d: "0,75%"
+    frais_totaux_e: "n.c."
+    perf_finale: "n.c."
+    retrocessions: "0,70%"
   - isin: "FR0013275112"
     nom: "OFI INVEST ESG EURO EQ ACT R"
     societe: "OFI INVEST ASSET MANAGEMENT"
@@ -96,7 +110,7 @@ supports:
 
 # Actions — Actions Zone euro
 
-6 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
+7 support(s) · Bourso Vie (5101) — Annexe financière, liste des supports en gestion libre, Generali Vie / BoursoBank, 18 septembre 2026.
 
 Frais de gestion du contrat : 0,75 %. Les frais totaux suivent la formule de l'assureur
 **E = B + (1 + C) × D**, qui fait croître les frais affichés avec la performance :
@@ -110,6 +124,7 @@ La performance porte sur le dernier exercice clos.
 | `LU1883303635` | AMUNDI FDS EUROLAND EQUITY A | AMUNDI LUXEMBOURG SA | 2,65% | 15,14% | 0,75% | Article 8 |
 | `BE0058182792` | DPAM INV B EQ EUROLAND B CAP | DEGROOF PETERCAM ASSET MNGT SA | 2,59% | 10,44% | 0,80% | Article 8 |
 | `LU2219351876` | FF FD SUS EUROZONE EQ FD A | FIL INVESTMENT MANAGEMENT LUX | 2,77% | 12,32% | 0,90% | Article 9 |
+| `LU2985305460` | IMGP EURO SELECT FUND C | IM GLOBAL PARTNER ASSET MGMT | n.c. | n.c. | 0,70% | Article 8 |
 | `FR0013275112` | OFI INVEST ESG EURO EQ ACT R | OFI INVEST ASSET MANAGEMENT | 2,69% | 14,66% | 0,88% | Article 8 |
 | `LU0503372608` | ROBECO EURO SDG CREDITS D | ROBECO INSTITUTIONAL ASSET MNG | 1,69% | 1,54% | 0,35% | Article 9 |
 | `FR0000448847` | SG ACTIONS EURO SMALL C IC | SG INVT SOLUTIONS FRANCE | 2,43% | 19,57% | 0,72% | Article 8 |
@@ -214,6 +229,40 @@ La performance porte sur le dernier exercice clos.
 | Brute de l'actif (A) | 15,09% |
 | Nette de l'unité de compte (C = A − B) | 13,17% |
 | **Finale (A − E)** | **12,32%** |
+
+---
+
+## IMGP EURO SELECT FUND C
+
+`LU2985305460` · IM GLOBAL PARTNER ASSET MGMT · SICAV · SFDR Article 8
+
+### Identité
+
+| | |
+|---|---|
+| Code ISIN | `LU2985305460` |
+| Société de gestion | IM GLOBAL PARTNER ASSET MGMT |
+| Nature juridique | SICAV |
+| Classification SFDR | Article 8 |
+| Avenant spécifique | non |
+| Classification d'actif | Actions Zone euro (déduite du libellé) |
+
+### Frais
+
+| Poste | Taux |
+|---|---|
+| Frais de gestion de l'actif (B) | 2,39% |
+| Frais de gestion du contrat (D) | 0,75% |
+| **Frais totaux (E = B + (1 + C) × D)** | **n.c.** |
+| Taux de rétrocession de commissionnement | 0,70% |
+
+### Performances du dernier exercice clos
+
+| Niveau | Taux |
+|---|---|
+| Brute de l'actif (A) | n.c. |
+| Nette de l'unité de compte (C = A − B) | n.c. |
+| **Finale (A − E)** | **n.c.** |
 
 ---
 
