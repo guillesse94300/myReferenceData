@@ -49,3 +49,14 @@ def test_morningstar_prefere_a_une_cotation_de_place():
     charge = ('{"quotes":[{"symbol":"PBFW.MU","exchange":"MUN"},'
               '{"symbol":"0P0000PTZT.F","exchange":"FRA"}]}')
     assert symboles.depuis_yahoo(charge)["symbole"] == "0P0000PTZT.F"
+
+
+def test_la_recherche_par_nom_livre_un_identifiant_de_fonds():
+    """Fidelity China n'est résolu par aucune source : son nom, lui, l'est."""
+    chemin = os.path.join(CAPTURES, "historiques", "LU0173614495__yahoo_recherche_nom.json")
+    assert symboles.morningstar_dans_recherche(open(chemin, encoding="utf-8").read()) == "0P00000TDB"
+
+
+def test_une_recherche_sans_fonds_ne_livre_rien():
+    assert symboles.morningstar_dans_recherche('{"quotes":[{"symbol":"AAPL"}]}') is None
+    assert symboles.morningstar_dans_recherche("pas du json") is None

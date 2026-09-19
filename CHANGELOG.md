@@ -4,6 +4,14 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.12.0 — 19 septembre 2026
+
+- La recherche par nom trouve pour Fidelity China l'identifiant `0P00000TDB`,
+  que ni son ISIN ni Boursorama ne donnaient.
+- Les sondes s'enchaînent : une recherche par nom déclenche aussitôt la demande
+  de série sur l'identifiant trouvé, avec et sans suffixe de place. Un tour de
+  capture supplémentaire est ainsi évité.
+
 ## 0.11.0 — 19 septembre 2026
 
 - La sonde croisée résout Pictet : de 1 à 1 157 séances. Couverture portée à

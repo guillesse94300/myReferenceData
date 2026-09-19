@@ -68,6 +68,15 @@ SONDE_PAR_NOM = ("yahoo_recherche_nom",
                  "https://query1.finance.yahoo.com/v1/finance/search"
                  "?q={nom}&quotesCount=10")
 
+# La recherche par nom ne rend qu'un identifiant : la serie se demande ensuite,
+# avec et sans suffixe de place, l'un des deux repondant selon le fonds.
+SONDES_ENCHAINEES = [
+    ("yahoo_chart_par_nom", "https://query1.finance.yahoo.com/v8/finance/chart/{symbole}"
+                            "?range=5y&interval=1d"),
+    ("yahoo_chart_par_nom_francfort", "https://query1.finance.yahoo.com/v8/finance/chart/{symbole}.F"
+                                      "?range=5y&interval=1d"),
+]
+
 
 def libelles():
     """Nom de chaque support, pour la recherche de dernier recours."""
@@ -161,7 +170,10 @@ def main():
             if nom:
                 tentatives.append(("yahoo", {"symbole": nom, "genre": "recherche"},
                                    *SONDE_PAR_NOM))
-        for source, resolu, nom, gabarit in tentatives:
+        # La liste s'allonge en cours de route : une recherche par nom ajoute la
+        # demande de serie sur l'identifiant qu'elle vient de livrer.
+        for source, resolu, nom, gabarit in iter(lambda: tentatives.pop(0) if tentatives else None,
+                                                 None):
                 url = gabarit.format(symbole=resolu["symbole"], jours=JOURS,
                                      nom=resolu["symbole"])
                 statut, corps, duree = interroger(url)
@@ -173,6 +185,11 @@ def main():
                                 "symbole": resolu["symbole"], "genre": resolu["genre"],
                                 "url": url, "statut": statut, "octets": len(corps),
                                 "points_estimes": points, "secondes": round(duree, 2)})
+                if nom == "yahoo_recherche_nom" and statut == 200:
+                    trouve = symboles.morningstar_dans_recherche(corps)
+                    if trouve:
+                        tentatives.extend(("yahoo", {"symbole": trouve, "genre": "vl"}, *sonde)
+                                          for sonde in SONDES_ENCHAINEES)
                 etat = (f"{points} valeurs" if points else
                         (f"refus {statut}" if statut >= 400 else
                          ("injoignable" if statut == 0 else "réponse non exploitable")))

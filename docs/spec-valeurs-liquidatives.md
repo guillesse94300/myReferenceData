@@ -191,7 +191,12 @@ Morningstar ; une **sonde par nom** interroge alors Yahoo sur le libellé du
 fonds. Elle ne vise que les fonds non cotés — sur un tracker, le cours de bourse
 est la donnée pertinente.
 
-Couverture après la sonde croisée : **13 supports sur 14**.
+La sonde par nom a trouvé, pour Fidelity China, l'identifiant `0P00000TDB` que
+ni l'ISIN ni Boursorama ne donnaient. La demande de série s'enchaîne désormais
+automatiquement sur l'identifiant trouvé, avec et sans suffixe de place.
+
+Couverture après la sonde croisée : **13 supports sur 14**, le quatorzième
+restant à confirmer.
 
 ## 7. Critère d'acceptation
 
