@@ -1,0 +1,22 @@
+Fonds	ISIN	Détenu dans
+Claresco USA P	LU1379103812	PER Gilles, PER Laurence
+SLF (F) Opportunité High Yield 2028 P Cap	FR0013332418	PER Gilles, PER Laurence
+AXA Or et Matières Premières C	FR0010011171	PER Gilles, PER Laurence
+Fidelity China Focus A-Dis-USD	LU0173614495	PER Gilles, PER Laurence
+Pictet Global Environmental Opportunities R EUR	LU0503631987	PER Gilles, PER Laurence
+Alken European Opportunities A	LU0524465977	PER Gilles, PER Laurence
+Auris Diversified Beta R Cap	LU1250158166	PER Gilles, PER Laurence
+R-co Valor Balanced F EUR	FR0013367281	PER Gilles, PER Laurence
+Amundi PEA Monde (MSCI World) UCITS ETF Acc	FR001400U5Q4	PEA Gilles
+Amundi Euro Stoxx Banks UCITS ETF Acc	LU1829219390	PEA Gilles
+Amundi MSCI World Swap II UCITS ETF Dist	FR0010315770	Assurance vie Gilles
+Amundi Core S&P 500 Swap UCITS ETF Dist	LU0496786574	Assurance vie Gilles
+Amundi MSCI EM Asia UCITS ETF	LU1681044480	Assurance vie Gilles
+iShares MSCI Global Semiconductors UCITS ETF	IE000I8KRLL9	Assurance vie Gilles
+Amundi Core Nasdaq-100 Swap UCITS ETF Acc	LU1829221024	Assurance vie Gilles
+Amundi Actions Internationales ESR-E	QS0000109767	PEE Gilles
+Amundi Label Monétaire ESR-F	non renseigné (code AMF 990000106019)	PEE Gilles
+Multipar Monétaire Sélection (C)	FR001400R849	PEE Laurence
+Multipar Actions Europe Bas Carbone (C)	FR001400OS06	PEE Laurence
+Multimanagers Actions Internationales – DWS (C)	FR001400S9E6	PEE Laurence
+June Opportunity (part AA+)	FR00140001C5	June REIM
