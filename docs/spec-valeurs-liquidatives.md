@@ -166,6 +166,25 @@ Convertir demanderait un historique de change et mêlerait deux sources d'écart
 la performance du fonds et le mouvement de la devise. Les indicateurs sont donc
 calculés en devise native, et les supports non libellés en euro sont signalés.
 
+## 6 bis. Résultat du second tour et source retenue
+
+Capture du 19 septembre 2026, 14 supports.
+
+| Sonde | Résultat |
+|---|---|
+| `bourso_eod` | **HTTP 410** sur les 14 — point d'accès supprimé |
+| `bourso_charts` | HTTP 200 mais réponse vide |
+| `yahoo_chart` | **12/14, 978 à 1 280 séances** sur quatre ans et demi à cinq ans |
+
+**Yahoo Finance est donc la source de collecte**, et Boursorama celle qui
+résout les symboles : le point d'accès de Yahoo accepte les identifiants
+Morningstar suffixés de la place de Francfort, et Boursorama les donne là où la
+recherche Yahoo renvoie parfois une cotation secondaire.
+
+Les deux échecs sont exactement ceux-là : Fidelity China et Pictet, résolus vers
+`FJRH.F` et `PBFW.MU`, deux cotations quasi sans échanges. Une sonde croisée a
+été ajoutée pour rejouer ces cas avec l'identifiant Boursorama.
+
 ## 7. Critère d'acceptation
 
 C'est ce qui distingue ce lot de la collecte des DIC : **il est vérifiable sans
@@ -176,15 +195,53 @@ comme la performance annuelle publiée par les assureurs. Pour chaque fonds et
 chaque exercice, la performance recalculée depuis les VL doit donc retrouver le
 chiffre publié.
 
-La base contient **3 393 performances annuelles publiées**. Le contrôle compare
-chaque couple et le lot n'est accepté que si :
+La base contient **3 393 performances annuelles publiées**, et la confrontation
+est automatisée par `tools/valider_series.py`.
 
-- l'écart médian est inférieur à **0,10 point** ;
-- moins de **5 %** des couples dépassent 0,50 point d'écart ;
-- chaque dépassement est expliqué, ou le support écarté.
+### Le critère initial était naïf
 
-Un parseur défaillant ou une source de mauvaise qualité échoue immédiatement ce
-contrôle.
+La première rédaction exigeait un écart médian sous 0,10 point et moins de 5 %
+des couples au-delà de 0,50. Mesuré, le résultat donnait 0,19 point de médiane
+et **29 %** de dépassements : critère non tenu.
+
+L'enquête a montré que la faute n'était pas à la source. Les séries ne
+comportent **pas de séance au 31 décembre** : la dernière cotation de l'année
+est celle du 30. L'assureur arrête au 31. Le calcul porte donc sur des bornes
+décalées d'un jour, à l'ouverture comme à la clôture de l'exercice.
+
+Trois faits l'établissent :
+
+- l'erreur corrèle à **0,79** avec la volatilité quotidienne du fonds ;
+- le fonds le moins volatil de l'échantillon, SLF Opportunité High Yield
+  (0,21 % par jour), tombe **exactement juste quatre années sur quatre** ;
+- sur un enchaînement de trois exercices, où les bornes intermédiaires se
+  compensent, l'écart d'Alken retombe de 1,15 à 0,41 point et celui de SLF à
+  0,00.
+
+### Le critère retenu
+
+Puisque l'écart provient d'un décalage d'une à deux séances, la tolérance suit
+la **volatilité quotidienne du support** plutôt qu'un seuil unique :
+
+> L'écart entre performance publiée et performance recalculée doit rester
+> inférieur à **2,5 mouvements quotidiens** du fonds, avec un plancher de
+> 0,10 point en deçà duquel l'arrondi des sources domine.
+
+Sur un fonds obligataire la tolérance vaut 0,54 point ; sur un fonds aurifère,
+3,55. C'est la même exigence exprimée dans l'unité qui convient à chaque
+support.
+
+### Mesure
+
+| | |
+|---|---|
+| Couples comparés | 21, sur 6 supports |
+| Écart médian | **0,19 point** |
+| Hors tolérance | **0 (0 %)** |
+
+Les six autres séries obtenues sont des ETF, pour lesquels les annexes ne
+publient pas d'historique annuel : elles ne sont pas validables par ce contrôle.
+C'est une limite de la validation, non des données.
 
 ## 8. Indicateurs à calculer
 

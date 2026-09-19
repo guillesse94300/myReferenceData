@@ -52,6 +52,14 @@ SONDES = {
     ],
 }
 
+# Sonde croisee : le point d'acces de Yahoo accepte les identifiants Morningstar,
+# suffixes de la place de Francfort. Lorsque la recherche Yahoo a renvoye une
+# cotation de place la ou Boursorama donnait un identifiant de fonds, c'est
+# celui-ci qu'il faut essayer -- il porte la valeur liquidative.
+SONDE_CROISEE = ("yahoo_via_boursorama",
+                 "https://query1.finance.yahoo.com/v8/finance/chart/{symbole}.F"
+                 "?range=5y&interval=1d")
+
 
 def resoudre():
     """Symboles des deux sources, relus des captures du premier tour."""
@@ -121,8 +129,13 @@ def main():
     for isin, sources in supports:
         genres = " ".join(f"{s}:{v['symbole']}({v['genre']})" for s, v in sources.items())
         print(f"{isin}  {genres}")
-        for source, resolu in sources.items():
-            for nom, gabarit in SONDES.get(source, []):
+        tentatives = [(source, resolu, nom, gabarit)
+                      for source, resolu in sources.items()
+                      for nom, gabarit in SONDES.get(source, [])]
+        bourso, yh = sources.get("boursorama"), sources.get("yahoo")
+        if bourso and yh and bourso["symbole"].startswith("0P") and yh["genre"] != "vl":
+            tentatives.append(("boursorama", bourso, *SONDE_CROISEE))
+        for source, resolu, nom, gabarit in tentatives:
                 url = gabarit.format(symbole=resolu["symbole"], jours=JOURS)
                 statut, corps, duree = interroger(url)
                 points = compter_points(corps)
