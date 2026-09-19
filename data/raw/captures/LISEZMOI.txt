@@ -1,0 +1,2 @@
+# Reponses brutes des sources de valeur liquidative.
+# Elles servent de jeu de test aux parseurs : ne pas les modifier a la main.

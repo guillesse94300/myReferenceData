@@ -4,6 +4,15 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.8.0 — 19 septembre 2026
+
+- Spécification de la collecte des valeurs liquidatives :
+  `docs/spec-valeurs-liquidatives.md`.
+- `tools/capturer_sources.py` interroge les sources candidates et archive leurs
+  réponses brutes, qui serviront de jeu de test aux parseurs. L'environnement de
+  développement n'ayant pas accès à l'internet public, les parseurs ne peuvent
+  être mis au point et vérifiés que contre ces captures.
+
 ## 0.7.0 — 19 septembre 2026
 
 - Les favoris portent une note libre, qui sert à indiquer l'enveloppe de
