@@ -6,10 +6,15 @@ plutot que de presenter des chiffres incertains comme s'ils ne l'etaient pas.
 """
 import os
 import sqlite3
+import sys
 
 import altair as alt
 import pandas as pd
 import streamlit as st
+
+from version import DATE, VERSION
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 RACINE = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 BASE = os.path.join(RACINE, "data/reference.db")
@@ -104,6 +109,25 @@ if donnees is None:
     st.error(f"Base introuvable : {BASE}\n\nLancez `construire.bat` pour la créer.")
     st.stop()
 univers, performances, arbitrage, offres, anomalies, imports = donnees
+
+
+MOIS = ["janvier", "février", "mars", "avril", "mai", "juin",
+        "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+
+
+def en_toutes_lettres(date_iso):
+    """'2026-09-19' donne '19 septembre 2026', le premier du mois prenant 'er'."""
+    annee, mois, jour = date_iso.split("-")
+    quantieme = "1er" if int(jour) == 1 else str(int(jour))
+    return f"{quantieme} {MOIS[int(mois) - 1]} {annee}"
+
+
+def en_tete(titre):
+    """Titre de page, suivi de la version et du millesime des documents sources."""
+    st.title(titre)
+    millesimes = " · ".join(f"{ligne.fournisseur} {en_toutes_lettres(ligne.millesime)}"
+                            for ligne in imports.itertuples())
+    st.caption(f"Version {VERSION} du {en_toutes_lettres(DATE)}  ·  données {millesimes}")
 
 
 def aller_a(page, **etat):
@@ -236,8 +260,7 @@ def barre_laterale():
 # ----------------------------------------------------------------------- pages
 
 def page_accueil(vue):
-    st.title("Univers d'investissement")
-    st.caption("SwissLife · BoursoVie — base locale, lecture seule")
+    en_tete("Univers d'investissement")
 
     colonnes = st.columns(4)
     colonnes[0].metric("Instruments", f"{len(univers):,}".replace(",", " "))
@@ -278,7 +301,7 @@ def page_accueil(vue):
 
 
 def page_parcourir(vue):
-    st.title("Parcourir l'univers")
+    en_tete("Parcourir l'univers")
     axe = st.segmented_control("Explorer par", ["Classe d'actif", "Risque", "Performance"],
                                key="axe", default="Classe d'actif")
     axe = axe or "Classe d'actif"
@@ -330,7 +353,7 @@ def page_parcourir(vue):
 
 
 def page_fiche(vue):
-    st.title("Fiche support")
+    en_tete("Fiche support")
     if vue.empty:
         st.info("Aucun instrument dans la sélection.")
         return
@@ -395,7 +418,7 @@ def page_fiche(vue):
 
 
 def page_frais(_):
-    st.title("Frais — le même fonds chez les deux assureurs")
+    en_tete("Frais — le même fonds chez les deux assureurs")
     st.info("Les deux assureurs ne publient pas la même grandeur pour les frais du fonds : "
             "SwissLife paraît donner les charges supportées sur le dernier exercice, BoursoVie les "
             "frais contractuels. Seules les lignes marquées **comparable** autorisent une conclusion "
@@ -419,7 +442,7 @@ def page_frais(_):
 
 
 def page_qualite(_):
-    st.title("Qualité des données")
+    en_tete("Qualité des données")
     st.markdown("### Provenance")
     tableau(imports.rename(columns={"fournisseur": "Assureur", "document": "Document",
                                     "empreinte": "Empreinte SHA-256", "millesime": "Millésime",
