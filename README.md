@@ -17,11 +17,28 @@ pour BoursoVie, dans `data/raw/`. Le périmètre couvre les OPC et les ETF ; les
 titres vifs de l'annexe IB SwissLife servent de référentiel (pays, notation) mais
 ne constituent pas des offres.
 
-## Construire la base
+## Utiliser l'application
 
-Double-cliquer sur **`construire.bat`** (Windows). Le script crée l'environnement
-Python au premier lancement, puis reconstruit `data/reference.db` à partir des
-fiches Markdown de `data/raw/md/`.
+Double-cliquer sur **`lancer.bat`** (Windows). Le script crée l'environnement
+Python au premier lancement, construit la base si elle est absente, puis ouvre
+l'interface dans le navigateur.
+
+Quatre onglets, tous alimentés par les filtres de la barre latérale — recherche,
+disponibilité, nature, classe d'actif, SFDR, SRI, plafond de frais, fiabilité de
+la classification :
+
+- **Univers** — répartition des frais de la sélection et tableau de screening.
+- **Fiche** — conditions comparées des deux assureurs et performance nette
+  annuelle de 2021 à 2025.
+- **Arbitrage** — les fonds communs, avec la réserve de lecture sur les frais.
+- **Qualité des données** — provenance des documents et écarts relevés au chargement.
+
+L'application est en lecture seule : elle n'écrit jamais dans la base.
+
+## Construire la base seule
+
+Double-cliquer sur **`construire.bat`**, qui reconstruit `data/reference.db` à
+partir des fiches Markdown de `data/raw/md/`.
 
 En ligne de commande :
 
@@ -29,6 +46,7 @@ En ligne de commande :
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python tools\construire_base.py
+.venv\Scripts\python -m streamlit run app\univers.py
 ```
 
 La base est **reconstruite intégralement à chaque exécution** : elle n'est jamais
@@ -93,6 +111,7 @@ la classification de ses supports est reconstituée, et le champ
 
 | Fichier | Rôle |
 |---|---|
+| `app/univers.py` | Interface de consultation, en lecture seule |
 | `tools/construire_base.py` | Construit la base et exécute les contrôles |
 | `tools/parse_boursorama_pdf.py` | Extrait les 631 supports du PDF BoursoVie |
 | `tools/fiches_boursorama.py` | Gabarit de lecture et d'écriture des fiches |
@@ -101,5 +120,12 @@ la classification de ses supports est reconstituée, et le champ
 
 ## Suite
 
-Enrichissement web (valeurs liquidatives, DIC), interface de filtrage, suivi de
-portefeuille.
+Enrichissement web : valeurs liquidatives quotidiennes, et surtout les **frais
+courants du DIC**, seule grandeur normalisée réglementairement — c'est elle qui
+permettra une comparaison de frais fonds par fonds, que les données des
+assureurs ne rendent pas possible aujourd'hui. Puis suivi de portefeuille.
+
+Le thème de l'interface est fixé en clair dans `.streamlit/config.toml` : les
+couleurs des graphiques sont validées contre cette surface (séparation des
+couleurs pour les daltonismes, contraste), un basculement automatique en sombre
+les rendrait non conformes.
