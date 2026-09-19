@@ -179,9 +179,14 @@ def main():
                 print(f"    {nom:16s} {etat:22s} {len(corps):>8d} o  {duree:4.1f}s")
                 time.sleep(DELAI)
 
-    with open(os.path.join(HISTORIQUES, "journal.json"), "w", encoding="utf-8") as sortie:
-        json.dump({"capture_le": datetime.datetime.now().isoformat(timespec="seconds"),
-                   "requetes": journal}, sortie, ensure_ascii=False, indent=2)
+    # Un tour dont aucune requête n'aboutit n'apprend rien et ne doit pas
+    # effacer le journal d'un tour précédent, qui lui portait des réponses.
+    if any(l["statut"] for l in journal):
+        with open(os.path.join(HISTORIQUES, "journal.json"), "w", encoding="utf-8") as sortie:
+            json.dump({"capture_le": datetime.datetime.now().isoformat(timespec="seconds"),
+                       "requetes": journal}, sortie, ensure_ascii=False, indent=2)
+    else:
+        print("\nAucune requête n'a abouti : le journal précédent est conservé.")
 
     print("\n" + "=" * 66)
     print(f"{'sonde':18s} {'répond':>8s} {'points médians':>16s}")
