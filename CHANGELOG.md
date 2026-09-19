@@ -4,6 +4,18 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.16.0 — 19 septembre 2026
+
+- Les supports détenus hors des deux contrats entrent au référentiel comme
+  instruments sans offre rattachée : la liste suivie passe de 14 à 20 supports.
+  Ils sont marqués « hors contrats » et n'ont ni SRI, ni frais, ni
+  classification, aucun assureur ne les publiant.
+- Le 21e support de la liste n'a qu'un code AMF, pas d'ISIN : il est consigné
+  comme anomalie et signalé sous le filtre Favoris, au lieu de manquer en
+  silence.
+- La vue `v_univers` distingue un quatrième cas de disponibilité. Elle
+  rattachait jusque-là à BoursoVie tout instrument sans offre.
+
 ## 0.15.0 — 19 septembre 2026
 
 - Performances de référence sur la fiche d'un support : dernier exercice civil

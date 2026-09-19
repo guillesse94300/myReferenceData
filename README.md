@@ -51,6 +51,14 @@ Les supports suivis se cochent dans la première colonne du tableau de
 **Parcourir**, ou par la bascule en haut de leur **fiche**. Le filtre
 « Favoris » de la barre latérale restreint l'affichage à la liste, ou l'en exclut.
 
+Un support **détenu hors des deux contrats** — fonds de PEE, ETF logé en PEA,
+part de SCPI — entre au référentiel comme instrument **sans offre rattachée** :
+le schéma le permet, un instrument n'a pas besoin d'être offert pour exister. Il
+apparaît dans la liste suivie, marqué « hors contrats », sans SRI ni frais ni
+classification puisque aucun assureur ne les publie. Un support dépourvu d'ISIN
+ne peut être rattaché à rien : il est signalé dans **Qualité des données** et
+sous le filtre Favoris, plutôt que de disparaître en silence.
+
 La liste vit dans **`data/favoris.csv`** — `isin`, `ajoute_le`, `note` —
 modifiable dans un tableur. La note est libre et sert aujourd'hui à porter
 l'enveloppe de détention ; elle s'affiche sur la fiche du support. Elle est délibérément tenue **hors de la base** : `construire.bat`

@@ -102,8 +102,8 @@ SELECT i.isin,
        i.societe_gestion,
        i.type_instrument,
        i.devise,
-       COALESCE(sl.grande_classe, bo.grande_classe) AS grande_classe,
-       COALESCE(sl.type_actif,    bo.type_actif)    AS type_actif,
+       COALESCE(sl.grande_classe, bo.grande_classe, 'Hors contrats') AS grande_classe,
+       COALESCE(sl.type_actif,    bo.type_actif,    'Non classé')    AS type_actif,
        COALESCE(sl.origine_classification, bo.origine_classification) AS origine_classification,
        COALESCE(sl.sfdr, bo.sfdr)                   AS sfdr,
        sl.sri                                       AS sri,
@@ -111,9 +111,12 @@ SELECT i.isin,
        bo.frais_fonds                               AS frais_fonds_boursorama,
        sl.frais_totaux_comparables                  AS frais_swisslife,
        bo.frais_totaux_comparables                  AS frais_boursorama,
+       -- Un instrument peut n'etre offert par aucun des deux assureurs : c'est le
+       -- cas des supports detenus hors assurance-vie, suivis mais non achetables ici.
        CASE WHEN sl.isin IS NOT NULL AND bo.isin IS NOT NULL THEN 'les deux'
             WHEN sl.isin IS NOT NULL                         THEN 'SwissLife'
-            ELSE 'BoursoVie' END                    AS disponibilite
+            WHEN bo.isin IS NOT NULL                         THEN 'BoursoVie'
+            ELSE 'hors contrats' END                AS disponibilite
 FROM instrument i
 LEFT JOIN offre sl ON sl.isin = i.isin AND sl.fournisseur = 'SwissLife'
 LEFT JOIN offre bo ON bo.isin = i.isin AND bo.fournisseur = 'BoursoVie';

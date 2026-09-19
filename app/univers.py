@@ -31,7 +31,7 @@ RAMPE_RISQUE = ["#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#1c5cab"
 
 PAGES = ["Accueil", "Parcourir", "Fiche", "Frais", "Qualité des données"]
 ORDRE_CLASSES = ["Monetaire", "Obligataire", "Mixte", "Actions", "ETF",
-                 "Actions vives", "Immobilier", "Alternatif", "Autres"]
+                 "Actions vives", "Immobilier", "Alternatif", "Autres", "Hors contrats"]
 BANDES_PERF = [("15 % et plus", 15, 999), ("10 à 15 %", 10, 15), ("5 à 10 %", 5, 10),
                ("0 à 5 %", 0, 5), ("négative", -999, 0)]
 
@@ -303,10 +303,24 @@ def barre_laterale():
         vue = vue[vue["nom"].str.contains(recherche, case=False, na=False)
                   | vue["isin"].str.contains(recherche.upper(), na=False)]
 
-    favori = barre.radio("Favoris", ["Tous", "Oui", "Non"], horizontal=True,
-                         help=f"{len(suivis)} support(s) suivi(s)")
+    # Un support detenu mais depourvu d'ISIN ne peut etre rattache a rien : le
+    # dire ici evite que la liste paraisse silencieusement incomplete.
+    introuvables = anomalies[anomalies["controle"] == "support détenu sans ISIN"]
+    manquants = len(introuvables)
+    aide = f"{len(suivis)} supports suivis"
+    if manquants:
+        aide += (f" — {manquants} autre{'s' if manquants > 1 else ''} de votre liste "
+                 f"{'sont' if manquants > 1 else 'est'} sans ISIN exploitable, donc "
+                 f"{'non rattachables' if manquants > 1 else 'non rattachable'}. "
+                 "Voir Qualité des données.")
+    favori = barre.radio("Favoris", ["Tous", "Oui", "Non"], horizontal=True, help=aide)
     if favori == "Oui":
         vue = vue[vue["favori"]]
+        if manquants:
+            barre.caption(f"⚠ {manquants} support de votre liste reste hors d'atteinte, "
+                          "faute d'ISIN." if manquants == 1 else
+                          f"⚠ {manquants} supports de votre liste restent hors d'atteinte, "
+                          "faute d'ISIN.")
     elif favori == "Non":
         vue = vue[~vue["favori"]]
 

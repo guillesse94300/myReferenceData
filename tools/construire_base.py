@@ -7,6 +7,7 @@ execution, ce qui la rend reproductible et rend inutile toute migration.
 
 Usage : python tools/construire_base.py [--base data/reference.db]
 """
+import csv
 import argparse
 import collections
 import datetime
@@ -25,6 +26,7 @@ from parse_boursorama_pdf import ISIN as RE_ISIN
 
 RACINE = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 FICHES = os.path.join(RACINE, "data/raw/md")
+DETENUS = os.path.join(RACINE, "data/raw/favorites.txt")
 SCHEMA = os.path.join(RACINE, "db/schema.sql")
 
 PDF = {
@@ -104,6 +106,29 @@ def empreinte(chemin):
         return hashlib.sha256(fichier.read()).hexdigest()
 
 
+def supports_detenus():
+    """Supports de la liste de detention qui ne sont offerts par aucun assureur.
+
+    Un instrument n'a pas besoin d'etre offert pour exister : les fonds de PEE,
+    l'ETF loge en PEA ou la part de SCPI sont detenus, donc suivis, sans etre
+    achetables dans l'un des deux contrats. Ils entrent au referentiel sans
+    offre rattachee.
+    """
+    if not os.path.exists(DETENUS):
+        return []
+    retenus, sans_isin = [], []
+    with open(DETENUS, encoding="utf-8", newline="") as fichier:
+        for ligne in csv.DictReader(fichier, delimiter="\t"):
+            code = (ligne.get("ISIN") or "").strip()
+            libelle = (ligne.get("Fonds") or "").strip()
+            if not RE_ISIN.match(code):
+                sans_isin.append(libelle)
+            else:
+                retenus.append({"isin": code, "nom": libelle,
+                                "enveloppe": (ligne.get("Détenu dans") or "").strip()})
+    return retenus, sans_isin
+
+
 def type_instrument(fournisseur, ligne):
     if ligne["grande_classe"] == "Actions vives":
         return "action"
@@ -178,6 +203,23 @@ def construire(base):
                 valeur = nombre(ligne.get(f"p{annee}"))
                 if valeur is not None:
                     performances.append((isin, fournisseur, annee, valeur))
+
+    # Supports detenus hors des deux contrats : ils rejoignent le referentiel
+    # sans offre, pour que la liste de suivi soit complete.
+    detenus, sans_isin = supports_detenus()
+    hors_contrats = 0
+    for support in detenus:
+        if support["isin"] in instruments:
+            continue
+        instruments[support["isin"]] = {
+            "nom": support["nom"],
+            "societe_gestion": None,
+            "type_instrument": "etf" if "ETF" in support["nom"].upper() else "opc",
+            "forme_juridique": None, "devise": None, "pays": None, "notation": None}
+        hors_contrats += 1
+    for libelle in sans_isin:
+        anomalies.append(("support détenu sans ISIN", "avertissement", None,
+                          f"{libelle} — non rattachable au référentiel, l'ISIN manque"))
 
     # Les instruments sont inseres avant les offres, qui les referencent.
     cx.executemany("INSERT INTO instrument (isin, nom, societe_gestion, type_instrument, forme_juridique,"
@@ -301,6 +343,10 @@ def rapport(cx, anomalies, base):
     ligne = lambda r: cx.execute(r).fetchone()[0]
     print(f"\nBase : {base}  ({os.path.getsize(base) / 1024:.0f} Ko)")
     print(f"  instruments            {ligne('SELECT COUNT(*) FROM instrument'):5d}")
+    hors = ligne("SELECT COUNT(*) FROM instrument i LEFT JOIN offre o ON o.isin = i.isin"
+                 " WHERE o.isin IS NULL")
+    if hors:
+        print(f"     dont hors contrats-----{hors:5d}  (détenus, non offerts par les assureurs)")
     for nature, n in cx.execute("SELECT type_instrument, COUNT(*) FROM instrument"
                                 " GROUP BY 1 ORDER BY 2 DESC"):
         print(f"     dont {nature:-<18s} {n:5d}")
