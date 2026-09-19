@@ -43,6 +43,20 @@ def depuis_boursorama(html):
     return {"symbole": symbole, "genre": genre, "precision": libelle}
 
 
+def morningstar_dans_recherche(charge):
+    """Identifiant Morningstar trouve dans une reponse de recherche Yahoo.
+
+    Sert au dernier recours : lorsqu'aucune source ne resout l'ISIN vers un
+    identifiant de fonds, la recherche par libelle en trouve parfois un.
+    """
+    try:
+        resultats = json.loads(charge).get("quotes") or []
+    except (TypeError, ValueError):
+        return None
+    fonds = [r for r in resultats if str(r.get("symbol", "")).startswith("0P")]
+    return fonds[0]["symbol"] if fonds else None
+
+
 def depuis_yahoo(charge):
     """Symbole Yahoo, choisi parmi les resultats de recherche.
 
