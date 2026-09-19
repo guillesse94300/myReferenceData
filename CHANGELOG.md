@@ -4,6 +4,19 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.10.0 — 19 septembre 2026
+
+- Second tour de capture dépouillé. Les deux points d'accès Boursorama sont
+  hors service — 410 pour l'un, réponse vide pour l'autre. Yahoo Finance livre
+  978 à 1 280 séances pour 12 des 14 supports.
+- `tools/collecte/yahoo.py` lit les séries, `tests/test_yahoo.py` le vérifie
+  contre les captures.
+- `tools/valider_series.py` confronte les séries aux performances publiées.
+- Le critère d'acceptation est reformulé : il suit désormais la volatilité
+  quotidienne du support, l'écart provenant d'un décalage de bornes et non d'un
+  défaut de la source. Résultat : 21 couples, 0,19 point d'écart médian, aucun
+  hors tolérance.
+
 ## 0.9.0 — 19 septembre 2026
 
 - Premier tour de capture dépouillé : Boursorama et Yahoo Finance résolvent
