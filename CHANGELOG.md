@@ -4,6 +4,17 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.9.0 — 19 septembre 2026
+
+- Premier tour de capture dépouillé : Boursorama et Yahoo Finance résolvent
+  chacun les 14 supports, Quantalys et l'AMF sont écartés faute de répondre sans
+  navigateur piloté.
+- `tools/collecte/symboles.py` extrait le symbole d'un support et en qualifie la
+  nature — valeur liquidative ou cours de bourse. `tests/test_symboles.py` le
+  vérifie contre les 28 captures réelles.
+- `tools/capturer_historiques.py` sonde les points d'accès d'historique avec les
+  symboles déjà résolus.
+
 ## 0.8.0 — 19 septembre 2026
 
 - Spécification de la collecte des valeurs liquidatives :

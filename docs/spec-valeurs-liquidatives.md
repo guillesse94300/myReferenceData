@@ -116,6 +116,46 @@ Cache disque, limitation de débit, reprise incrémentale et journal des échecs
 par ISIN. La collecte doit être interruptible et reprenable : sur l'univers
 entier elle durera des heures au premier passage.
 
+## 5 bis. Résultat du premier tour de capture
+
+Capture du 19 septembre 2026, 14 supports × 4 sources.
+
+| Source | Résultat | Suite |
+|---|---|---|
+| **Boursorama** | 14/14 résolus, réponses distinctes | **retenue** |
+| **Yahoo Finance** | 14/14 résolus, réponses distinctes | **retenue** |
+| Quantalys | 268 octets, redirection JavaScript exigeant les cookies | écartée |
+| AMF / GECO | même page pour les 14 ISIN : application monopage sans formulaire | écartée |
+
+Quantalys et l'AMF demanderaient un navigateur piloté. Puisque deux sources
+couvrent déjà les 14 supports, elles sont écartées pour l'instant — à rouvrir
+seulement si le taux de couverture s'effondre sur un palier plus large.
+
+### Nature du symbole, et pourquoi elle décide de la cascade
+
+Le préfixe du symbole Boursorama dit ce que la source livrera :
+
+| Préfixe | Nature | Supports |
+|---|---|---|
+| `0P…` | identifiant de fonds Morningstar — **valeur liquidative** | 6 |
+| `MP-…` | code de fonds Boursorama — **valeur liquidative** | 2 |
+| `1rT…` | tracker coté sur Euronext — **cours de bourse** | 6 |
+
+La distinction n'est pas cosmétique. Pour Pictet Global Environmental
+Opportunities, Yahoo propose `PBFW.MU`, une cotation sur la bourse de Munich,
+quand Boursorama donne `0P0000PTZT`, la valeur liquidative. **Sur un fonds non
+coté, un cours de bourse n'est pas une valeur liquidative** : il porte une prime
+ou une décote, et sa liquidité est faible.
+
+D'où l'ordre de la cascade : **Boursorama d'abord sur les OPC non cotés**,
+puisqu'il livre un identifiant de VL là où Yahoo renvoie parfois une place de
+cotation ; Yahoo en premier sur les ETF, où le cours est la bonne donnée.
+
+Le parseur de symboles, `tools/collecte/symboles.py`, est vérifié par
+`tests/test_symboles.py` contre les 28 captures : résolution des 14 supports sur
+les deux sources, nature correcte sur les six fonds non cotés, et préférence de
+l'identifiant Morningstar sur une cotation de place.
+
 ## 6. Devises
 
 Les valeurs liquidatives sont stockées **en devise native**, avec la devise.
@@ -174,4 +214,7 @@ supposé.
 | 5 | Indicateurs et affichage dans l'application | ici |
 | 6 | Élargissement du périmètre, palier par palier | les deux |
 
-L'étape 1 est livrée : `tools/capturer_sources.py`.
+L'étape 1 est faite. Le second tour de capture, `tools/capturer_historiques.py`,
+vise les points d'accès d'historique avec les symboles déjà résolus — il ne
+refait aucune requête de résolution, et les réponses attendues sont du JSON,
+donc légères.
