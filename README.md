@@ -23,15 +23,22 @@ Double-cliquer sur **`lancer.bat`** (Windows). Le script crée l'environnement
 Python au premier lancement, construit la base si elle est absente, puis ouvre
 l'interface dans le navigateur.
 
-Quatre onglets, tous alimentés par les filtres de la barre latérale — recherche,
-disponibilité, nature, classe d'actif, SFDR, SRI, plafond de frais, fiabilité de
-la classification :
+Cinq pages, choisies dans la barre latérale :
 
-- **Univers** — répartition des frais de la sélection et tableau de screening.
-- **Fiche** — conditions comparées des deux assureurs et performance nette
-  annuelle de 2021 à 2025.
-- **Arbitrage** — les fonds communs, avec la réserve de lecture sur les frais.
-- **Qualité des données** — provenance des documents et écarts relevés au chargement.
+- **Accueil** — l'univers d'un coup d'œil : composition par classe d'actif, profil
+  de risque, et la dispersion du rendement à chaque niveau de risque. Trois
+  boutons mènent directement à l'exploration correspondante.
+- **Parcourir** — l'univers selon trois axes au choix : **classe d'actif**
+  (avec un second niveau par type d'actif), **risque** ou **performance**. Le
+  segment retenu est mis en avant, le reste s'efface.
+- **Fiche** — un support en détail : risque, rendement, frais, performance nette
+  annuelle et conditions comparées des deux assureurs.
+- **Frais** — les fonds communs, avec la réserve de lecture ci-dessous.
+- **Qualité des données** — provenance, couverture et écarts relevés au chargement.
+
+Les filtres de la barre latérale — recherche, nature, classe, SRI, rendement
+minimum, SFDR, et en repli les frais et la fiabilité de classification —
+s'appliquent à **Parcourir** et **Fiche**. L'accueil présente l'univers entier.
 
 L'application est en lecture seule : elle n'écrit jamais dans la base.
 
@@ -66,6 +73,25 @@ l'effectif chargé ne correspond pas à l'inventaire des ISIN des PDF d'origine.
 - **`v_univers`** — une ligne par instrument, les deux assureurs côte à côte.
 - **`v_arbitrage`** — les fonds communs, classés par écart de frais, avec une
   colonne `fiabilite` (voir la réserve ci-dessous).
+
+## Comment lire la performance
+
+Le rendement affiché est **annualisé**, au sens géométrique, et net des frais du
+fonds. La moyenne arithmétique des performances annuelles, plus simple mais
+fausse, surestime le rendement réellement obtenu : de 0,60 point en médiane sur
+cet univers, et jusqu'à **8,2 points** sur les fonds les plus volatils.
+
+La couverture est inégale et l'application l'affiche :
+
+| | Instruments |
+|---|---|
+| Rendement annualisé calculable | 767 |
+| dont cinq exercices complets | 600 |
+| Indicateur de risque (SRI) renseigné | 902 |
+
+Le SRI vient des annexes SwissLife : les 470 supports présents uniquement chez
+BoursoVie n'en portent pas, et forment un segment « non renseigné » à part
+entière sur l'axe risque.
 
 ## Réserve importante sur la comparaison de frais
 
