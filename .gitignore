@@ -6,3 +6,7 @@ __pycache__/
 
 # Base reconstructible a la demande
 data/*.db
+
+# Liste des favoris : ecrite par l'application, amorcee depuis
+# data/raw/favorites.txt quand elle manque
+data/favoris.csv

@@ -61,10 +61,20 @@ sous le filtre Favoris, plutôt que de disparaître en silence.
 
 La liste vit dans **`data/favoris.csv`** — `isin`, `ajoute_le`, `note` —
 modifiable dans un tableur. La note est libre et sert aujourd'hui à porter
-l'enveloppe de détention ; elle s'affiche sur la fiche du support. Elle est délibérément tenue **hors de la base** : `construire.bat`
-efface et reconstruit `reference.db` à chaque exécution, une donnée saisie ne
-pourrait pas y survivre. Le fichier est suivi par Git, ce qui lui sert de
-sauvegarde.
+l'enveloppe de détention ; elle s'affiche sur la fiche du support. Elle est
+délibérément tenue **hors de la base** : `construire.bat` efface et reconstruit
+`reference.db` à chaque exécution, une donnée saisie ne pourrait pas y survivre.
+
+Ce CSV n'est **pas suivi par Git**, et pour la même raison qu'il vit hors de la
+base : l'application l'écrit à chaque coche, or un fichier que le programme
+modifie entre en conflit à chaque `git pull`. La semence, elle, est versionnée —
+**`data/raw/favorites.txt`**, tenue à la main, colonnes `Fonds`, `ISIN`,
+`Détenu dans` séparées par des tabulations. Quand le CSV manque, il en est
+amorcé au premier lancement ; ensuite il vit sa vie en local. Une liste vidée à
+la main laisse un fichier à en-tête seul : elle n'est pas ressuscitée.
+
+Pour reprendre la semence après l'avoir modifiée, sans perdre les coches
+ajoutées depuis : `python tools/importer_favoris.py`.
 
 L'application est en lecture seule : elle n'écrit jamais dans la base.
 

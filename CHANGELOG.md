@@ -4,6 +4,15 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.16.1 — 19 septembre 2026
+
+- `data/favoris.csv` sort du suivi Git. L'application l'écrit à chaque coche :
+  un fichier que le programme modifie fait échouer `git pull` — c'est ce qui
+  vient d'arriver. La semence versionnée reste `data/raw/favorites.txt` ; le
+  CSV en est amorcé quand il manque, puis reste local. Une liste vidée à la
+  main n'est pas ressuscitée.
+- Six tests couvrent l'amorçage et la portée de l'édition filtrée.
+
 ## 0.16.0 — 19 septembre 2026
 
 - Les supports détenus hors des deux contrats entrent au référentiel comme
