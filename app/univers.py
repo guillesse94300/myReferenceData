@@ -39,6 +39,7 @@ st.set_page_config(page_title="Univers d'investissement", page_icon="◈", layou
 
 FORMATS = {
     "Perf. annualisée": "{:+.2f} %", "Perf. N-1": "{:+.2f} %",
+    "Depuis 1er janv.": "{:+.2f} %", "12 mois": "{:+.2f} %",
     "Frais totaux": "{:.2f} %", "Frais SwissLife": "{:.2f} %", "Frais BoursoVie": "{:.2f} %",
     "Frais du fonds": "{:.2f} %", "Frais de contrat": "{:.2f} %",
     "Frais totaux publiés": "{:.2f} %", "Frais totaux homogènes": "{:.2f} %",
@@ -131,7 +132,14 @@ if donnees is None:
     st.stop()
 univers, performances, arbitrage, offres, anomalies, imports = donnees
 avec_vl = set(cotations["isin"].unique())
-univers = univers.assign(cotee=univers["isin"].isin(avec_vl),
+usuelles_par_isin = {
+    isin: indicateurs.performances_usuelles(
+        {ligne.date.date(): ligne.valeur for ligne in groupe.itertuples()})
+    for isin, groupe in cotations.groupby("isin")} if len(cotations) else {}
+univers = univers.assign(
+    cotee=univers["isin"].isin(avec_vl),
+    ytd=univers["isin"].map(lambda i: usuelles_par_isin.get(i, {}).get("depuis le 1er janvier")),
+    douze_mois=univers["isin"].map(lambda i: usuelles_par_isin.get(i, {}).get("12 mois")),
                          favori=univers["isin"].isin(suivis),
                          note=univers["isin"].map(lambda i: suivis.get(i, {}).get("note", "")))
 
@@ -435,8 +443,17 @@ def page_parcourir(vue):
     if detail["note"].astype(bool).any():
         del colonnes["disponibilite"]
         colonnes["note"] = "Détenu dans"
+    # Lorsque les valeurs liquidatives sont disponibles, elles remplacent les
+    # mesures tirées des exercices publiés plutôt que de s'y ajouter : plus
+    # fines, plus récentes, et le tableau garde un nombre de colonnes lisible.
+    if detail["ytd"].notna().any():
+        for remplacee in ("perf_annualisee", "annees", "perf_n1"):
+            colonnes.pop(remplacee, None)
+        colonnes["ytd"] = "Depuis 1er janv."
+        colonnes["douze_mois"] = "12 mois"
+    tri = "12 mois" if "douze_mois" in colonnes else "Perf. ann."
     affiche = (detail[list(colonnes)].rename(columns=colonnes)
-               .sort_values("Perf. ann.", ascending=False))
+               .sort_values(tri, ascending=False))
     # Le signe est porte par le format : une performance negative doit se
     # distinguer d'une positive sans avoir a lire la valeur.
     rendement = lambda libelle: st.column_config.NumberColumn(libelle, format="%+.2f %%")
@@ -447,9 +464,13 @@ def page_parcourir(vue):
         # s'etalent et rejettent les dernieres colonnes hors du cadre.
         column_config={"Favori": st.column_config.CheckboxColumn("Favori", width=78),
                        "ISIN": st.column_config.TextColumn("ISIN", width=105),
-                       "Support": st.column_config.TextColumn("Support", width=200),
-                       "Type d'actif": st.column_config.TextColumn("Type d'actif", width=200),
+                       "Support": st.column_config.TextColumn("Support", width=185),
+                       "Type d'actif": st.column_config.TextColumn("Type d'actif", width=185),
                        "Détenu dans": st.column_config.TextColumn("Détenu dans", width=150),
+                       "Depuis 1er janv.": st.column_config.NumberColumn(
+                           "Depuis 1er janv.", format="%+.2f %%", width=115),
+                       "12 mois": st.column_config.NumberColumn("12 mois", format="%+.2f %%",
+                                                                width=85),
                        "Disponible": st.column_config.TextColumn("Disponible", width=90),
                        "Perf. ann.": rendement("Perf. ann."), "Perf. N-1": rendement("Perf. N-1"),
                        "Frais": st.column_config.NumberColumn("Frais", format="%.2f %%", width=70),
@@ -500,7 +521,22 @@ def page_fiche(vue):
         valeurs = {ligne.date.date(): ligne.valeur for ligne in serie.itertuples()}
         devise = serie["devise"].iloc[0]
         debut, fin = min(valeurs), max(valeurs)
-        st.markdown("**Parcours de la valeur liquidative**")
+        st.markdown("**Performances**")
+        usuelles = indicateurs.performances_usuelles(valeurs)
+        libelles = {"depuis le 1er janvier": "Depuis le 1er janv."}
+        cases = st.columns(len(usuelles))
+        for case, (periode, taux) in zip(cases, usuelles.items()):
+            case.metric(libelles.get(periode, periode),
+                        "—" if taux is None else f"{taux:+.2f} %")
+        st.caption(
+            f"Cumulées et non annualisées, calculées sur la série de valeurs liquidatives, "
+            f"en {devise}. Une période que l'historique ne couvre pas reste vide plutôt que "
+            "d'être calculée sur une fenêtre tronquée."
+            + ("" if devise == "EUR" else
+               " Le support étant hors euro, ces chiffres diffèrent des performances annuelles "
+               "publiées plus bas, que l'assureur donne en euro."))
+
+        st.markdown("**Risque et parcours**")
         mesures = st.columns(3)
         mesures[0].metric("Rendement annualisé observé",
                           f"{indicateurs.rendement_annualise(valeurs):+.2f} %/an",
@@ -512,7 +548,7 @@ def page_fiche(vue):
         mesures[2].metric("Perte maximale", f"{indicateurs.perte_maximale(valeurs):.1f} %",
                           help="La plus forte baisse depuis un plus haut, sur la période couverte.")
         st.caption(f"{len(valeurs)} séances du {debut.strftime('%d/%m/%Y')} au "
-                   f"{fin.strftime('%d/%m/%Y')}, en {devise}."
+                   f"{fin.strftime('%d/%m/%Y')}."
                    + ("" if devise == "EUR" else
                       " Support hors euro : ces mesures portent sur le fonds seul, "
                       "sans l'effet du change subi par un investisseur en euro."))

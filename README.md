@@ -34,9 +34,10 @@ Cinq pages, choisies dans la barre latérale :
   tableau permet de suivre un support.
 - **Fiche** — un support en détail : risque, rendement, frais, conditions
   comparées des deux assureurs, performance nette annuelle, et — lorsque sa
-  valeur liquidative a été collectée — sa trajectoire quotidienne ramenée à 100,
-  sa perte depuis chaque plus haut, sa volatilité annualisée et sa perte
-  maximale.
+  valeur liquidative a été collectée — ses performances de référence (dernier
+  exercice complet, depuis le 1er janvier, 3, 6, 12 et 24 mois glissants), sa
+  trajectoire quotidienne ramenée à 100, sa perte depuis chaque plus haut, sa
+  volatilité annualisée et sa perte maximale.
 - **Frais** — les fonds communs, avec la réserve de lecture ci-dessous.
 - **Qualité des données** — provenance, couverture et écarts relevés au chargement.
 

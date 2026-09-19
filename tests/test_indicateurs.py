@@ -54,3 +54,41 @@ def test_les_indicateurs_sont_plausibles_sur_les_series_reelles():
         assert 0 < volatilite < 100, f"{isin} : volatilité de {volatilite:.1f} %"
         assert -100 < perte <= 0, f"{isin} : perte maximale de {perte:.1f} %"
     cx.close()
+
+
+def serie_quotidienne(depart, fin, taux_annuel):
+    """Serie croissant regulierement, pour verifier les fenetres de calcul."""
+    valeurs, jour, niveau = {}, depart, 100.0
+    quotidien = (1 + taux_annuel / 100) ** (1 / 365)
+    while jour <= fin:
+        valeurs[jour] = niveau
+        niveau *= quotidien
+        jour += datetime.timedelta(days=1)
+    return valeurs
+
+
+def test_la_valeur_au_remonte_a_la_derniere_connue():
+    valeurs = {datetime.date(2026, 1, 5): 10, datetime.date(2026, 1, 9): 12}
+    assert indicateurs.valeur_au(valeurs, datetime.date(2026, 1, 7)) == 10
+    assert indicateurs.valeur_au(valeurs, datetime.date(2026, 1, 1)) is None
+
+
+def test_les_periodes_glissantes_reculent_du_bon_nombre_de_mois():
+    valeurs = serie_quotidienne(datetime.date(2022, 1, 1), datetime.date(2026, 9, 18), 10)
+    mesures = indicateurs.performances_usuelles(valeurs)
+    assert abs(mesures["12 mois"] - 10) < 0.2
+    assert abs(mesures["24 mois"] - 21) < 0.4          # deux ans à 10 % composés
+    assert abs(mesures["6 mois"] - 4.88) < 0.2
+
+
+def test_une_periode_plus_longue_que_l_historique_ne_rend_rien():
+    valeurs = serie_quotidienne(datetime.date(2026, 1, 1), datetime.date(2026, 9, 18), 10)
+    mesures = indicateurs.performances_usuelles(valeurs)
+    assert mesures["24 mois"] is None
+    assert mesures["2025"] is None
+    assert mesures["3 mois"] is not None
+
+
+def test_le_dernier_exercice_complet_est_deduit_de_la_serie():
+    valeurs = serie_quotidienne(datetime.date(2022, 1, 1), datetime.date(2026, 9, 18), 10)
+    assert "2025" in indicateurs.performances_usuelles(valeurs)
