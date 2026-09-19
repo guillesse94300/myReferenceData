@@ -1,5 +1,5 @@
 {
-  "capture_le": "2026-09-19T12:47:59",
+  "capture_le": "2026-09-19T14:40:19",
   "requetes": [
     {
       "isin": "FR0010011171",
@@ -8,10 +8,10 @@
       "symbole": "MP-805613",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=MP-805613&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.31
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.13
     },
     {
       "isin": "FR0010011171",
@@ -20,10 +20,10 @@
       "symbole": "MP-805613",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=MP-805613&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.25
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.18
     },
     {
       "isin": "FR0010011171",
@@ -32,10 +32,10 @@
       "symbole": "0P00000GAG.F",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P00000GAG.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.23
+      "statut": 200,
+      "octets": 128645,
+      "points_estimes": 1275,
+      "secondes": 0.11
     },
     {
       "isin": "FR0010315770",
@@ -44,10 +44,10 @@
       "symbole": "1rTWLD",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=1rTWLD&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.05
     },
     {
       "isin": "FR0010315770",
@@ -56,10 +56,10 @@
       "symbole": "1rTWLD",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=1rTWLD&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 215,
+      "points_estimes": 0,
+      "secondes": 0.2
     },
     {
       "isin": "FR0010315770",
@@ -68,10 +68,10 @@
       "symbole": "WLD.PA",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/WLD.PA?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.25
+      "statut": 200,
+      "octets": 134403,
+      "points_estimes": 1281,
+      "secondes": 0.18
     },
     {
       "isin": "FR0013332418",
@@ -80,10 +80,10 @@
       "symbole": "0P0001E1DP",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=0P0001E1DP&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.2
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.07
     },
     {
       "isin": "FR0013332418",
@@ -92,10 +92,10 @@
       "symbole": "0P0001E1DP",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=0P0001E1DP&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.19
     },
     {
       "isin": "FR0013332418",
@@ -104,10 +104,10 @@
       "symbole": "0P0001E1DP.F",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P0001E1DP.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.12
+      "statut": 200,
+      "octets": 131357,
+      "points_estimes": 1275,
+      "secondes": 0.11
     },
     {
       "isin": "FR0013367281",
@@ -116,10 +116,10 @@
       "symbole": "0P0001F4N2",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=0P0001F4N2&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.3
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.05
     },
     {
       "isin": "FR0013367281",
@@ -128,10 +128,10 @@
       "symbole": "0P0001F4N2",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=0P0001F4N2&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.24
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.15
     },
     {
       "isin": "FR0013367281",
@@ -140,10 +140,10 @@
       "symbole": "0P0001F4N2.F",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P0001F4N2.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.25
+      "statut": 200,
+      "octets": 132259,
+      "points_estimes": 1275,
+      "secondes": 0.09
     },
     {
       "isin": "IE000I8KRLL9",
@@ -152,10 +152,10 @@
       "symbole": "1rTSEME",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=1rTSEME&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.27
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.06
     },
     {
       "isin": "IE000I8KRLL9",
@@ -164,10 +164,10 @@
       "symbole": "1rTSEME",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=1rTSEME&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 200,
+      "octets": 214,
+      "points_estimes": 0,
+      "secondes": 0.23
     },
     {
       "isin": "IE000I8KRLL9",
@@ -176,10 +176,10 @@
       "symbole": "SEMI.AS",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/SEMI.AS?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 137897,
+      "points_estimes": 1281,
+      "secondes": 0.11
     },
     {
       "isin": "LU0173614495",
@@ -188,10 +188,10 @@
       "symbole": "MP-358709",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=MP-358709&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.24
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.11
     },
     {
       "isin": "LU0173614495",
@@ -200,10 +200,10 @@
       "symbole": "MP-358709",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=MP-358709&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.23
     },
     {
       "isin": "LU0173614495",
@@ -212,22 +212,10 @@
       "symbole": "FJRH.F",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/FJRH.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
-    },
-    {
-      "isin": "LU0173614495",
-      "source": "yahoo",
-      "sonde": "yahoo_recherche_nom",
-      "symbole": "Fidelity%20China%20Focus%20A-Dis-USD",
-      "genre": "recherche",
-      "url": "https://query1.finance.yahoo.com/v1/finance/search?q=Fidelity%20China%20Focus%20A-Dis-USD&quotesCount=10",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.28
+      "statut": 200,
+      "octets": 1276,
+      "points_estimes": 1,
+      "secondes": 0.1
     },
     {
       "isin": "LU0496786574",
@@ -236,10 +224,10 @@
       "symbole": "1rTSP5",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=1rTSP5&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.08
     },
     {
       "isin": "LU0496786574",
@@ -248,10 +236,10 @@
       "symbole": "1rTSP5",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=1rTSP5&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 200,
+      "octets": 215,
+      "points_estimes": 0,
+      "secondes": 0.14
     },
     {
       "isin": "LU0496786574",
@@ -260,10 +248,10 @@
       "symbole": "LYPS.DE",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/LYPS.DE?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 137311,
+      "points_estimes": 1275,
+      "secondes": 0.12
     },
     {
       "isin": "LU0503631987",
@@ -272,10 +260,10 @@
       "symbole": "0P0000PTZT",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=0P0000PTZT&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.24
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.1
     },
     {
       "isin": "LU0503631987",
@@ -284,10 +272,10 @@
       "symbole": "0P0000PTZT",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=0P0000PTZT&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.21
     },
     {
       "isin": "LU0503631987",
@@ -296,10 +284,10 @@
       "symbole": "PBFW.MU",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/PBFW.MU?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.27
+      "statut": 200,
+      "octets": 1311,
+      "points_estimes": 1,
+      "secondes": 0.1
     },
     {
       "isin": "LU0503631987",
@@ -308,10 +296,10 @@
       "symbole": "0P0000PTZT",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P0000PTZT.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 111573,
+      "points_estimes": 1157,
+      "secondes": 0.09
     },
     {
       "isin": "LU0524465977",
@@ -320,10 +308,10 @@
       "symbole": "0P0000PVYU",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=0P0000PVYU&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.08
     },
     {
       "isin": "LU0524465977",
@@ -332,10 +320,10 @@
       "symbole": "0P0000PVYU",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=0P0000PVYU&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.25
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.21
     },
     {
       "isin": "LU0524465977",
@@ -344,10 +332,10 @@
       "symbole": "0P0000PVYU.F",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P0000PVYU.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.25
+      "statut": 200,
+      "octets": 116630,
+      "points_estimes": 1157,
+      "secondes": 0.13
     },
     {
       "isin": "LU1250158166",
@@ -356,10 +344,10 @@
       "symbole": "0P00019W51",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=0P00019W51&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.09
     },
     {
       "isin": "LU1250158166",
@@ -368,10 +356,10 @@
       "symbole": "0P00019W51",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=0P00019W51&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.21
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.22
     },
     {
       "isin": "LU1250158166",
@@ -380,10 +368,10 @@
       "symbole": "0P00019W51.F",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P00019W51.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 110499,
+      "points_estimes": 1157,
+      "secondes": 0.1
     },
     {
       "isin": "LU1379103812",
@@ -392,10 +380,10 @@
       "symbole": "0P00018FWZ",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=0P00018FWZ&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.08
     },
     {
       "isin": "LU1379103812",
@@ -404,10 +392,10 @@
       "symbole": "0P00018FWZ",
       "genre": "vl",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=0P00018FWZ&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.23
+      "statut": 200,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.2
     },
     {
       "isin": "LU1379103812",
@@ -416,10 +404,10 @@
       "symbole": "0P00018FWZ.F",
       "genre": "vl",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/0P00018FWZ.F?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.19
+      "statut": 200,
+      "octets": 112861,
+      "points_estimes": 1157,
+      "secondes": 0.1
     },
     {
       "isin": "LU1681044480",
@@ -428,9 +416,9 @@
       "symbole": "1rTAASI",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=1rTAASI&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
       "secondes": 0.12
     },
     {
@@ -440,10 +428,10 @@
       "symbole": "1rTAASI",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=1rTAASI&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.21
+      "statut": 200,
+      "octets": 201,
+      "points_estimes": 0,
+      "secondes": 0.22
     },
     {
       "isin": "LU1681044480",
@@ -452,10 +440,10 @@
       "symbole": "AASI.PA",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/AASI.PA?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.24
+      "statut": 200,
+      "octets": 138346,
+      "points_estimes": 1281,
+      "secondes": 0.16
     },
     {
       "isin": "LU1829219390",
@@ -464,10 +452,10 @@
       "symbole": "1rTBNKE",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=1rTBNKE&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.25
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.08
     },
     {
       "isin": "LU1829219390",
@@ -476,10 +464,10 @@
       "symbole": "1rTBNKE",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=1rTBNKE&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.29
+      "statut": 200,
+      "octets": 212,
+      "points_estimes": 0,
+      "secondes": 0.22
     },
     {
       "isin": "LU1829219390",
@@ -488,10 +476,10 @@
       "symbole": "BNKE.PA",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/BNKE.PA?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.26
+      "statut": 200,
+      "octets": 136697,
+      "points_estimes": 1281,
+      "secondes": 0.13
     },
     {
       "isin": "LU1829221024",
@@ -500,10 +488,10 @@
       "symbole": "1rTUST",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/GetTicksEOD?symbol=1rTUST&length=1825&period=0&guid=",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.29
+      "statut": 410,
+      "octets": 2,
+      "points_estimes": 0,
+      "secondes": 0.09
     },
     {
       "isin": "LU1829221024",
@@ -512,10 +500,10 @@
       "symbole": "1rTUST",
       "genre": "cours",
       "url": "https://www.boursorama.com/bourse/action/graph/ws/UpdateCharts?symbol=1rTUST&period=-1",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.22
+      "statut": 200,
+      "octets": 227,
+      "points_estimes": 0,
+      "secondes": 0.23
     },
     {
       "isin": "LU1829221024",
@@ -524,10 +512,10 @@
       "symbole": "UST.PA",
       "genre": "cours",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/UST.PA?range=5y&interval=1d",
-      "statut": 0,
-      "octets": 65,
-      "points_estimes": null,
-      "secondes": 0.34
+      "statut": 200,
+      "octets": 135895,
+      "points_estimes": 1281,
+      "secondes": 0.14
     }
   ]
 }
