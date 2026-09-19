@@ -4,9 +4,13 @@ Tout est calcule dans la devise du support. Convertir melangerait la
 performance du fonds et le mouvement de la devise, alors que ces indicateurs
 servent precisement a juger le fonds seul.
 """
+import datetime
 import math
 
 SEANCES_PAR_AN = 252
+
+# Periodes glissantes affichees, en mois.
+GLISSANTES = (3, 6, 12, 24)
 
 
 def rendements(valeurs):
@@ -67,3 +71,61 @@ def rendement_annualise(valeurs):
     if annees <= 0 or not valeurs[dates[0]]:
         return None
     return ((valeurs[dates[-1]] / valeurs[dates[0]]) ** (1 / annees) - 1) * 100
+
+
+def valeur_au(valeurs, cible):
+    """Derniere valeur connue a la date visee, ou avant.
+
+    Une valeur liquidative n'est pas publiee tous les jours : viser une date
+    exacte echouerait un jour sur trois. On prend donc la derniere connue.
+    """
+    anterieures = [d for d in valeurs if d <= cible]
+    return valeurs[max(anterieures)] if anterieures else None
+
+
+def performance_entre(valeurs, debut, fin):
+    """Performance cumulee entre deux dates, en pourcentage."""
+    depart, arrivee = valeur_au(valeurs, debut), valeur_au(valeurs, fin)
+    if not depart or arrivee is None:
+        return None
+    return (arrivee / depart - 1) * 100
+
+
+def _recule_de_mois(date, mois):
+    """Meme quantieme, `mois` mois plus tot, ramene au dernier jour du mois si besoin."""
+    annee, rang = divmod(date.month - 1 - mois, 12)
+    jour = min(date.day, [31, 29 if (date.year + annee) % 4 == 0 else 28, 31, 30, 31, 30,
+                          31, 31, 30, 31, 30, 31][rang])
+    return datetime.date(date.year + annee, rang + 1, jour)
+
+
+def performances_usuelles(valeurs):
+    """Performances de reference d'un support, toutes cumulees et non annualisees.
+
+    Le dernier exercice civil complet, le depuis-le-1er-janvier, puis les
+    periodes glissantes. Une periode que l'historique ne couvre pas rend None
+    plutot qu'un chiffre calcule sur une fenetre tronquee, qui serait faux.
+    """
+    if not valeurs:
+        return {}
+    dernier = max(valeurs)
+    debut_serie = min(valeurs)
+    exercice = dernier.year - 1
+
+    mesures = {}
+    fin_precedente = datetime.date(exercice - 1, 12, 31)
+    if debut_serie <= fin_precedente:
+        mesures[str(exercice)] = performance_entre(
+            valeurs, fin_precedente, datetime.date(exercice, 12, 31))
+    else:
+        mesures[str(exercice)] = None
+
+    debut_annee = datetime.date(dernier.year - 1, 12, 31)
+    mesures["depuis le 1er janvier"] = (performance_entre(valeurs, debut_annee, dernier)
+                                        if debut_serie <= debut_annee else None)
+
+    for mois in GLISSANTES:
+        depart = _recule_de_mois(dernier, mois)
+        mesures[f"{mois} mois"] = (performance_entre(valeurs, depart, dernier)
+                                   if debut_serie <= depart else None)
+    return mesures

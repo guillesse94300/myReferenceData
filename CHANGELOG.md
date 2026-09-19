@@ -4,6 +4,17 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.15.0 — 19 septembre 2026
+
+- Performances de référence sur la fiche d'un support : dernier exercice civil
+  complet, depuis le 1er janvier, et 3, 6, 12 et 24 mois glissants. Toutes
+  cumulées, calculées sur la série de valeurs liquidatives.
+- Une période que l'historique ne couvre pas reste vide plutôt que d'être
+  calculée sur une fenêtre tronquée.
+- Dans le tableau de Parcourir, « Depuis 1er janv. » et « 12 mois » remplacent
+  les mesures tirées des exercices publiés dès qu'un support affiché porte une
+  série : plus fines, plus récentes, et le nombre de colonnes reste lisible.
+
 ## 0.14.0 — 19 septembre 2026
 
 - Base `cotations.db`, accumulée et distincte de `reference.db`, chargée depuis
