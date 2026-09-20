@@ -4,6 +4,30 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.18.0 — 20 septembre 2026
+
+- Nouveau tableau de bord, en trois menus : **LISTE**, **PERF**, **COMPARE**.
+  Date et version passent en haut de la barre latérale ; les filtres
+  s'appliquent aux trois menus ; Frais et Qualité des données deviennent deux
+  annexes en pied de barre latérale, qui recouvrent le menu courant sans le
+  changer. La fiche d'un support s'ouvre en sélectionnant sa ligne dans LISTE.
+- Nouvel axe **véhicule** — Fond UC, ETF, Actions, FCPE, SCPI, Livret — qui
+  remplace la classe d'actif Morningstar comme filtre. Il classe par ce que le
+  support est, non par ce dans quoi il investit. Exhaustif et sans
+  recouvrement : les tests le vérifient sur les 1 378 lignes. Deux écarts au
+  croquis : SCPI est une sixième case, sans laquelle la part June Opportunity
+  disparaîtrait de l'application ; Livret figure sans aucun membre, faute de
+  source.
+- **PERF** classe la sélection sur six horizons — 1 an, 2 ans, exercice clos,
+  année en cours, 3 mois, 6 mois — bâtis sur les seules séries de valeurs
+  liquidatives. Les performances annuelles publiées couvriraient plus de
+  supports sur la case de l'exercice clos, mais sous une autre définition :
+  les mélanger rendrait cette case incomparable à ses cinq voisines.
+- **COMPARE** superpose jusqu'à huit trajectoires ramenées à 100 à leur départ
+  commun, la première séance où tous les supports retenus cotent.
+- Colonne `enveloppe` sur `instrument`, colonne `vehicule` sur `v_univers`.
+- Spécification dans `docs/spec-tableau-de-bord.md`. 35 tests.
+
 ## 0.17.0 — 19 septembre 2026
 
 - Le tableau de bord d'accueil est supprimé, en amont de sa refonte. Il est

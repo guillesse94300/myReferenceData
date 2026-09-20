@@ -39,7 +39,10 @@ CREATE TABLE instrument (
     forme_juridique TEXT,
     devise          TEXT,
     pays            TEXT,                  -- actions en direct uniquement
-    notation        TEXT                   -- notation emetteur, actions en direct
+    notation        TEXT,                  -- notation emetteur, actions en direct
+    enveloppe       TEXT                   -- ou le support est detenu, pour les seuls
+                                           -- supports hors des deux contrats : c'est
+                                           -- elle qui distingue un FCPE d'une SCPI
 );
 
 -- Conditions d'acces a un instrument chez un assureur donne.
@@ -102,6 +105,7 @@ SELECT i.isin,
        i.societe_gestion,
        i.type_instrument,
        i.devise,
+       i.enveloppe,
        COALESCE(sl.grande_classe, bo.grande_classe, 'Hors contrats') AS grande_classe,
        COALESCE(sl.type_actif,    bo.type_actif,    'Non classé')    AS type_actif,
        COALESCE(sl.origine_classification, bo.origine_classification) AS origine_classification,
@@ -116,7 +120,17 @@ SELECT i.isin,
        CASE WHEN sl.isin IS NOT NULL AND bo.isin IS NOT NULL THEN 'les deux'
             WHEN sl.isin IS NOT NULL                         THEN 'SwissLife'
             WHEN bo.isin IS NOT NULL                         THEN 'BoursoVie'
-            ELSE 'hors contrats' END                AS disponibilite
+            ELSE 'hors contrats' END                AS disponibilite,
+       -- Axe « vehicule » : ce que le support est juridiquement, non ce dans quoi
+       -- il investit. Les deux lectures se croisent -- un ETF loge en assurance vie
+       -- est un ETF et une UC -- et c'est la premiere que l'utilisateur emploie
+       -- pour se reperer. La classification est exhaustive par construction : tout
+       -- instrument tombe dans exactement une case.
+       CASE WHEN i.type_instrument = 'action'                   THEN 'Actions'
+            WHEN i.type_instrument = 'etf'                      THEN 'ETF'
+            WHEN sl.isin IS NOT NULL OR bo.isin IS NOT NULL     THEN 'Fond UC'
+            WHEN i.enveloppe LIKE 'PEE%'                        THEN 'FCPE'
+            ELSE 'SCPI' END                         AS vehicule
 FROM instrument i
 LEFT JOIN offre sl ON sl.isin = i.isin AND sl.fournisseur = 'SwissLife'
 LEFT JOIN offre bo ON bo.isin = i.isin AND bo.fournisseur = 'BoursoVie';
