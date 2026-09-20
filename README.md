@@ -23,6 +23,10 @@ Double-cliquer sur **`lancer.bat`** (Windows). Le script crée l'environnement
 Python au premier lancement, construit la base si elle est absente, puis ouvre
 l'interface dans le navigateur.
 
+Depuis un terminal, **PowerShell exige le préfixe `.\`** — il n'exécute jamais
+un fichier du dossier courant sans lui, et répond « n'est pas reconnu » que le
+fichier existe ou non : `.\lancer.bat`, `.\construire.bat`, `.\cotations.bat`.
+
 Trois menus, choisis dans la barre latérale :
 
 - **LISTE** — le tableau de la sélection. Sélectionner une ligne fait
@@ -85,8 +89,8 @@ Double-cliquer sur **`cotations.bat`**, ou en ligne de commande :
 
 | Commande | Effet |
 |---|---|
-| `cotations.bat` | Migre si besoin, charge les captures, puis **simule** l'import des relevés de `data/raw/vl/*.xlsx` |
-| `cotations.bat --ecrire` | Écrit l'import |
+| `.\cotations.bat` | Migre si besoin, charge les captures, puis **simule** l'import des relevés de `data/raw/vl/*.xlsx` |
+| `.\cotations.bat --ecrire` | Écrit l'import |
 
 N'appelez pas `python tools/…` directement : les dépendances vivent dans
 `.venv`, et sous Windows 11 le nom `python` désigne un raccourci factice vers le
@@ -143,11 +147,14 @@ partir des fiches Markdown de `data/raw/md/`.
 En ligne de commande :
 
 ```
-python -m venv .venv
+py -3 -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python tools\construire_base.py
 .venv\Scripts\python -m streamlit run app\univers.py
 ```
+
+`py -3` plutôt que `python` : sous Windows 11 ce dernier désigne un raccourci
+factice vers le Microsoft Store.
 
 La base est **reconstruite intégralement à chaque exécution** : elle n'est jamais
 migrée, et n'est donc pas versionnée. Le chargement s'interrompt en erreur si

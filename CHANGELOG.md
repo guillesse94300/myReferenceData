@@ -4,6 +4,15 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.19.2 — 20 septembre 2026
+
+- Le README donnait les commandes `.bat` sans le préfixe `.\`. PowerShell
+  n'exécute jamais un fichier du dossier courant sans lui, et répond « n'est pas
+  reconnu » que le fichier existe ou non — message qui envoie chercher une
+  absence là où il n'y a qu'une règle de résolution.
+- Le mode ligne de commande y donnait encore `python -m venv`, remplacé par
+  `py -3` pour la raison déjà connue.
+
 ## 0.19.1 — 20 septembre 2026
 
 - **`openpyxl` manquait dans `requirements.txt`** : l'import des relevés
