@@ -81,12 +81,18 @@ calculée entre deux de ses points. La clé de `valeur_liquidative` est donc
 `(isin, date, base)`, et la vue `v_serie` choisit une seule convention par
 support — la plus fournie, l'ajustée à égalité.
 
+Double-cliquer sur **`cotations.bat`**, ou en ligne de commande :
+
 | Commande | Effet |
 |---|---|
-| `python tools/migrer_cotations.py` | Migre une base antérieure, sauvegarde horodatée |
-| `python tools/charger_cotations.py` | Charge les captures dans les deux conventions |
-| `python tools/importer_vl.py` | Simule l'import des relevés de `data/raw/vl/*.xlsx` |
-| `python tools/importer_vl.py --ecrire` | Écrit |
+| `cotations.bat` | Migre si besoin, charge les captures, puis **simule** l'import des relevés de `data/raw/vl/*.xlsx` |
+| `cotations.bat --ecrire` | Écrit l'import |
+
+N'appelez pas `python tools/…` directement : les dépendances vivent dans
+`.venv`, et sous Windows 11 le nom `python` désigne un raccourci factice vers le
+Microsoft Store. Les `.bat` résolvent l'interpréteur — `py -3`, `py`, `python`,
+`python3`, chacun réellement exécuté — et réinstallent les dépendances quand la
+liste a changé.
 
 Un relevé ponctuel **ne remplace jamais** une valeur présente : il comble un
 trou, et le recoupement devient un échantillon de contrôle. Il ne permet que la

@@ -4,6 +4,24 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.19.1 — 20 septembre 2026
+
+- **`openpyxl` manquait dans `requirements.txt`** : l'import des relevés
+  échouait à l'import du module sur un poste où il n'était pas déjà installé.
+- Nouveau **`cotations.bat`** : migration, chargement des captures et import des
+  relevés en une commande, simulation par défaut. Les outils ne s'appellent plus
+  par `python tools/…` — les dépendances vivent dans `.venv`, et sous Windows 11
+  le nom `python` désigne un raccourci factice vers le Microsoft Store.
+- La résolution de l'interpréteur passe dans **`_preparer.bat`**, appelé par les
+  trois scripts. Elle vivait en double dans `lancer.bat` et `construire.bat` ;
+  un troisième script en aurait fait une troisième copie.
+- `_preparer.bat` **réinstalle les dépendances quand `requirements.txt` a
+  changé**, en le comparant à une copie gardée dans `.venv`. Sans quoi une
+  dépendance ajoutée par un `git pull` restait absente.
+- `lancer.bat` lance la migration des cotations à chaque démarrage : elle est
+  sans effet si elle a déjà eu lieu, mais un `git pull` peut faire avancer le
+  schéma d'une base qui, elle, ne se reconstruit pas.
+
 ## 0.19.0 — 20 septembre 2026
 
 - **La convention de cotation entre dans la clé** de `valeur_liquidative`, qui
