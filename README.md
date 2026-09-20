@@ -23,32 +23,58 @@ Double-cliquer sur **`lancer.bat`** (Windows). Le script crée l'environnement
 Python au premier lancement, construit la base si elle est absente, puis ouvre
 l'interface dans le navigateur.
 
-Cinq pages, choisies dans la barre latérale :
+Trois menus, choisis dans la barre latérale :
 
-- **Accueil** — page d'attente : le tableau de bord est en cours de refonte.
-  L'ancien a été supprimé plutôt que laissé en place, un tableau de bord qu'on
-  sait périmé orientant les lectures sans qu'on s'en aperçoive.
-- **Parcourir** — l'univers selon trois axes au choix : **classe d'actif**
-  (avec un second niveau par type d'actif), **risque** ou **performance**. Le
-  segment retenu est mis en avant, le reste s'efface. La première colonne du
-  tableau permet de suivre un support.
-- **Fiche** — un support en détail : risque, rendement, frais, conditions
-  comparées des deux assureurs, performance nette annuelle, et — lorsque sa
-  valeur liquidative a été collectée — ses performances de référence (dernier
-  exercice complet, depuis le 1er janvier, 3, 6, 12 et 24 mois glissants), sa
-  trajectoire quotidienne ramenée à 100, sa perte depuis chaque plus haut, sa
-  volatilité annualisée et sa perte maximale.
-- **Frais** — les fonds communs, avec la réserve de lecture ci-dessous.
-- **Qualité des données** — provenance, couverture et écarts relevés au chargement.
+- **LISTE** — le tableau de la sélection. Sélectionner une ligne fait
+  apparaître le support, une bascule pour le suivre et un bouton vers sa fiche.
+  Quand des valeurs liquidatives existent, leurs performances remplacent celles
+  tirées des exercices publiés plutôt que de s'y ajouter.
+- **PERF** — six classements côte à côte : 1 an, 2 ans, exercice clos, année en
+  cours, 3 mois, 6 mois. Douze supports par case au plus.
+- **COMPARE** — jusqu'à huit trajectoires superposées, ramenées à 100 à leur
+  départ commun, suivies des six horizons en clair.
 
-Les filtres de la barre latérale — favoris, recherche, nature, classe, SRI,
-rendement minimum, SFDR, et en repli les frais et la fiabilité de classification
-— s'appliquent à **Parcourir** et **Fiche**.
+Sélectionner une ligne de LISTE ouvre la **fiche** du support : risque,
+rendement, frais, conditions comparées des deux assureurs, performance nette
+annuelle, et — lorsque sa valeur liquidative a été collectée — ses six
+performances de référence, sa trajectoire quotidienne ramenée à 100, sa perte
+depuis chaque plus haut, sa volatilité annualisée et sa perte maximale.
+
+Deux annexes en pied de barre latérale, **Frais** et **Qualité des données**,
+recouvrent le menu courant sans le changer ; un bouton de retour ramène où l'on
+était.
+
+## Classe d'actif
+
+Le filtre classe par **véhicule** — ce que le support est juridiquement — et
+non par classe d'actif au sens Morningstar. Les deux lectures se croisent : un
+ETF logé en assurance vie est un ETF *et* une unité de compte.
+
+| Case | Règle | Univers |
+|---|---|---|
+| Fond UC | OPC offert par au moins un assureur | 1 077 |
+| ETF | `type_instrument = etf` | 186 |
+| Actions | `type_instrument = action` | 110 |
+| FCPE | hors contrats, enveloppe commençant par `PEE` | 4 |
+| SCPI | hors contrats, sans épargne salariale | 1 |
+| Livret | — | 0 |
+
+La classification est exhaustive et sans recouvrement : tout instrument tombe
+dans exactement une case. **Livret** n'a encore aucun membre — aucun assureur
+ne le publie et un livret n'a pas d'ISIN — mais la case figure quand même :
+une catégorie absente se lit comme une catégorie qui n'existe pas.
+
+Les autres filtres — recherche, favoris, SRI, frais, SFDR, présence d'un
+historique — s'appliquent eux aussi aux trois menus. La classification
+Morningstar reste en base et s'affiche sur la fiche.
+
+Le détail de la conception est dans
+[`docs/spec-tableau-de-bord.md`](docs/spec-tableau-de-bord.md).
 
 ## Favoris
 
-Les supports suivis se cochent dans la première colonne du tableau de
-**Parcourir**, ou par la bascule en haut de leur **fiche**. Le filtre
+Les supports suivis se basculent en sélectionnant leur ligne dans **LISTE**,
+ou par la bascule en haut de leur **fiche**. Le filtre
 « Favoris » de la barre latérale restreint l'affichage à la liste, ou l'en exclut.
 
 Un support **détenu hors des deux contrats** — fonds de PEE, ETF logé en PEA,

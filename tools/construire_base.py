@@ -215,7 +215,8 @@ def construire(base):
             "nom": support["nom"],
             "societe_gestion": None,
             "type_instrument": "etf" if "ETF" in support["nom"].upper() else "opc",
-            "forme_juridique": None, "devise": None, "pays": None, "notation": None}
+            "forme_juridique": None, "devise": None, "pays": None, "notation": None,
+            "enveloppe": support["enveloppe"]}
         hors_contrats += 1
     for libelle in sans_isin:
         anomalies.append(("support détenu sans ISIN", "avertissement", None,
@@ -223,9 +224,10 @@ def construire(base):
 
     # Les instruments sont inseres avant les offres, qui les referencent.
     cx.executemany("INSERT INTO instrument (isin, nom, societe_gestion, type_instrument, forme_juridique,"
-                   " devise, pays, notation) VALUES (?,?,?,?,?,?,?,?)",
+                   " devise, pays, notation, enveloppe) VALUES (?,?,?,?,?,?,?,?,?)",
                    [(isin, v["nom"], v["societe_gestion"], v["type_instrument"], v["forme_juridique"],
-                     v["devise"], v["pays"], v["notation"]) for isin, v in instruments.items()])
+                     v["devise"], v["pays"], v["notation"], v.get("enveloppe"))
+                    for isin, v in instruments.items()])
     cx.executemany(
         "INSERT INTO offre (import_id, isin, fournisseur, contrat, grande_classe, type_actif,"
         " origine_classification, sfdr, sri, label, statut, avenant, frais_fonds, frais_contrat,"

@@ -4,6 +4,7 @@ Lecture seule : l'application n'ecrit jamais dans la base, qui se reconstruit
 par construire.bat. Elle affiche les reserves de lecture la ou elles portent,
 plutot que de presenter des chiffres incertains comme s'ils ne l'etaient pas.
 """
+import datetime
 import os
 import sqlite3
 import sys
@@ -29,11 +30,20 @@ BLEU, ROUGE, GRIS = "#2a78d6", "#e34948", "#c9c8c3"
 # le plus clair reste au-dessus du plancher de contraste de 2:1 sur fond clair.
 RAMPE_RISQUE = ["#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#1c5cab", "#104281"]
 
-PAGES = ["Accueil", "Parcourir", "Fiche", "Frais", "Qualité des données"]
-ORDRE_CLASSES = ["Monetaire", "Obligataire", "Mixte", "Actions", "ETF",
-                 "Actions vives", "Immobilier", "Alternatif", "Autres", "Hors contrats"]
-BANDES_PERF = [("15 % et plus", 15, 999), ("10 à 15 %", 10, 15), ("5 à 10 %", 5, 10),
-               ("0 à 5 %", 0, 5), ("négative", -999, 0)]
+MENUS = ["LISTE", "PERF", "COMPARE"]
+ANNEXES = ["Frais", "Qualité des données"]
+# Axe « vehicule » : ce que le support est, non ce dans quoi il investit. Livret
+# n'a encore aucun membre -- il figure quand meme, parce qu'une case absente se
+# lit comme une categorie qui n'existe pas, et celle-ci existe.
+ORDRE_VEHICULES = ["Fond UC", "ETF", "Actions", "FCPE", "SCPI", "Livret"]
+# Palette categorielle, huit teintes dans un ordre fixe, jamais cyclees. Validee
+# contre la surface #fcfcfb : bande de clarte, plancher de chroma, separation
+# daltonienne et vision normale sur les paires adjacentes. Trois teintes passent
+# sous 3:1 de contraste, ce qui impose un releve -- legende, etiquettes de fin de
+# courbe et tableau des valeurs, tous presents sur COMPARE.
+SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100",
+          "#e87ba4", "#008300", "#4a3aa7", "#e34948"]
+MAX_COMPARE = len(SERIES)
 
 st.set_page_config(page_title="Univers d'investissement", page_icon="◈", layout="wide")
 
@@ -136,12 +146,21 @@ usuelles_par_isin = {
     isin: indicateurs.performances_usuelles(
         {ligne.date.date(): ligne.valeur for ligne in groupe.itertuples()})
     for isin, groupe in cotations.groupby("isin")} if len(cotations) else {}
-univers = univers.assign(
-    cotee=univers["isin"].isin(avec_vl),
-    ytd=univers["isin"].map(lambda i: usuelles_par_isin.get(i, {}).get("depuis le 1er janvier")),
-    douze_mois=univers["isin"].map(lambda i: usuelles_par_isin.get(i, {}).get("12 mois")),
+univers = univers.assign(cotee=univers["isin"].isin(avec_vl),
                          favori=univers["isin"].isin(suivis),
                          note=univers["isin"].map(lambda i: suivis.get(i, {}).get("note", "")))
+
+# Le dernier exercice clos porte un millesime qui avance : il est lu dans les
+# series plutot qu'ecrit en dur, faute de quoi la grille se figerait sur 2025.
+ANNEE = max(cotations["date"]).year if len(cotations) else None
+EXERCICE = str(ANNEE - 1) if ANNEE else "exercice clos"
+# Les six horizons, dans l'ordre du croquis : 1 an, 2 ans, exercice clos, puis
+# l'annee en cours, 3 mois et 6 mois.
+HORIZONS = [("12 mois", "1 an"), ("24 mois", "2 ans"), (EXERCICE, EXERCICE),
+            ("depuis le 1er janvier", f"{ANNEE} à ce jour" if ANNEE else "Depuis le 1er janvier"),
+            ("3 mois", "3 mois"), ("6 mois", "6 mois")]
+for cle, _ in HORIZONS:
+    univers[cle] = univers["isin"].map(lambda i, c=cle: usuelles_par_isin.get(i, {}).get(c))
 
 
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin",
@@ -155,43 +174,96 @@ def en_toutes_lettres(date_iso):
     return f"{quantieme} {MOIS[int(mois) - 1]} {annee}"
 
 
-def en_tete(titre):
-    """Titre de page, suivi de la version et du millesime des documents sources."""
+def en_tete(titre, sous_titre=None):
+    """Titre de page. La version et le millesime vivent en barre laterale."""
     st.title(titre)
-    millesimes = " · ".join(f"{ligne.fournisseur} {en_toutes_lettres(ligne.millesime)}"
-                            for ligne in imports.itertuples())
-    st.caption(f"Version {VERSION} du {en_toutes_lettres(DATE)}  ·  données {millesimes}")
-
-
-def classes_ordonnees(cadre):
-    presentes = [c for c in ORDRE_CLASSES if c in set(cadre["grande_classe"].dropna())]
-    return presentes + sorted(set(cadre["grande_classe"].dropna()) - set(presentes))
+    if sous_titre:
+        st.caption(sous_titre)
 
 
 # ----------------------------------------------------------------- graphiques
 
-def barres_horizontales(cadre, champ, titre=None, ordre=None, mises_en_avant=None):
-    """Effectifs par categorie. Une selection met en avant, le reste s'efface."""
-    comptes = cadre[champ].value_counts().rename_axis(champ).reset_index(name="n")
-    if ordre:
-        comptes[champ] = pd.Categorical(comptes[champ], categories=ordre, ordered=True)
-        comptes = comptes.sort_values(champ)
-    couleur = (alt.condition(alt.FieldOneOfPredicate(champ, list(mises_en_avant)),
-                             alt.value(BLEU), alt.value(GRIS))
-               if mises_en_avant else alt.value(BLEU))
-    base = alt.Chart(comptes).encode(
-        alt.Y(f"{champ}:N", sort=ordre or "-x", title=None,
-              axis=alt.Axis(labelColor=ENCRE, labelLimit=260, domainColor=GRILLE, ticks=False,
-                            labelOverlap=False, labelPadding=6)),
-        alt.X("n:Q", title=None, axis=None))
-    barres = base.mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4, height=18).encode(
-        color=couleur, tooltip=[alt.Tooltip(f"{champ}:N", title="Catégorie"),
-                                alt.Tooltip("n:Q", title="Instruments")])
-    valeurs = base.mark_text(align="left", dx=6, color=ENCRE_DOUCE, fontSize=11).encode(text="n:Q")
-    hauteur = max(110, 32 * len(comptes))
-    graphique = (barres + valeurs).properties(height=hauteur)
-    # Altair rejette un titre nul : il n'est pose que s'il existe.
-    return graphique.properties(title=titre) if titre else graphique
+def classement(cadre, cle, plafond=12):
+    """Supports ordonnes sur un horizon, du meilleur au pire.
+
+    Paire divergente bleu/rouge : la polarite est le signe de la performance,
+    pas son rang. Chaque barre porte sa valeur -- douze au plus, l'etiquetage
+    reste lisible et dispense d'aller lire un axe.
+    """
+    donnees = (cadre.dropna(subset=[cle])[["nom", cle]]
+               .sort_values(cle, ascending=False).head(plafond)
+               .rename(columns={cle: "taux"}))
+    if donnees.empty:
+        return None
+    bornes = marge(donnees["taux"])
+    # L'ordre est fixe ici plutot que delegue a « -x » : la couche du zero ne
+    # porte pas le champ de tri, et Vega abandonne le rendu de tout le graphique.
+    base = alt.Chart(donnees).encode(
+        alt.Y("nom:N", sort=list(donnees["nom"]), title=None,
+              axis=alt.Axis(labelColor=ENCRE, labelLimit=150, domainColor=GRILLE,
+                            ticks=False, labelPadding=6, labelFontSize=11)),
+        alt.X("taux:Q", title=None, axis=None, scale=alt.Scale(domain=bornes)))
+    barres = base.mark_bar(cornerRadius=4, height=13).encode(
+        color=alt.condition(alt.datum.taux >= 0, alt.value(BLEU), alt.value(ROUGE)),
+        tooltip=[alt.Tooltip("nom:N", title="Support"),
+                 alt.Tooltip("taux:Q", title="Performance", format="+.2f")])
+    # L'etiquette bascule du cote ou la barre s'etend, sans quoi elle la recouvre.
+    valeurs = base.mark_text(
+        align=alt.expr(alt.expr.if_(alt.datum.taux >= 0, "left", "right")),
+        dx=alt.expr(alt.expr.if_(alt.datum.taux >= 0, 5, -5)),
+        color=ENCRE_DOUCE, fontSize=10).encode(text=alt.Text("taux:Q", format="+.1f"))
+    # La regle du zero porte explicitement la meme echelle que les barres. Sans
+    # elle, Vega ne resout pas l'echelle de bande partagee et abandonne le rendu
+    # du graphique entier -- silencieusement, la page restant simplement vide.
+    zero = (alt.Chart(pd.DataFrame({"x": [0]})).mark_rule(color=GRILLE, strokeWidth=1)
+            .encode(alt.X("x:Q", axis=None, scale=alt.Scale(domain=bornes))))
+    return ((zero + barres + valeurs).properties(height=max(90, 22 * len(donnees)))
+            .configure_view(strokeWidth=0))
+
+
+def marge(taux):
+    """Domaine elargi de 18 %, pour que les etiquettes de valeur tiennent."""
+    bas, haut = min(taux.min(), 0), max(taux.max(), 0)
+    jeu = max((haut - bas) * 0.18, 0.5)
+    return [bas - jeu, haut + jeu]
+
+
+def superposition(series, noms):
+    """Trajectoires de plusieurs supports ramenees a 100 a leur depart commun.
+
+    Base 100 parce que les valeurs liquidatives brutes, de quelques euros a
+    plusieurs centaines, ne se superposent pas : seule l'evolution se compare.
+    Le depart est la premiere date ou tous les supports cotent, sans quoi une
+    serie plus courte partirait avec un avantage qu'elle n'a pas.
+    """
+    debut = max(min(v) for v in series.values())
+    lignes = []
+    for rang, (isin, valeurs) in enumerate(series.items()):
+        retenues = {d: v for d, v in valeurs.items() if d >= debut}
+        for date, indice in indicateurs.base_cent(retenues).items():
+            lignes.append({"date": date, "base": indice, "support": noms[isin], "rang": rang})
+    trace = pd.DataFrame(lignes)
+    ordre = [noms[i] for i in series]
+    echelle = alt.Scale(domain=ordre, range=SERIES[:len(ordre)])
+
+    courbes = alt.Chart(trace).mark_line(strokeWidth=2).encode(
+        alt.X("date:T", title=None,
+              axis=alt.Axis(gridColor=GRILLE, labelColor=ENCRE, format="%b %Y", tickCount=6)),
+        alt.Y("base:Q", title="Base 100 au départ commun", scale=alt.Scale(zero=False),
+              axis=alt.Axis(gridColor=GRILLE, labelColor=ENCRE, titleColor=ENCRE_DOUCE)),
+        alt.Color("support:N", scale=echelle,
+                  legend=alt.Legend(title=None, labelColor=ENCRE, orient="bottom", columns=2)),
+        tooltip=[alt.Tooltip("support:N", title="Support"),
+                 alt.Tooltip("date:T", title="Date", format="%d/%m/%Y"),
+                 alt.Tooltip("base:Q", title="Base 100", format=".1f")])
+    # Etiquette de fin de courbe : trois teintes de la palette passent sous 3:1
+    # de contraste, l'identite ne peut donc pas reposer sur la couleur seule.
+    fins = trace.sort_values("date").groupby("support", as_index=False).last()
+    bouts = alt.Chart(fins).mark_text(align="left", dx=6, fontSize=11, color=ENCRE).encode(
+        alt.X("date:T"), alt.Y("base:Q"), text="support:N")
+    return ((courbes + bouts).properties(height=380,
+            padding={"left": 16, "top": 5, "right": 90, "bottom": 5})
+            .configure_view(strokeWidth=0))
 
 
 # --------------------------------------------------------------------- filtres
@@ -243,15 +315,35 @@ def parcours_et_pertes(serie):
         .configure_view(strokeWidth=0)
 
 
+def quitter_les_annexes():
+    """Le choix d'un menu referme la fiche et les annexes qui le recouvraient."""
+    st.session_state["annexe"] = None
+    st.session_state["fiche"] = None
+
+
+def ouvrir(annexe):
+    st.session_state["annexe"] = annexe
+    st.session_state["fiche"] = None
+
+
 def barre_laterale():
+    """Date, version, les trois menus, les filtres, et les annexes en pied.
+
+    Les filtres s'appliquent aux trois menus. Les annexes -- frais et qualite
+    des donnees -- ont leurs propres selecteurs et ignorent la selection.
+    """
     barre = st.sidebar
-    barre.radio("Navigation", PAGES, key="page", label_visibility="collapsed")
-    # L'accueil presente l'univers entier et les deux dernieres pages ont leurs
-    # propres selecteurs : les filtres ne s'affichent que la ou ils agissent.
-    if st.session_state["page"] in ("Accueil", "Frais", "Qualité des données"):
-        return univers
+    aujourdhui = datetime.date.today().isoformat()
+    barre.markdown(f"**{en_toutes_lettres(aujourdhui)}**")
+    millesimes = " · ".join(f"{ligne.fournisseur} {en_toutes_lettres(ligne.millesime)}"
+                            for ligne in imports.itertuples())
+    barre.caption(f"Version {VERSION} du {en_toutes_lettres(DATE)}\n\nDonnées {millesimes}")
+
     barre.divider()
-    barre.subheader("Filtres")
+    barre.radio("Menu", MENUS, key="menu", horizontal=True, label_visibility="collapsed",
+                on_change=quitter_les_annexes)
+
+    barre.divider()
     vue = univers.copy()
 
     recherche = barre.text_input("Nom ou ISIN")
@@ -261,8 +353,7 @@ def barre_laterale():
 
     # Un support detenu mais depourvu d'ISIN ne peut etre rattache a rien : le
     # dire ici evite que la liste paraisse silencieusement incomplete.
-    introuvables = anomalies[anomalies["controle"] == "support détenu sans ISIN"]
-    manquants = len(introuvables)
+    manquants = int((anomalies["controle"] == "support détenu sans ISIN").sum())
     aide = f"{len(suivis)} supports suivis"
     if manquants:
         aide += (f" — {manquants} autre{'s' if manquants > 1 else ''} de votre liste "
@@ -273,163 +364,195 @@ def barre_laterale():
     if favori == "Oui":
         vue = vue[vue["favori"]]
         if manquants:
-            barre.caption(f"⚠ {manquants} support de votre liste reste hors d'atteinte, "
-                          "faute d'ISIN." if manquants == 1 else
-                          f"⚠ {manquants} supports de votre liste restent hors d'atteinte, "
-                          "faute d'ISIN.")
+            accord = "reste" if manquants == 1 else "restent"
+            pluriel = "" if manquants == 1 else "s"
+            barre.caption(f"⚠ {manquants} support{pluriel} de votre liste {accord} hors "
+                          "d'atteinte, faute d'ISIN.")
     elif favori == "Non":
         vue = vue[~vue["favori"]]
 
-    natures = barre.multiselect("Nature", sorted(univers["type_instrument"].unique()),
-                                default=["opc", "etf"])
-    if natures:
-        vue = vue[vue["type_instrument"].isin(natures)]
+    barre.markdown("**Classe d'actif**")
+    effectifs = univers["vehicule"].value_counts()
+    coches = [v for v in ORDRE_VEHICULES
+              if barre.checkbox(f"{v} ({int(effectifs.get(v, 0))})", key=f"veh_{v}")]
+    if coches:
+        vue = vue[vue["vehicule"].isin(coches)]
 
-    classes = barre.multiselect("Grande classe", classes_ordonnees(univers), key="classes")
-    if classes:
-        vue = vue[vue["grande_classe"].isin(classes)]
-
-    sri = barre.slider("Indicateur de risque (SRI)", 1, 7, (1, 7))
-    if sri != (1, 7):
-        vue = vue[vue["sri"].between(*sri)]
-
-    plancher = barre.slider("Rendement annualisé minimum (%/an)", -20, 20, -20)
-    if plancher > -20:
-        vue = vue[vue["perf_annualisee"] >= plancher]
-
-    sfdr = barre.multiselect("Classification SFDR", sorted(univers["sfdr"].dropna().unique()))
-    if sfdr:
-        vue = vue[vue["sfdr"].isin(sfdr)]
-
-    with barre.expander("Frais et fiabilité"):
+    # Les filtres du croquis tiennent en deux blocs ; les autres restent
+    # disponibles, replies, plutot que d'etre supprimes ou d'encombrer.
+    with barre.expander("Autres filtres"):
+        sri = st.slider("Indicateur de risque (SRI)", 1, 7, (1, 7))
+        if sri != (1, 7):
+            vue = vue[vue["sri"].between(*sri)]
         plafond = st.slider("Frais totaux maximum (%)", 0.0, 6.0, 6.0, 0.25)
         if plafond < 6.0:
             vue = vue[vue["frais"] <= plafond]
-        if st.checkbox("Classification fiable uniquement",
-                       help="Écarte les supports dont la classe d'actif a été déduite du libellé, "
-                            "dont 12 % environ sont mal classés."):
-            vue = vue[vue["origine_classification"] != "déduite du libellé"]
+        sfdr = st.multiselect("Classification SFDR", sorted(univers["sfdr"].dropna().unique()))
+        if sfdr:
+            vue = vue[vue["sfdr"].isin(sfdr)]
+        if st.checkbox("Avec historique de valeurs liquidatives",
+                       help="Les performances glissantes et les trajectoires ne peuvent être "
+                            "calculées que pour ces supports."):
+            vue = vue[vue["cotee"]]
 
-    barre.caption(f"{len(vue)} instruments sur {len(univers)}")
+    barre.caption(f"**{len(vue)}** instruments sur {len(univers)}")
+    barre.divider()
+    for annexe in ANNEXES:
+        barre.button(annexe, width="stretch", on_click=ouvrir, args=(annexe,))
     return vue
 
 
 # ----------------------------------------------------------------------- pages
 
-def page_accueil(_):
-    """Page d'attente : le tableau de bord est en cours de redefinition.
-
-    L'ancien est supprime plutot que laisse en place pendant la refonte : un
-    tableau de bord qu'on sait faux oriente les lectures sans qu'on s'en
-    apercoive. Mieux vaut une page vide qui le dit.
-    """
-    en_tete("Univers d'investissement")
-    st.info("Le tableau de bord est en cours de refonte. "
-            "Utilisez **Parcourir** dans la barre latérale pour explorer l'univers.")
-    st.metric("Instruments au référentiel", f"{len(univers):,}".replace(",", " "))
-
-
-def page_parcourir(vue):
-    en_tete("Parcourir l'univers")
-    axe = st.segmented_control("Explorer par", ["Classe d'actif", "Risque", "Performance"],
-                               key="axe", default="Classe d'actif")
-    axe = axe or "Classe d'actif"
-
-    if axe == "Classe d'actif":
-        vue = vue.assign(segment=vue["grande_classe"])
-        ordre = classes_ordonnees(vue)
-        intitule = "Grande classe"
-    elif axe == "Risque":
-        vue = vue.assign(segment=vue["sri"].map(
-            lambda s: f"SRI {int(s)}" if pd.notna(s) else "non renseigné"))
-        ordre = [f"SRI {n}" for n in range(1, 8)] + ["non renseigné"]
-        intitule = "Niveau de risque"
-    else:
-        def bande(ligne):
-            taux = ligne["perf_annualisee"]
-            if pd.isna(taux):
-                return "performance inconnue"
-            return next(nom for nom, bas, haut in BANDES_PERF if bas <= taux < haut)
-        vue = vue.assign(segment=vue.apply(bande, axis=1))
-        ordre = [nom for nom, _, _ in BANDES_PERF] + ["performance inconnue"]
-        intitule = "Rendement annualisé"
-
-    ordre = [s for s in ordre if s in set(vue["segment"])]
-    if not ordre:
-        st.info("Aucun instrument dans la sélection.")
-        return
-
-    choisis = st.pills(intitule, ordre, selection_mode="multi", key=f"seg_{axe}")
-    st.altair_chart(
-        barres_horizontales(vue, "segment", ordre=ordre, mises_en_avant=choisis or None)
-        .configure_view(strokeWidth=0), width="stretch")
-
-    detail = vue[vue["segment"].isin(choisis)] if choisis else vue
-    if axe == "Classe d'actif" and choisis:
-        types = st.pills("Type d'actif", sorted(detail["type_actif"].dropna().unique()),
-                         selection_mode="multi", key="types")
-        if types:
-            detail = detail[detail["type_actif"].isin(types)]
-
-    st.caption(f"{len(detail)} instruments — cochez la première colonne pour suivre un support")
-    # Neuf colonnes tiennent sans troncature ; la société de gestion et la
-    # classification SFDR restent consultables sur la fiche du support.
-    colonnes = {"favori": "Favori", "isin": "ISIN", "nom": "Support", "type_actif": "Type d'actif",
-                "sri": "SRI", "perf_annualisee": "Perf. ann.", "annees": "Ans",
-                "perf_n1": "Perf. N-1", "frais": "Frais", "disponibilite": "Disponible"}
-    # Pour un support detenu, savoir dans quelle enveloppe prime sur savoir chez
-    # quel assureur il s'achete : la colonne prend la place de l'autre.
-    if detail["note"].astype(bool).any():
-        del colonnes["disponibilite"]
-        colonnes["note"] = "Détenu dans"
-    # Lorsque les valeurs liquidatives sont disponibles, elles remplacent les
-    # mesures tirées des exercices publiés plutôt que de s'y ajouter : plus
-    # fines, plus récentes, et le tableau garde un nombre de colonnes lisible.
-    if detail["ytd"].notna().any():
-        for remplacee in ("perf_annualisee", "annees", "perf_n1"):
-            colonnes.pop(remplacee, None)
-        colonnes["ytd"] = "Depuis 1er janv."
-        colonnes["douze_mois"] = "12 mois"
-    tri = "12 mois" if "douze_mois" in colonnes else "Perf. ann."
-    affiche = (detail[list(colonnes)].rename(columns=colonnes)
-               .sort_values(tri, ascending=False))
-    # Le signe est porte par le format : une performance negative doit se
-    # distinguer d'une positive sans avoir a lire la valeur.
-    rendement = lambda libelle: st.column_config.NumberColumn(libelle, format="%+.2f %%")
-    edite = st.data_editor(
-        affiche, width="stretch", hide_index=True, height=460, key=f"editeur_{axe}",
-        disabled=[c for c in affiche.columns if c != "Favori"],
-        # Largeurs contraintes : laissees libres, le libelle et le type d'actif
-        # s'etalent et rejettent les dernieres colonnes hors du cadre.
-        column_config={"Favori": st.column_config.CheckboxColumn("Favori", width=78),
-                       "ISIN": st.column_config.TextColumn("ISIN", width=105),
-                       "Support": st.column_config.TextColumn("Support", width=185),
-                       "Type d'actif": st.column_config.TextColumn("Type d'actif", width=185),
-                       "Détenu dans": st.column_config.TextColumn("Détenu dans", width=150),
-                       "Depuis 1er janv.": st.column_config.NumberColumn(
-                           "Depuis 1er janv.", format="%+.2f %%", width=115),
-                       "12 mois": st.column_config.NumberColumn("12 mois", format="%+.2f %%",
-                                                                width=85),
-                       "Disponible": st.column_config.TextColumn("Disponible", width=90),
-                       "Perf. ann.": rendement("Perf. ann."), "Perf. N-1": rendement("Perf. N-1"),
-                       "Frais": st.column_config.NumberColumn("Frais", format="%.2f %%", width=70),
-                       "SRI": st.column_config.NumberColumn("SRI", format="%d", width=50),
-                       "Ans": st.column_config.NumberColumn("Ans", format="%d", width=50)})
-    # L'alignement ne porte que sur les lignes affichées : un écran filtré ne
-    # doit pas effacer le reste de la liste.
-    _, modifie = suivi.appliquer(affiche["ISIN"].tolist(),
-                                 set(edite.loc[edite["Favori"], "ISIN"]))
-    if modifie:
-        st.rerun()
-
-
-def page_fiche(vue):
-    en_tete("Fiche support")
+def page_liste(vue):
+    en_tete("LISTE", f"{len(vue)} instruments — sélectionnez une ligne pour agir dessus")
     if vue.empty:
-        st.info("Aucun instrument dans la sélection.")
+        st.info("Aucun instrument ne correspond aux filtres.")
         return
-    choix = st.selectbox("Support", vue["isin"] + " — " + vue["nom"], key="fiche")
-    isin = choix.split(" — ")[0]
+
+    colonnes = {"favori": "Suivi", "isin": "ISIN", "nom": "Support", "vehicule": "Classe",
+                "type_actif": "Type d'actif", "sri": "SRI", "frais": "Frais"}
+    # Pour un support detenu, savoir dans quelle enveloppe prime sur savoir chez
+    # quel assureur il s'achete : la colonne prend la place de l'autre. Il faut
+    # que tous les supports affiches soient detenus, sinon la colonne serait vide
+    # sur l'essentiel des lignes et chasserait une information qui, elle, y est.
+    tous_detenus = vue["note"].astype(bool).all()
+    colonnes["note" if tous_detenus else "disponibilite"] = (
+        "Détenu dans" if tous_detenus else "Disponible")
+    # Les valeurs liquidatives remplacent les mesures tirees des exercices publies
+    # plutot que de s'y ajouter : plus fines, plus recentes, et le tableau garde
+    # un nombre de colonnes lisible.
+    if vue["12 mois"].notna().any():
+        colonnes["depuis le 1er janvier"] = f"{ANNEE} à ce jour"
+        colonnes["12 mois"] = "1 an"
+        tri = "1 an"
+    else:
+        colonnes["perf_annualisee"] = "Perf. ann."
+        tri = "Perf. ann."
+
+    affiche = (vue[list(colonnes)].rename(columns=colonnes)
+               .sort_values(tri, ascending=False).reset_index(drop=True))
+    # Largeurs contraintes : laissees libres, le libelle et le type d'actif
+    # s'etalent et rejettent les dernieres colonnes hors du cadre.
+    rendement = lambda libelle, largeur: st.column_config.NumberColumn(
+        libelle, format="%+.2f %%", width=largeur)
+    choix = st.dataframe(
+        affiche, width="stretch", hide_index=True, height=440, key="liste",
+        on_select="rerun", selection_mode="single-row",
+        column_config={
+            "Suivi": st.column_config.CheckboxColumn("Suivi", width=60),
+            "ISIN": st.column_config.TextColumn("ISIN", width=100),
+            "Support": st.column_config.TextColumn("Support", width=175),
+            "Classe": st.column_config.TextColumn("Classe", width=80),
+            "Type d'actif": st.column_config.TextColumn("Type d'actif", width=150),
+            "Détenu dans": st.column_config.TextColumn("Détenu dans", width=130),
+            "Disponible": st.column_config.TextColumn("Disponible", width=85),
+            "SRI": st.column_config.NumberColumn("SRI", format="%d", width=50),
+            "Frais": st.column_config.NumberColumn("Frais", format="%.2f %%", width=65),
+            f"{ANNEE} à ce jour": rendement(f"{ANNEE} à ce jour", 105),
+            "1 an": rendement("1 an", 80), "Perf. ann.": rendement("Perf. ann.", 90)})
+
+    lignes = choix["selection"]["rows"]
+    if not lignes:
+        st.caption("Aucune ligne sélectionnée.")
+        return
+    isin = affiche.loc[lignes[0], "ISIN"]
+    ligne = univers[univers["isin"] == isin].iloc[0]
+    st.divider()
+    nom, bascule, fiche = st.columns([4, 1, 1])
+    nom.markdown(f"**{ligne['nom']}** · `{isin}`")
+    if bascule.toggle("Suivi", value=isin in suivis, key=f"suivi_{isin}") != (isin in suivis):
+        suivi.basculer(isin, isin not in suivis)
+        st.rerun()
+    fiche.button("Ouvrir la fiche", width="stretch", on_click=voir_fiche, args=(isin,))
+
+
+def page_perf(vue):
+    """Les six horizons cote a cote, chacun classant les memes supports.
+
+    La grille est batie sur les seules series de valeurs liquidatives. Les
+    performances annuelles publiees par les assureurs couvriraient bien plus de
+    supports sur la case de l'exercice clos, mais elles obeissent a une autre
+    definition -- exercice civil, en euro, nette des frais du fonds. Les melanger
+    rendrait cette case incomparable a ses cinq voisines, ce qui est precisement
+    ce que la grille sert a faire.
+    """
+    cotes = vue[vue["cotee"]]
+    en_tete("PERF", f"{len(cotes)} supports de la sélection ont un historique de valeurs "
+                    f"liquidatives, sur {len(vue)}")
+    if cotes.empty:
+        st.info("Aucun support de la sélection n'a d'historique de valeurs liquidatives. "
+                "Les six horizons se calculent sur ces séries, non sur les performances "
+                "annuelles publiées.")
+        return
+    st.caption("Performances cumulées, non annualisées, dans la devise du fonds. Une période que "
+               "l'historique ne couvre pas laisse le support hors du classement, plutôt que de "
+               "le calculer sur une fenêtre tronquée.")
+
+    for rangee in (HORIZONS[:3], HORIZONS[3:]):
+        cases = st.columns(3)
+        for case, (cle, libelle) in zip(cases, rangee):
+            with case:
+                st.markdown(f"**{libelle}**")
+                graphique = classement(cotes, cle)
+                if graphique is None:
+                    st.caption("Aucun support ne couvre cet horizon.")
+                    continue
+                st.altair_chart(graphique, width="stretch")
+                couverts = int(cotes[cle].notna().sum())
+                if couverts > 12:
+                    st.caption(f"Les 12 premiers sur {couverts}.")
+
+
+def page_compare(vue):
+    """Selection a gauche, trajectoires superposees a droite."""
+    cotes = vue[vue["cotee"]]
+    en_tete("COMPARE", "Superposition des trajectoires, ramenées à 100 à leur départ commun")
+    if cotes.empty:
+        st.info("Aucun support de la sélection n'a d'historique de valeurs liquidatives.")
+        return
+
+    gauche, droite = st.columns([1, 2])
+    with gauche:
+        st.markdown("**Supports**")
+        etiquettes = {f"{l.nom}": l.isin for l in cotes.itertuples()}
+        defaut = list(etiquettes)[:min(4, len(etiquettes))]
+        retenus = st.multiselect("Supports", list(etiquettes), default=defaut,
+                                 max_selections=MAX_COMPARE, label_visibility="collapsed")
+        st.caption(f"{MAX_COMPARE} au maximum : au-delà, les courbes ne se distinguent plus.")
+
+    isins = [etiquettes[e] for e in retenus]
+    if not isins:
+        droite.info("Choisissez au moins un support.")
+        return
+    series = {isin: {l.date.date(): l.valeur
+                     for l in cotations[cotations["isin"] == isin].itertuples()}
+              for isin in isins}
+    noms = {l.isin: l.nom for l in cotes.itertuples()}
+    with droite:
+        st.altair_chart(superposition(series, noms), width="stretch")
+
+    debut = max(min(v) for v in series.values())
+    st.caption(f"Départ commun au {debut.strftime('%d/%m/%Y')}, première séance où tous les "
+               "supports retenus cotent.")
+    # La couleur seule ne porte pas l'identite : le meme contenu se relit ici en
+    # clair, ce qu'exige le contraste de trois teintes de la palette.
+    st.markdown("**Performances par horizon**")
+    valeurs = cotes[cotes["isin"].isin(isins)]
+    grille = (valeurs[["nom"] + [c for c, _ in HORIZONS]]
+              .rename(columns={"nom": "Support", **{c: l for c, l in HORIZONS}}))
+    st.dataframe(grille, width="stretch", hide_index=True,
+                 column_config={l: st.column_config.NumberColumn(l, format="%+.2f %%")
+                                for _, l in HORIZONS})
+
+
+def voir_fiche(isin):
+    st.session_state["fiche"] = isin
+
+
+def page_fiche(isin):
+    """Detail d'un support, ouvert depuis une ligne de LISTE."""
+    st.button("← Retour à la liste", on_click=voir_fiche, args=(None,))
     ligne = univers[univers["isin"] == isin].iloc[0]
 
     titre, bascule = st.columns([5, 1])
@@ -437,8 +560,10 @@ def page_fiche(vue):
     if bascule.toggle("Favori", value=isin in suivis, key=f"fav_{isin}") != (isin in suivis):
         suivi.basculer(isin, isin not in suivis)
         st.rerun()
-    st.caption(f"`{isin}` · {ligne['societe_gestion'] or 'société non communiquée'} · "
-               f"{ligne['type_actif']} · SFDR {ligne['sfdr']} · disponible chez {ligne['disponibilite']}")
+    st.caption(f"`{isin}` · {ligne['vehicule']} · "
+               f"{ligne['societe_gestion'] or 'société non communiquée'} · {ligne['type_actif']} · "
+               f"classe {ligne['grande_classe']} · SFDR {ligne['sfdr']} · "
+               f"disponible chez {ligne['disponibilite']}")
     if ligne["note"]:
         st.info(f"Support suivi — détenu dans : {ligne['note']}")
     if ligne["origine_classification"] == "déduite du libellé":
@@ -462,11 +587,12 @@ def page_fiche(vue):
         debut, fin = min(valeurs), max(valeurs)
         st.markdown("**Performances**")
         usuelles = indicateurs.performances_usuelles(valeurs)
-        libelles = {"depuis le 1er janvier": "Depuis le 1er janv."}
-        cases = st.columns(len(usuelles))
-        for case, (periode, taux) in zip(cases, usuelles.items()):
-            case.metric(libelles.get(periode, periode),
-                        "—" if taux is None else f"{taux:+.2f} %")
+        # Memes horizons, meme ordre et memes libelles que la grille PERF : un
+        # chiffre doit porter ici le nom sous lequel il y a ete lu.
+        cases = st.columns(len(HORIZONS))
+        for case, (cle, libelle) in zip(cases, HORIZONS):
+            taux = usuelles.get(cle)
+            case.metric(libelle, "—" if taux is None else f"{taux:+.2f} %")
         st.caption(
             f"Cumulées et non annualisées, calculées sur la série de valeurs liquidatives, "
             f"en {devise}. Une période que l'historique ne couvre pas reste vide plutôt que "
@@ -534,6 +660,7 @@ def page_fiche(vue):
 
 
 def page_frais(_):
+    st.button("← Retour", on_click=quitter_les_annexes)
     en_tete("Frais — le même fonds chez les deux assureurs")
     st.info("Les deux assureurs ne publient pas la même grandeur pour les frais du fonds : "
             "SwissLife paraît donner les charges supportées sur le dernier exercice, BoursoVie les "
@@ -558,6 +685,7 @@ def page_frais(_):
 
 
 def page_qualite(_):
+    st.button("← Retour", on_click=quitter_les_annexes)
     en_tete("Qualité des données")
     st.markdown("### Provenance")
     tableau(imports.rename(columns={"fournisseur": "Assureur", "document": "Document",
@@ -583,7 +711,15 @@ def page_qualite(_):
             .rename(columns={"isin": "ISIN", "detail": "Détail"}), height=300)
 
 
-st.session_state.setdefault("page", "Accueil")
+st.session_state.setdefault("annexe", None)
+st.session_state.setdefault("fiche", None)
 selection = barre_laterale()
-{"Accueil": page_accueil, "Parcourir": page_parcourir, "Fiche": page_fiche,
- "Frais": page_frais, "Qualité des données": page_qualite}[st.session_state["page"]](selection)
+# La fiche et les annexes recouvrent le menu courant sans le changer : on y
+# revient par un simple retour, la selection restant celle qu'on avait laissee.
+if st.session_state["fiche"]:
+    page_fiche(st.session_state["fiche"])
+elif st.session_state["annexe"]:
+    {"Frais": page_frais, "Qualité des données": page_qualite}[st.session_state["annexe"]](selection)
+else:
+    {"LISTE": page_liste, "PERF": page_perf,
+     "COMPARE": page_compare}[st.session_state["menu"]](selection)
