@@ -71,6 +71,31 @@ Morningstar reste en base et s'affiche sur la fiche.
 Le détail de la conception est dans
 [`docs/spec-tableau-de-bord.md`](docs/spec-tableau-de-bord.md).
 
+## Valeurs liquidatives
+
+Une observation, c'est un support, une date **et une convention** : la clôture
+brute est le prix affiché ce jour-là, la clôture ajustée corrige les dividendes
+détachés depuis. Sur un support distribuant l'écart dépasse 6 % et grandit avec
+l'ancienneté ; les mélanger dans une même série fausserait toute performance
+calculée entre deux de ses points. La clé de `valeur_liquidative` est donc
+`(isin, date, base)`, et la vue `v_serie` choisit une seule convention par
+support — la plus fournie, l'ajustée à égalité.
+
+| Commande | Effet |
+|---|---|
+| `python tools/migrer_cotations.py` | Migre une base antérieure, sauvegarde horodatée |
+| `python tools/charger_cotations.py` | Charge les captures dans les deux conventions |
+| `python tools/importer_vl.py` | Simule l'import des relevés de `data/raw/vl/*.xlsx` |
+| `python tools/importer_vl.py --ecrire` | Écrit |
+
+Un relevé ponctuel **ne remplace jamais** une valeur présente : il comble un
+trou, et le recoupement devient un échantillon de contrôle. Il ne permet que la
+performance de l'exercice clos — les fenêtres glissantes réclament une valeur du
+jour qu'il ne porte pas.
+
+Conception détaillée dans
+[`docs/spec-valeurs-liquidatives.md`](docs/spec-valeurs-liquidatives.md).
+
 ## Favoris
 
 Les supports suivis se basculent en sélectionnant leur ligne dans **LISTE**,

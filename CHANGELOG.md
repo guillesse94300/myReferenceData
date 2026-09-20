@@ -4,6 +4,41 @@ Les versions sont numérotées `majeure.mineure.corrective` : la mineure avance
 avec une fonctionnalité, la corrective avec un correctif. La majeure reste à 0
 tant que le périmètre fonctionnel n'est pas arrêté.
 
+## 0.19.0 — 20 septembre 2026
+
+- **La convention de cotation entre dans la clé** de `valeur_liquidative`, qui
+  devient `(isin, date, base)`. Un même couple support-date porte deux valeurs
+  légitimes : la clôture brute, qui est le prix du jour, et la clôture ajustée
+  des dividendes, qui est la base d'une performance dividendes réinvestis. Sur
+  un ETF distribuant l'écart dépasse 6 % et grandit avec l'ancienneté. Tant que
+  la convention n'était pas dans la clé, un import pouvait écraser l'une par
+  l'autre et la série mélangeait deux définitions, sans trace.
+- Les captures portaient déjà `adjclose` : les deux conventions sont chargées
+  côte à côte, sans nouvelle collecte. La vue `v_serie` tranche à la lecture,
+  en préférant la série la plus fournie puis l'ajustée à égalité. Trois supports
+  distribuants gagnent leurs dividendes — MSCI World Dist +19,1 → **+20,6 %**
+  à un an, S&P 500 Dist +19,4 → **+20,6 %**.
+- `tools/importer_vl.py` importe un relevé tableur. La convention et le moment
+  se lisent ligne par ligne dans la remarque ; c'est la date retenue qui est
+  stockée, jamais la date visée ; **un relevé ponctuel ne remplace jamais une
+  valeur présente**, il comble un trou. Simulation par défaut, `--ecrire` pour
+  écrire.
+- Journal `import_cotation` avec empreinte SHA-256 — un fichier déjà importé est
+  reconnu — et table `rejet_cotation` : une ligne écartée est consignée, jamais
+  perdue.
+- `tools/migrer_cotations.py` migre la base existante, qui s'accumule et ne se
+  reconstruit pas. Sauvegarde horodatée, contrôle du nombre de lignes,
+  sans effet si la migration est déjà faite.
+- Premier import : **25 supports cotés** contre 14. Les 11 nouveaux sont des
+  relevés ponctuels : ils n'apparaissent que sur l'exercice clos, qui passe de
+  14 à **24 supports**. Les cinq fenêtres glissantes réclament une valeur du
+  jour que le relevé ne porte pas.
+- Date d'arrêt commune à tous les supports, prise comme **médiane** des
+  dernières séances et non comme maximum : un seul support cotant un jour de
+  plus déplaçait la performance à un an d'un ETF de +115,5 % à +107,1 %.
+- `valeur_au` refuse une valeur vieille de plus de dix jours, et
+  `performances_usuelles` accepte une date d'arrêt. 40 tests.
+
 ## 0.18.0 — 20 septembre 2026
 
 - Nouveau tableau de bord, en trois menus : **LISTE**, **PERF**, **COMPARE**.

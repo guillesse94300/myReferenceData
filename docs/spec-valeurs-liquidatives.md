@@ -306,3 +306,110 @@ L'étape 1 est faite. Le second tour de capture, `tools/capturer_historiques.py`
 vise les points d'accès d'historique avec les symboles déjà résolus — il ne
 refait aucune requête de résolution, et les réponses attendues sont du JSON,
 donc légères.
+
+---
+
+# Stockage des valeurs liquidatives
+
+Arrêté le 20 septembre 2026, à l'occasion du premier import massif.
+
+## Une observation, c'est un support, une date **et** une convention
+
+Le même couple `(support, date)` porte deux valeurs légitimes :
+
+| Convention | Ce que c'est | À quoi ça sert |
+|---|---|---|
+| `brute` | le prix affiché ce jour-là | retrouver un relevé |
+| `ajustee` | le prix corrigé des dividendes détachés depuis | une performance dividendes réinvestis |
+
+Sur un support capitalisant, les deux sont identiques. Sur un distribuant,
+l'ajustée est plus basse dans le passé, et **l'écart grandit avec
+l'ancienneté** : 6,38 % sur Amundi MSCI World Swap II Dist, 5,60 % sur Amundi
+Core S&P 500 Swap Dist, 8,72 % sur Fidelity China Focus Dis.
+
+Tant que la convention n'était pas dans la clé primaire, un import pouvait
+écraser l'une par l'autre. La série mélangeait alors deux définitions, et toute
+performance calculée entre deux de ses points était fausse du montant des
+dividendes détachés entre les deux — d'un montant devenu irretrouvable, puisque
+rien n'indiquait le mélange.
+
+La clé est donc `(isin, date, base)`. Les deux valeurs coexistent, aucune
+n'écrase l'autre, et mélanger les conventions n'est plus une question de
+discipline.
+
+## La date stockée est la date réelle
+
+Le repère « il y a 24 mois » du relevé tableur vaut au 01/10/2024, douze jours
+après la cible du 19/09/2024, et c'est un **cours d'ouverture**. La date visée
+est un artefact de l'extraction ; la donnée, c'est la date réelle et ce qu'on a
+mesuré. D'où la colonne `moment` : `cloture` ou `ouverture`.
+
+## Un relevé ponctuel ne remplace jamais une valeur présente
+
+Il comble un trou, sinon rien — `ON CONFLICT DO NOTHING`. Une série quotidienne
+validée ne se laisse pas réécrire par une transcription de tableur.
+
+Le recoupement devient alors un **échantillon de contrôle** plutôt qu'un
+écrasement silencieux. Au premier import : 96 points recoupés, écart absolu
+médian 0,000 %, trois au-delà de 0,5 % — tous au 01/10/2024, tous expliqués par
+l'ouverture prise pour une clôture.
+
+## Ce que la vue `v_serie` tranche
+
+Une seule convention par support, choisie par **densité d'abord** : une série de
+sept relevés ponctuels ne sert ni trajectoire, ni volatilité, ni perte maximale,
+et la préférer à un historique quotidien les supprimerait. À égalité de points,
+l'ajustée l'emporte.
+
+Aujourd'hui : 21 supports en ajustée, 4 en brute.
+
+## La date d'arrêt est une médiane, pas un maximum
+
+Toutes les fenêtres glissantes s'arrêtent à une date commune. Sans elle, chaque
+support arrêterait la sienne à sa propre dernière valeur, et une série de
+relevés vieux de trois mois nommerait « 3 mois » une fenêtre close depuis trois
+mois.
+
+Mais pas la date la plus récente. Treize séries s'arrêtaient au 17/09/2026, une
+au 18/09. Retenir le maximum déplaçait la séance de départ de la fenêtre à un an
+de **tous** les supports, sans rien leur apporter puisque leur valeur de fin ne
+bougeait pas — et la performance à un an d'un ETF passait de **+115,5 % à
++107,1 %**, les deux séances candidates tombant de part et d'autre d'un saut de
+4 %.
+
+La médiane est la date que la moitié au moins des supports atteignent. Les
+relevés ponctuels en sont exclus : ils la tireraient en arrière.
+
+`valeur_au` refuse par ailleurs une valeur vieille de plus de dix jours — assez
+pour une trêve de fin d'année, pas pour le trou que laisse un relevé ponctuel.
+
+## Ce qu'un relevé ponctuel permet, et ce qu'il ne permet pas
+
+| Horizon | Relevé ponctuel |
+|---|---|
+| Exercice clos | **oui** — deux dates fixes, toutes deux couvertes |
+| Année en cours, 3, 6, 12, 24 mois | non — il faut une valeur du jour |
+
+D'où le résultat du premier import : 25 supports cotés contre 14, mais
+l'exercice clos passe de 14 à 24 supports pendant que les cinq autres colonnes
+restent à 14.
+
+## Traçabilité
+
+`import_cotation` porte l'empreinte SHA-256 de la source : un fichier déjà
+importé est reconnu et non rejoué. Un lot se défait d'un `DELETE WHERE
+import_id = ?`.
+
+`rejet_cotation` consigne ce qui n'est pas entré. Au premier import : 5 valeurs
+absentes à la source — l'ETF PEA Monde lancé en mars 2025 n'a pas de cours en
+2024 — et 96 lignes déjà présentes, chacune avec l'écart constaté.
+
+## La migration a un coût, et c'est assumé
+
+`reference.db` se reconstruit à chaque `construire.bat` et ignore la question.
+`cotations.db` s'accumule — c'est sa raison d'être — et ne peut pas être refaite :
+`tools/migrer_cotations.py` déplace les lignes, après une copie horodatée et
+sous contrôle du nombre de lignes.
+
+Aucune ambiguïté sur l'existant : le collecteur lisait `indicators.quote[0].close`
+et n'a jamais lu `adjclose`. Les 16 696 lignes étaient brutes, sans exception.

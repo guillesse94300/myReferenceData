@@ -31,7 +31,11 @@ def metadonnees(charge):
 
 
 def serie(charge):
-    """{date: valeur}, dans la devise de cotation, trous exclus."""
+    """Clotures brutes : {date: valeur}, dans la devise de cotation, trous exclus.
+
+    C'est le prix affiche ce jour-la -- celui d'un releve, pas celui d'un calcul
+    de performance sur un support distribuant. Voir `serie_ajustee`.
+    """
     resultat = _resultat(charge)
     if not resultat:
         return {}
@@ -39,6 +43,23 @@ def serie(charge):
     clotures = (resultat.get("indicators", {}).get("quote") or [{}])[0].get("close") or []
     return {datetime.date.fromtimestamp(h): v
             for h, v in zip(horodatages, clotures) if v is not None}
+
+
+def serie_ajustee(charge):
+    """Clotures ajustees des dividendes detaches depuis : {date: valeur}.
+
+    Base correcte pour une performance dividendes reinvestis. Sur un support
+    capitalisant elle est identique a la serie brute ; sur un distribuant, la
+    valeur d'une date ancienne est inferieure au cours cote ce jour-la, et
+    l'ecart grandit avec l'anciennete.
+    """
+    resultat = _resultat(charge)
+    if not resultat:
+        return {}
+    horodatages = resultat.get("timestamp") or []
+    ajustees = (resultat.get("indicators", {}).get("adjclose") or [{}])[0].get("adjclose") or []
+    return {datetime.date.fromtimestamp(h): v
+            for h, v in zip(horodatages, ajustees) if v is not None}
 
 
 def performance_annuelle(valeurs, annee):
