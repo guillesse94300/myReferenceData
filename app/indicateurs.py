@@ -12,6 +12,31 @@ SEANCES_PAR_AN = 252
 # Periodes glissantes affichees, en mois.
 GLISSANTES = (3, 6, 12, 24)
 
+# Au-dela, une valeur n'est plus celle de la date visee mais celle d'une autre
+# date. Dix jours couvrent une treve de fin d'annee ; ils ne couvrent pas le
+# trou de plusieurs mois que laisse une serie de releves ponctuels.
+ECART_TOLERE = datetime.timedelta(days=10)
+
+
+def date_d_arret(dernieres_seances):
+    """Seance de reference commune, a partir des dernieres seances de chaque serie.
+
+    Une date commune est necessaire : chaque support arreterait sinon ses
+    fenetres a sa propre derniere valeur, et une serie de releves ponctuels
+    nommerait « 3 mois » une fenetre close depuis trois mois.
+
+    Mais pas la plus recente. Un seul support cotant un jour de plus que les
+    autres decalerait la fenetre de tous, sans rien leur apporter puisque leur
+    valeur de fin, elle, ne bougerait pas. Le cas s'est presente : treize series
+    arretees au 17/09, une au 18/09, et la performance a un an d'un ETF passait
+    de +115,5 % a +107,1 % -- les deux seances de depart candidates tombant de
+    part et d'autre d'un saut de 4 %.
+
+    La mediane est la date que la moitie au moins des supports atteignent.
+    """
+    fins = sorted(dernieres_seances)
+    return fins[len(fins) // 2] if fins else None
+
 
 def rendements(valeurs):
     """Rendements d'une seance a l'autre, en pourcentage."""
@@ -73,14 +98,21 @@ def rendement_annualise(valeurs):
     return ((valeurs[dates[-1]] / valeurs[dates[0]]) ** (1 / annees) - 1) * 100
 
 
-def valeur_au(valeurs, cible):
-    """Derniere valeur connue a la date visee, ou avant.
+def valeur_au(valeurs, cible, tolerance=ECART_TOLERE):
+    """Derniere valeur connue a la date visee, ou peu avant.
 
     Une valeur liquidative n'est pas publiee tous les jours : viser une date
-    exacte echouerait un jour sur trois. On prend donc la derniere connue.
+    exacte echouerait un jour sur trois. On prend donc la derniere connue --
+    mais pas n'importe laquelle. Une serie clairsemee, sept releves ponctuels,
+    rendrait autrement une valeur vieille de plusieurs mois pour une date
+    qu'elle ne couvre pas, et la performance calculee dessus porterait un nom
+    qui n'est pas le sien.
     """
     anterieures = [d for d in valeurs if d <= cible]
-    return valeurs[max(anterieures)] if anterieures else None
+    if not anterieures:
+        return None
+    plus_proche = max(anterieures)
+    return valeurs[plus_proche] if cible - plus_proche <= tolerance else None
 
 
 def performance_entre(valeurs, debut, fin):
@@ -99,7 +131,7 @@ def _recule_de_mois(date, mois):
     return datetime.date(date.year + annee, rang + 1, jour)
 
 
-def performances_usuelles(valeurs):
+def performances_usuelles(valeurs, arrete_au=None):
     """Performances de reference d'un support, toutes cumulees et non annualisees.
 
     Le dernier exercice civil complet, le depuis-le-1er-janvier, puis les
@@ -108,7 +140,11 @@ def performances_usuelles(valeurs):
     """
     if not valeurs:
         return {}
-    dernier = max(valeurs)
+    # La date de reference est celle du tableau de bord, non celle de la serie.
+    # Sans quoi une serie arretee il y a trois mois nommerait « 3 mois » une
+    # fenetre qui court de six mois a trois mois en arriere, et chaque support
+    # rapporterait un exercice clos different du voisin.
+    dernier = arrete_au or max(valeurs)
     debut_serie = min(valeurs)
     exercice = dernier.year - 1
 

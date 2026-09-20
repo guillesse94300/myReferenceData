@@ -4,8 +4,9 @@ __pycache__/
 # Environnement Python
 .venv/
 
-# Base reconstructible a la demande
+# Base reconstructible a la demande, et copies de sauvegarde des migrations
 data/*.db
+data/*.db.avant-migration-*
 
 # Liste des favoris : ecrite par l'application, amorcee depuis
 # data/raw/favorites.txt quand elle manque

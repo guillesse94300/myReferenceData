@@ -44,6 +44,10 @@ ORDRE_VEHICULES = ["Fond UC", "ETF", "Actions", "FCPE", "SCPI", "Livret"]
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100",
           "#e87ba4", "#008300", "#4a3aa7", "#e34948"]
 MAX_COMPARE = len(SERIES)
+# En deca, la serie n'est pas un historique quotidien mais quelques releves
+# ponctuels : elle sert une performance de date a date, jamais une trajectoire,
+# une volatilite ou une perte maximale.
+QUOTIDIENNE = 100
 
 st.set_page_config(page_title="Univers d'investissement", page_icon="◈", layout="wide")
 
@@ -85,15 +89,22 @@ def annualiser(rendements):
 
 @st.cache_data
 def charger_cotations():
-    """Valeurs liquidatives, si la base des cotations existe.
+    """Series de reference, si la base des cotations existe.
 
     Elle est facultative : l'application reste utilisable sans elle, les
     sections qui en dependent disparaissant simplement.
+
+    La lecture passe par v_serie et non par la table : celle-ci porte deux
+    conventions par support, la cloture brute et la cloture ajustee des
+    dividendes, et une performance calculee entre l'une et l'autre serait
+    fausse du montant des dividendes detaches entre les deux. La vue tranche,
+    en preferant la serie la plus fournie -- une trajectoire ne se trace pas
+    sur sept releves -- puis l'ajustee a egalite.
     """
     if not os.path.exists(COTATIONS):
-        return pd.DataFrame(columns=["isin", "date", "valeur", "devise"])
+        return pd.DataFrame(columns=["isin", "date", "valeur", "devise", "base", "points"])
     cx = sqlite3.connect(COTATIONS)
-    series = pd.read_sql("SELECT isin, date, valeur, devise FROM valeur_liquidative", cx,
+    series = pd.read_sql("SELECT isin, date, valeur, devise, base, points FROM v_serie", cx,
                          parse_dates=["date"])
     cx.close()
     return series
@@ -142,17 +153,36 @@ if donnees is None:
     st.stop()
 univers, performances, arbitrage, offres, anomalies, imports = donnees
 avec_vl = set(cotations["isin"].unique())
+def seance_de_reference(series):
+    """Date d'arret du tableau de bord, lue dans les series quotidiennes.
+
+    Les releves ponctuels en sont exclus : vieux de trois mois, ils tireraient
+    la date en arriere. La regle elle-meme est dans `indicateurs.date_d_arret`.
+    """
+    if not len(series):
+        return None
+    quotidiennes = series[series["points"] >= QUOTIDIENNE]
+    retenues = quotidiennes if len(quotidiennes) else series
+    return indicateurs.date_d_arret(d.date() for d in retenues.groupby("isin")["date"].max())
+
+
+ARRET = seance_de_reference(cotations)
 usuelles_par_isin = {
     isin: indicateurs.performances_usuelles(
-        {ligne.date.date(): ligne.valeur for ligne in groupe.itertuples()})
+        {ligne.date.date(): ligne.valeur for ligne in groupe.itertuples()}, arrete_au=ARRET)
     for isin, groupe in cotations.groupby("isin")} if len(cotations) else {}
+# Densite et convention, pour que les pages puissent le dire plutot que le taire.
+densites = cotations.groupby("isin")["points"].first().to_dict() if len(cotations) else {}
+bases = cotations.groupby("isin")["base"].first().to_dict() if len(cotations) else {}
 univers = univers.assign(cotee=univers["isin"].isin(avec_vl),
+                         points=univers["isin"].map(densites),
+                         base_cotation=univers["isin"].map(bases),
                          favori=univers["isin"].isin(suivis),
                          note=univers["isin"].map(lambda i: suivis.get(i, {}).get("note", "")))
 
 # Le dernier exercice clos porte un millesime qui avance : il est lu dans les
 # series plutot qu'ecrit en dur, faute de quoi la grille se figerait sur 2025.
-ANNEE = max(cotations["date"]).year if len(cotations) else None
+ANNEE = ARRET.year if ARRET else None
 EXERCICE = str(ANNEE - 1) if ANNEE else "exercice clos"
 # Les six horizons, dans l'ordre du croquis : 1 an, 2 ans, exercice clos, puis
 # l'annee en cours, 3 mois et 6 mois.
@@ -478,16 +508,19 @@ def page_perf(vue):
     ce que la grille sert a faire.
     """
     cotes = vue[vue["cotee"]]
-    en_tete("PERF", f"{len(cotes)} supports de la sélection ont un historique de valeurs "
-                    f"liquidatives, sur {len(vue)}")
+    quotidiennes = int((cotes["points"] >= QUOTIDIENNE).sum())
+    ponctuels = len(cotes) - quotidiennes
+    en_tete("PERF", f"{len(cotes)} supports cotés sur {len(vue)} — {quotidiennes} en historique "
+                    f"quotidien, {ponctuels} en relevés ponctuels")
     if cotes.empty:
-        st.info("Aucun support de la sélection n'a d'historique de valeurs liquidatives. "
-                "Les six horizons se calculent sur ces séries, non sur les performances "
-                "annuelles publiées.")
+        st.info("Aucun support de la sélection n'a de valeurs liquidatives. Les six horizons se "
+                "calculent sur ces séries, non sur les performances annuelles publiées.")
         return
-    st.caption("Performances cumulées, non annualisées, dans la devise du fonds. Une période que "
-               "l'historique ne couvre pas laisse le support hors du classement, plutôt que de "
-               "le calculer sur une fenêtre tronquée.")
+    st.caption("Performances cumulées, non annualisées, dans la devise du fonds, arrêtées au "
+               f"{ARRET.strftime('%d/%m/%Y')}. Une période que l'historique ne couvre pas laisse "
+               "le support hors du classement, plutôt que de la calculer sur une fenêtre "
+               "tronquée — c'est pourquoi les supports en relevés ponctuels n'apparaissent que "
+               "sur l'exercice clos, seule mesure qui repose sur deux dates fixes.")
 
     for rangee in (HORIZONS[:3], HORIZONS[3:]):
         cases = st.columns(3)
@@ -506,11 +539,16 @@ def page_perf(vue):
 
 def page_compare(vue):
     """Selection a gauche, trajectoires superposees a droite."""
-    cotes = vue[vue["cotee"]]
+    cotes = vue[vue["cotee"] & (vue["points"] >= QUOTIDIENNE)]
+    ecartes = int(vue["cotee"].sum()) - len(cotes)
     en_tete("COMPARE", "Superposition des trajectoires, ramenées à 100 à leur départ commun")
     if cotes.empty:
-        st.info("Aucun support de la sélection n'a d'historique de valeurs liquidatives.")
+        st.info("Aucun support de la sélection n'a d'historique quotidien. Une trajectoire ne se "
+                "trace pas sur quelques relevés ponctuels.")
         return
+    if ecartes:
+        st.caption(f"{ecartes} support(s) coté(s) de la sélection sont écartés : leurs valeurs "
+                   "sont des relevés ponctuels, pas un historique quotidien.")
 
     gauche, droite = st.columns([1, 2])
     with gauche:
@@ -581,22 +619,29 @@ def page_fiche(isin):
                        "—" if pd.isna(ligne["frais"]) else f"{ligne['frais']:.2f} %")
 
     serie = cotations[cotations["isin"] == isin].sort_values("date")
-    if len(serie) > 100:
+    if 0 < len(serie) < QUOTIDIENNE:
+        st.info(f"Ce support n'a que {len(serie)} relevés ponctuels, pas un historique quotidien : "
+                "seule la performance de l'exercice clos est calculable, et ni la trajectoire, "
+                "ni la volatilité, ni la perte maximale ne le sont.")
+    if len(serie) >= QUOTIDIENNE:
         valeurs = {ligne.date.date(): ligne.valeur for ligne in serie.itertuples()}
         devise = serie["devise"].iloc[0]
         debut, fin = min(valeurs), max(valeurs)
         st.markdown("**Performances**")
-        usuelles = indicateurs.performances_usuelles(valeurs)
+        usuelles = indicateurs.performances_usuelles(valeurs, arrete_au=ARRET)
         # Memes horizons, meme ordre et memes libelles que la grille PERF : un
         # chiffre doit porter ici le nom sous lequel il y a ete lu.
         cases = st.columns(len(HORIZONS))
         for case, (cle, libelle) in zip(cases, HORIZONS):
             taux = usuelles.get(cle)
             case.metric(libelle, "—" if taux is None else f"{taux:+.2f} %")
+        convention = ("cours ajustés des dividendes détachés depuis"
+                      if ligne["base_cotation"] == "ajustee" else "valeurs brutes, non ajustées")
         st.caption(
-            f"Cumulées et non annualisées, calculées sur la série de valeurs liquidatives, "
-            f"en {devise}. Une période que l'historique ne couvre pas reste vide plutôt que "
-            "d'être calculée sur une fenêtre tronquée."
+            f"Cumulées et non annualisées, calculées sur la série de valeurs liquidatives "
+            f"({convention}), en {devise}, arrêtées au {ARRET.strftime('%d/%m/%Y')}. Une période "
+            "que l'historique ne couvre pas reste vide plutôt que d'être calculée sur une "
+            "fenêtre tronquée."
             + ("" if devise == "EUR" else
                " Le support étant hors euro, ces chiffres diffèrent des performances annuelles "
                "publiées plus bas, que l'assureur donne en euro."))
